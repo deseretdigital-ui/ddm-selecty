@@ -1,0 +1,20 @@
+.idea
+.DS_Store
+
+logs
+*.log
+.npm
+npm-debug.log*
+*.log
+
+node_modules
+coverage
+build
+dist
+lib
+lib-cov
+
+# Runtime data
+pids
+*.pid
+*.seed

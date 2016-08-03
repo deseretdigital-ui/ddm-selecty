@@ -1,0 +1,14 @@
+.*
+.DS_Store
+*.log
+_book
+book.json
+coverage
+docs
+examples
+npm-debug.log
+package.json
+src
+test
+util
+webpack*.js
