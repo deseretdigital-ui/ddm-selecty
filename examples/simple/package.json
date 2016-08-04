@@ -1,5 +1,5 @@
 {
-  "name": "ui-selecty-basic-example",
+  "name": "ddm-selecty-basic-example",
   "version": "1.0.0",
   "description": "An example showing the simple selecty",
   "scripts": {
@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/QuietOmen/ui-selecty/issues"
+    "url": "https://github.com/deseretdigital-ui/ddm-selecty/issues"
   },
   "dependencies": {
     "ui-rating": "^1.0.0"

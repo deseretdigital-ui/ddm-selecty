@@ -21,7 +21,7 @@ module.exports = {
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('ui-selecty.css', {allChunks: true}),
+    new ExtractTextPlugin('ddm.selecty.css', {allChunks: true}),
   ],
   module: {
     loaders: [

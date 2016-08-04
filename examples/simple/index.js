@@ -1,11 +1,9 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {SimpleSelecty} from '../../dist/ui.selecty.js';
-// import {StarRating} from 'ui-elements'
+import {SimpleSelecty} from '../../dist/ddm.selecty.js';
+import '../../dist/ddm.selecty.css';
 import 'whatwg-fetch'
-
-
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -20,7 +18,6 @@ function checkStatus(response) {
 function parseJSON(response) {
   return response.json()
 }
-
 
 class Root extends React.Component {
 
