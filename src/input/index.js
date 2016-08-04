@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
 // import {default as css} from './selectStyles'
+import styles from './styles'
+import CSSModules from 'react-css-modules';
 
 class InputElement extends React.Component {
   static propTypes = {
@@ -12,33 +14,34 @@ class InputElement extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      value: this.props.value
-    }
+    // this.state = {
+    //   value: this.props.value
+    // }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if(this.props.value != nextProps.value) {
-      this.setState({value: nextProps.value})
-    }
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    return (nextState != this.state);
-  }
+  // componentWillReceiveProps (nextProps) {
+  //   if(this.props.value != nextProps.value) {
+  //     console.log("HERE", nextProps)
+  //     this.setState({value: nextProps.value})
+  //   }
+  // }
+  //
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   return (nextState != this.state);
+  // }
 
   render() {
     let {Actions, Change, Focus, placeHolder, className} = this.props;
     // style={css.inputStyles}
 
     return (
-      <div>
+      <div styleName='input'>
         <input
           type="text"
           name="selectize"
           autoComplete="off"
           placeholder={placeHolder}
-          value={this.state.value}
+          value={this.props.value}
           onKeyDown={Actions}
           onChange={Change}
           onClick={Focus}
@@ -48,4 +51,4 @@ class InputElement extends React.Component {
   }
 }
 
-export default InputElement;
+export default CSSModules(InputElement, styles);

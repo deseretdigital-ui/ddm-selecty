@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react'
-// import css from './suggestionsStyles'
-import SuggestedGroup from '../option-groups/group'
+import React, { PropTypes } from 'react';
+import styles from './styles';
+import SuggestedGroup from '../option-groups/group';
+import CSSModules from 'react-css-modules';
 
 const defaultGroup = {
   order: 1,
@@ -138,7 +139,7 @@ class Suggestions extends React.Component {
       if (Object.keys(results).length > 0) {
         // style={[css.suggestion, css.norm, visible && css.show]}
         return (
-          <div >
+          <div styleName='suggestion'>
             {
               Object.keys(this.state.results).map(
                 (groupName, index) => (
@@ -157,7 +158,7 @@ class Suggestions extends React.Component {
       } else {
         // style={[css.norm, visible && css.show]}
         return (
-          <div>
+          <div styleName='norm'>
             No results found.
           </div>
         );
@@ -165,7 +166,7 @@ class Suggestions extends React.Component {
     } else {
       // style={[css.norm, visible && css.show]}
       return (
-        <div>
+        <div styleName='norm'>
           Loading...
         </div>
       )
@@ -177,4 +178,4 @@ class Suggestions extends React.Component {
  //   {item.name}
  // </div>
 
-export default Suggestions;
+export default CSSModules(Suggestions, styles);

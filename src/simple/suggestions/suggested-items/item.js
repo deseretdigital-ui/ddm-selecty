@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
-// import css from './itemStyles'
+import CSSModules from 'react-css-modules';
+import styles from '../styles'
 
 class SuggestedItem extends React.Component {
   static propTypes = {
@@ -15,16 +16,12 @@ class SuggestedItem extends React.Component {
     this._selected = this._selected.bind(this);
   }
 
-  componentDidMount () { }
-
-  componentWillReceiveProps (nextProps) {}
-
   _selected () {
     let {item} = this.props;
     //Check to make sure it's not a label
-    // if(item.selectable) {
-    this.props.selectItem(item);
-    // }
+    if(item.selectable) {
+      this.props.selectItem(item);
+    }
   }
 
   render() {
@@ -39,6 +36,7 @@ class SuggestedItem extends React.Component {
     // style={[css.item, css.norm, isSelected && css.selected]}
     return (
       <div
+        styleName='item'
         key={`item-${index}`}
         onClick={this._selected}
       >
@@ -48,4 +46,4 @@ class SuggestedItem extends React.Component {
   }
 }
 
-export default SuggestedItem;
+export default CSSModules(SuggestedItem, styles);
