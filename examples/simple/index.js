@@ -81,7 +81,7 @@ class Root extends React.Component {
   render() {
     let {defaultOptions, optgroups} = this.state;
     return (
-      <div style={{width: '400px'}}>
+      <div>
         Selectize (no jquery here):
 
         <div>

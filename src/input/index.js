@@ -37,7 +37,7 @@ class InputElement extends React.Component {
     // style={css.inputStyles}
 
     return (
-      <div className='input' styleName='input'>
+      <div styleName='input-wrapper'>
         <input
           type="text"
           name="selectize"
@@ -47,10 +47,11 @@ class InputElement extends React.Component {
           onKeyDown={Actions}
           onChange={Change}
           onClick={Focus}
+          styleName='input'
         />
       </div>
     );
   }
 }
 
-export default  CSSModules(InputElement, styles);
+export default  CSSModules(InputElement, styles, {allowMultiple: true});
