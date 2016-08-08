@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 // import {default as css} from './selectStyles'
-import styles from './styles'
 import CSSModules from 'react-css-modules';
+import styles from './styles'
 
 class InputElement extends React.Component {
   static propTypes = {
@@ -26,6 +26,8 @@ class InputElement extends React.Component {
   //   }
   // }
   //
+
+
   // shouldComponentUpdate (nextProps, nextState) {
   //   return (nextState != this.state);
   // }
@@ -35,7 +37,7 @@ class InputElement extends React.Component {
     // style={css.inputStyles}
 
     return (
-      <div styleName='input'>
+      <div className='input' styleName='input'>
         <input
           type="text"
           name="selectize"
@@ -46,9 +48,9 @@ class InputElement extends React.Component {
           onChange={Change}
           onClick={Focus}
         />
-       </div>
+      </div>
     );
   }
 }
 
-export default CSSModules(InputElement, styles);
+export default  CSSModules(InputElement, styles);

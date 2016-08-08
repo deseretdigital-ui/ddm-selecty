@@ -1,3 +1,15 @@
-.input {
+.input:container ("width >= 100px") {
+  max-width: 200px;
+  background-color: yellow;
+}
 
+.input:container ("width <= 100px") {
+  max-width: 100px;
+  background-color: blue;
+}
+
+.input {
+  width: 45%;
+  background-color: red;
+  display: inline-block;
 }

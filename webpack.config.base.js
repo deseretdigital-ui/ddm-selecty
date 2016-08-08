@@ -5,6 +5,10 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
+var initial = require('postcss-initial');
+var autoreset = require('postcss-autoreset');
+// autoprefixer({ browsers: ['last 2 versions'] }),
+
 
 module.exports = {
   entry: {
@@ -50,13 +54,19 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss')
       },
     ]
   },
-  postcss: [
-    precss,
-    autoprefixer({ browsers: ['last 2 versions'] }),
-  ],
+  postcss: function () {
+     return [
+       require('cq-prolyfill/postcss-plugin')(),
+       precss,
+       initial,
+       autoreset,
+       autoprefixer({ browsers: ['last 2 versions'] }),
+     ];
+  },
+
   externals: ['react', 'react-dom']
 };

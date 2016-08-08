@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import CSSModules from 'react-css-modules';
 import styles from '../styles'
 
 class SuggestedItem extends React.Component {
@@ -36,7 +35,7 @@ class SuggestedItem extends React.Component {
     // style={[css.item, css.norm, isSelected && css.selected]}
     return (
       <div
-        styleName='item'
+        className={styles.item}
         key={`item-${index}`}
         onClick={this._selected}
       >
@@ -46,4 +45,4 @@ class SuggestedItem extends React.Component {
   }
 }
 
-export default CSSModules(SuggestedItem, styles);
+export default SuggestedItem;
