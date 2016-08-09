@@ -1,9 +1,9 @@
 .input {
-  border: '1px solid #eee';
-  height: '34px';
-  boxSizing: 'border-box';
-  padding: '8px';
-  fontSize: '13px';
-  width: '100%';
+  border: 1px solid #eee;
+  height: 34px;
+  boxSizing: border-box;
+  padding: 8px;
+  fontSize: 13px;
+  width: 100%;
   display: inline-block;
 }
