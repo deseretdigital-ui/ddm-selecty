@@ -1,18 +1,9 @@
-.input-wrapper {
-  width: 45%;
-  display: inline-block;
-  background-color: red;
-}
-
-.input-wrapper:container ("width <= 100px") {
-  background-color: yellow;
-}
-
 .input {
-  width: 100%;
+  border: '1px solid #eee';
+  height: '34px';
+  boxSizing: 'border-box';
+  padding: '8px';
+  fontSize: '13px';
+  width: '100%';
   display: inline-block;
-}
-
-.input:container ("width <= 100px") {
-  background-color: blue;
 }

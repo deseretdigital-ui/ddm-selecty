@@ -9,7 +9,7 @@ var initial = require('postcss-initial');
 var autoreset = require('postcss-autoreset');
 // autoprefixer({ browsers: ['last 2 versions'] }),
 
-
+// ?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]
 module.exports = {
   entry: {
     UISelecty: './src/index.js',
@@ -60,7 +60,6 @@ module.exports = {
   },
   postcss: function () {
      return [
-       require('cq-prolyfill/postcss-plugin')(),
        precss,
        initial,
        autoreset,

@@ -37,21 +37,19 @@ class InputElement extends React.Component {
     // style={css.inputStyles}
 
     return (
-      <div styleName='input-wrapper'>
-        <input
-          type="text"
-          name="selectize"
-          autoComplete="off"
-          placeholder={placeHolder}
-          value={this.props.value}
-          onKeyDown={Actions}
-          onChange={Change}
-          onClick={Focus}
-          styleName='input'
-        />
-      </div>
+      <input
+        type="text"
+        name="selectize"
+        autoComplete="off"
+        placeholder={placeHolder}
+        value={this.props.value}
+        onKeyDown={Actions}
+        onChange={Change}
+        onClick={Focus}
+        styleName='input'
+      />
     );
   }
 }
 
-export default  CSSModules(InputElement, styles, {allowMultiple: true});
+export default CSSModules(InputElement, styles);

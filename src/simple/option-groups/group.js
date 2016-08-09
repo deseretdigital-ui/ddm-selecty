@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import SuggestedItem from '../suggestions/suggested-items/item'
+import CSSModules from 'react-css-modules';
 import styles from './styles'
 
 class SuggestedGroup extends React.Component {
@@ -21,9 +22,8 @@ class SuggestedGroup extends React.Component {
 
   render() {
     let {group, index, item, select, selected, displayField} = this.props;
-    // style={css.optionGroup}
     return (
-      <div>
+      <div styleName='optionGroup'>
         {
           (group.label && group.items.length > 0)
             ? (
@@ -52,4 +52,4 @@ class SuggestedGroup extends React.Component {
   }
 }
 
-export default SuggestedGroup;
+export default CSSModules(SuggestedGroup, styles);

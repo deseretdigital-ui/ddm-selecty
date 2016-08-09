@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
-import styles from '../styles'
+import CSSModules from 'react-css-modules';
+import classNames from 'classnames';
+import styles from './styles'
 
 class SuggestedItem extends React.Component {
   static propTypes = {
@@ -25,17 +27,17 @@ class SuggestedItem extends React.Component {
 
   render() {
     let {index, item, selected, displayField} = this.props;
-
+    const itemSelected = false; 
     // Classes for div
     // 'autocomplete__item': true,
     // 'autocomplete__item--selected': selected,
     // 'clickable': true
     //
     let isSelected = selected.name == item.name && selected.value == item.value;
-    // style={[css.item, css.norm, isSelected && css.selected]}
+    const applied = classNames('item', 'norm', {'isSelected': itemSelected});
     return (
       <div
-        className={styles.item}
+        styleName={applied}
         key={`item-${index}`}
         onClick={this._selected}
       >
@@ -45,4 +47,4 @@ class SuggestedItem extends React.Component {
   }
 }
 
-export default SuggestedItem;
+export default CSSModules(SuggestedItem, styles, {allowMultiple: true});

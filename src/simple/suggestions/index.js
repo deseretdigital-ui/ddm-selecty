@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
-import styles from './styles';
 import SuggestedGroup from '../option-groups/group';
+import classNames from 'classnames';
+import CSSModules from 'react-css-modules';
+import styles from './styles';
 
 const defaultGroup = {
   order: 1,
@@ -132,13 +134,14 @@ class Suggestions extends React.Component {
   }
 
   render() {
+    const showSuggestions = false;
     let {displayField, select, visible, options, selected} = this.props;
     let {results} = this.state;
     if (results) {
       if (Object.keys(results).length > 0) {
-        // style={[css.suggestion, css.norm, visible && css.show]}
+        const applied = classNames('sugesstion', 'norm', {'visible': showSuggestions});
         return (
-          <div>
+          <div styleName={applied}>
             {
               Object.keys(this.state.results).map(
                 (groupName, index) => (
@@ -155,17 +158,17 @@ class Suggestions extends React.Component {
           </div>
         )
       } else {
-        // style={[css.norm, visible && css.show]}
+        const applied = classNames('norm', {'visible': showSuggestions});
         return (
-          <div>
+          <div styleName={applied}>
             No results found.
           </div>
         );
       }
     } else {
-      // style={[css.norm, visible && css.show]}
+      const applied = classNames('norm', {'visible': showSuggestions});
       return (
-        <div>
+        <div styleName={applied}>
           Loading...
         </div>
       )
@@ -177,4 +180,4 @@ class Suggestions extends React.Component {
  //   {item.name}
  // </div>
 
-export default Suggestions;
+export default CSSModules(Suggestions, styles, {allowMultiple: true});
