@@ -1,7 +1,7 @@
-import SimpleSelecty from './simple/';
-// import MultiSelecty from '';
-// import HighlightSelecty from '';
+import {SimpleSelecty} from './simple/';
+import {SimpleSelectyStateless} from './simple';
 
 export {
   SimpleSelecty,
+  SimpleSelectyStateless,
 }
