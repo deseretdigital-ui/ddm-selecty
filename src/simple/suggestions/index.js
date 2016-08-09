@@ -134,12 +134,12 @@ class Suggestions extends React.Component {
   }
 
   render() {
-    const showSuggestions = false;
+    const showSuggestions = true;
     let {displayField, select, visible, options, selected} = this.props;
     let {results} = this.state;
     if (results) {
       if (Object.keys(results).length > 0) {
-        const applied = classNames('sugesstion', 'norm', {'visible': showSuggestions});
+        const applied = classNames('suggestion', 'norm', {'visible': showSuggestions});
         return (
           <div styleName={applied}>
             {
