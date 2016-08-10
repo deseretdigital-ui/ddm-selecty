@@ -95,25 +95,18 @@ class Root extends React.Component {
           <SimpleSelectyStateless
             options={defaultOptions}
             load={
-              () => {
-                return function (query, callback) {
-                  var queryParams = '';
-                  if (Object.keys(query).length) {
-                    queryParams = '?' + queryString.stringify(query);
-                  }
-
-                  // let uri = `//${window.location.host}/api${endpoint}${queryParams}`;
-                  let uri = 'https://api.github.com/users/mralexgray';
-                  return fetch(uri)
-                    .then(checkStatus)
-                    .then(parseJSON)
-                    .then(function (response){
-                      //Condition your response here.
-                      callback (response);
-                    }).catch(function (error) {
-                      callback();
-                    })
-                }
+              (query, callback = () => {}) => {
+                // let uri = `//${window.location.host}/api${endpoint}${queryParams}`;
+                let uri = `https://api.github.com/users/mralexgray?${query}`;
+                return fetch(uri)
+                  .then(checkStatus)
+                  .then(parseJSON)
+                  .then(function (response){
+                    //Condition your response here.
+                    callback (response);
+                  }).catch(function (error) {
+                    callback();
+                  })
               }
             }
             onValueChange={(e) => this._onValueChange(e, 'StatelessWithoutGroups')}

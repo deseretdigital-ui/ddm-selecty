@@ -6,24 +6,29 @@ import Suggestions from './suggestions/';
 // import {default as css} from './mainStyles'
 
 const SimpleSelectyStateless = ({
-    blur = () => {},
-    focus = () => {},
-    displayField,
-    input,
-    optionGroups,
-    options,
-    onSelected,
-    onValueChange,
-    selected,
-    value,
-    visibility,
+  load = () => {},
+  blur = () => {},
+  focus = () => {},
+  displayField,
+  input,
+  optionGroups,
+  options,
+  onSelected,
+  onValueChange,
+  selected,
+  value,
+  visibility,
 }) => {
-  const _actions = (ev) => {
+  const _actions = e => {
     /*
     let {selected} = this.state;
     var keyCode = ev.keyCode;
     var stateUpdate = {};
     */
+    load(e.target.value, result => {
+      options = result;
+      console.log(result);
+    });
   };
 
   return (

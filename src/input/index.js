@@ -14,8 +14,8 @@ const InputElement = ({
     name="selectize"
     autoComplete="off"
     placeholder={placeHolder}
-    value={inputValue}
-    onKeyDown={Actions}
+    defaultValue={inputValue}
+    onKeyDown={e => Actions && Actions(e)}
     onChange={Change}
     onClick={Focus}
     styleName='input'
