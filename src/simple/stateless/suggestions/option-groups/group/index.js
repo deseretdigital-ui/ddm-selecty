@@ -5,22 +5,13 @@ import styles from './styles'
 
 const SuggestedGroup = ({
   group,
-  index,
-  item,
-  select,
+  selectItem,
   selected,
-  displayField
+  displayField,
+  itemSelected,
 }) => (
   <div styleName='optionGroup'>
-    {
-      (group.label && group.items.length > 0)
-        ? (
-          <div>
-            {group.label}
-          </div>
-        )
-        : <noscript/>
-    }
+    { group.label && group.items.length > 0 ? group.label : <noscript/> }
     {
       group.items.map(
         (item, index) => (
@@ -29,7 +20,7 @@ const SuggestedGroup = ({
             index={index}
             displayField={displayField}
             itemSelected={itemSelected}
-            selectItem={select}
+            selectItem={selectItem}
             selected={selected}
             key={`autocomplete-${item[displayField]+index}`}
           />
@@ -42,10 +33,8 @@ const SuggestedGroup = ({
 SuggestedGroup.propTypes = {
   displayField: PropTypes.string.isRequired,
   group: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
-  item: PropTypes.object.isRequired,
   itemSelected: PropTypes.bool.isRequired,
-  selected: PropTypes.bool.isRequired,
+  selected: PropTypes.object.isRequired,
   selectItem: PropTypes.func.isRequired
 };
 

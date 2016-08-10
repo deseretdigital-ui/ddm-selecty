@@ -20,7 +20,7 @@ const InputElement = ({
     onClick={Focus}
     styleName='input'
   />
-)
+);
 
 InputElement.propTypes = {
   Actions: PropTypes.func.isRequired,

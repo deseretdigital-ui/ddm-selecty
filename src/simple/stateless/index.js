@@ -1,38 +1,37 @@
-import React, { PropTypes } from 'react'
-import InputElement from '../../input/'
-import Suggestions from './suggestions/'
-import {KEY_MAP} from '../../utils/constants'
+import React, { PropTypes } from 'react';
+import InputElement from '../../input/';
+import Suggestions from './suggestions/';
+
+// import {KEY_MAP} from '../../utils/constants'
 // import {default as css} from './mainStyles'
 
 const SimpleSelectyStateless = ({
-    blur,
+    blur = () => {},
+    focus = () => {},
     displayField,
-    focus,
     input,
-    onValueChange,
     optionGroups,
     options,
     onSelected,
+    onValueChange,
     selected,
     value,
     visibility,
 }) => {
-  const _blur = () => {if(blur) {blur();}}
-  const _change = (e) => {if(onChange) {onChange(e.target.value);}}
-  const _focus = () => {if(focus) {focus();}}
-  const _itemSelected = (item) => {if(onSelected) {onSelected(item);}}
   const _actions = (ev) => {
+    /*
     let {selected} = this.state;
     var keyCode = ev.keyCode;
     var stateUpdate = {};
-  }
+    */
+  };
 
   return (
-    <div onMouseLeave={_blur}>
+    <div onMouseLeave={blur}>
       <InputElement
         Actions={_actions}
-        Change={_change}
-        Focus={_focus}
+        Change={e => onValueChange && onValueChange(e.target.value)}
+        Focus={focus}
         value={input}
       />
       <Suggestions
@@ -40,13 +39,13 @@ const SimpleSelectyStateless = ({
         options={options}
         searchTerm={value}
         displayField={displayField}
-        select={_itemSelected}
+        select={item => onSelected && onSelected(item)}
         selected={selected}
         optionGroups={optionGroups}
       />
     </div>
   )
-}
+};
 
 SimpleSelectyStateless.propTypes = {
   load: PropTypes.func,
@@ -55,11 +54,13 @@ SimpleSelectyStateless.propTypes = {
   options: PropTypes.array,
   placeHolder: PropTypes.string,
   displayField: PropTypes.string,
-  optionGroups: PropTypes.arrayOf(PropTypes.shape({
-    order: PropTypes.number.isRequired,
-    value: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired
-  }))
+  optionGroups: PropTypes.arrayOf(
+    PropTypes.shape({
+      order: PropTypes.number.isRequired,
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ),
 };
 
 SimpleSelectyStateless.defaultProps = {
@@ -67,6 +68,6 @@ SimpleSelectyStateless.defaultProps = {
   visibility: false,
   value: "",
   displayField: 'label',
-}
+};
 
 export default SimpleSelectyStateless;
