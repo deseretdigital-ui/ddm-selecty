@@ -17,7 +17,7 @@ const SimpleSelectyStateless = ({
   onValueChange,
   selected,
   value,
-  visibility,
+  visible,
 }) => {
   const _actions = e => {
     /*
@@ -31,16 +31,18 @@ const SimpleSelectyStateless = ({
     });
   };
 
+  console.log(selected.label);
+
   return (
     <div onMouseLeave={blur}>
       <InputElement
         Actions={_actions}
-        Change={e => onValueChange && onValueChange(e.target.value)}
+        Change={e => onValueChange(e.target.value)}
         Focus={focus}
-        value={input}
+        inputValue={selected.label}
       />
       <Suggestions
-        visible={visibility}
+        visible={visible}
         options={options}
         searchTerm={value}
         displayField={displayField}

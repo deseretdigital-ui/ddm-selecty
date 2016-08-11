@@ -8,19 +8,22 @@ const InputElement = ({
   Focus,
   inputValue,
   placeHolder,
-}) => (
-  <input
-    type="text"
-    name="selectize"
-    autoComplete="off"
-    placeholder={placeHolder}
-    defaultValue={inputValue}
-    onKeyDown={e => Actions && Actions(e)}
-    onChange={Change}
-    onClick={Focus}
-    styleName='input'
-  />
-);
+}) => {
+  return (
+    <input
+      type="text"
+      name="selectize"
+      autoComplete="off"
+      placeholder={placeHolder}
+      defaultValue={inputValue}
+      onKeyUp={e => Actions && Actions(e)}
+      onChange={e => Change(e)}
+      onClick={Focus}
+      styleName='input'
+      { ...(inputValue ? {value: inputValue} : {}) }
+    />
+  )
+};
 
 InputElement.propTypes = {
   Actions: PropTypes.func.isRequired,

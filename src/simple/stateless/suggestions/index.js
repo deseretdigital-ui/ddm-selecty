@@ -39,7 +39,7 @@ const Suggestions = ({
               group={results[groupName]}
               selected={selected}
               displayField={displayField}
-              selectItem={select}
+              select={select}
               key={index}
             />
           )

@@ -1,12 +1,6 @@
-.norm {
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
 .item {
+  all: initial;
+  display: block;
   padding: 5px 0 5px 7px;
   color: #2354ac;
   cursor: pointer;
@@ -14,9 +8,10 @@
     background-color: #5b92f4;
     color: #fff;
   }
-}
-
-.selected {
-  background-color: #5b92f4;
-  color: #fff;
+  &.selected {
+    display: block;
+    padding: 5px 0 5px 7px;
+    background-color: #5b92f4;
+    color: #fff;
+  }
 }

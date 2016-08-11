@@ -22,10 +22,12 @@ export class StatlessNoGroupStatic extends React.Component {
   constructor (props){
     super(props);
     this.state = {
+      suggestionVisible: false,
+      selected: {id: null},
       defaultOptions: [
-        {label: 'One',   value: 1, group:"search"},
+        /*{label: 'One',   value: 1, group:"search"},
         {label: 'Two',   value: 2, group:"other"},
-        {label: 'Three', value: 3, group:"search"},
+        {label: 'Three', value: 3, group:"search"},*/
         {id: "196", label: "Dessert"},
         {id: "197", label: "Diners"},
         {id: "198", label: "Donut Shops"},
@@ -91,10 +93,23 @@ export class StatlessNoGroupStatic extends React.Component {
         <div>
           Default Options WITHOUT Groups:
           <SimpleSelectyStateless
-            onValueChange={(e) => this._onValueChange(e, 'StatelessWithoutGroups')}
-            onSelected={(e) => this._onSelected(e, 'StatelessWithoutGroups')}
+            onValueChange={
+              text => {
+                this.setState({
+                  selected: {
+                    id: Symbol('uniq'),
+                    value: text,
+                    label: text,
+                  }
+                });
+              }
+            }
+            onSelected={selected => this.setState({selected})}
+            selected={this.state.selected}
             options={this.state.defaultOptions}
             placeHolder={'Stateless Without Groups'}
+            focus={() => this.setState({suggestionVisible: true})}
+            visible={this.state.suggestionVisible}
           />
         </div>
       </div>

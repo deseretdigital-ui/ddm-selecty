@@ -5,7 +5,7 @@ import styles from './styles'
 
 const SuggestedGroup = ({
   group,
-  selectItem,
+  select,
   selected,
   displayField,
   itemSelected,
@@ -20,7 +20,7 @@ const SuggestedGroup = ({
             index={index}
             displayField={displayField}
             itemSelected={itemSelected}
-            selectItem={selectItem}
+            select={select}
             selected={selected}
             key={`autocomplete-${item[displayField]+index}`}
           />
@@ -35,7 +35,7 @@ SuggestedGroup.propTypes = {
   group: PropTypes.object.isRequired,
   itemSelected: PropTypes.bool.isRequired,
   selected: PropTypes.object.isRequired,
-  selectItem: PropTypes.func.isRequired
+  select: PropTypes.func.isRequired
 };
 
 SuggestedGroup.defaultProps = {
