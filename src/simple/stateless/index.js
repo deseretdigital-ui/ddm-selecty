@@ -6,11 +6,11 @@ import Suggestions from './suggestions/';
 // import {default as css} from './mainStyles'
 
 const SimpleSelectyStateless = ({
-  load = () => {},
   blur = () => {},
+  filterable,
   focus = () => {},
   displayField,
-  input,
+  load = () => {},
   optionGroups,
   options,
   onSelected,
@@ -39,25 +39,26 @@ const SimpleSelectyStateless = ({
         inputValue={selected.label}
       />
       <Suggestions
-        visible={visible}
+        displayField={displayField}
+        filterable={filterable}
+        optionGroups={optionGroups}
         options={options}
         searchTerm={value}
-        displayField={displayField}
         select={item => onSelected && onSelected(item)}
         selected={selected}
-        optionGroups={optionGroups}
+        value={value}
+        visible={visible}
       />
     </div>
   )
 };
 
 SimpleSelectyStateless.propTypes = {
-  load: PropTypes.func,
-  onValueChange: PropTypes.func,
-  onSelected: PropTypes.func,
-  options: PropTypes.array,
-  placeHolder: PropTypes.string,
   displayField: PropTypes.string,
+  filterable: PropTypes.bool,
+  load: PropTypes.func,
+  onSelected: PropTypes.func,
+  onValueChange: PropTypes.func,
   optionGroups: PropTypes.arrayOf(
     PropTypes.shape({
       order: PropTypes.number.isRequired,
@@ -65,13 +66,16 @@ SimpleSelectyStateless.propTypes = {
       label: PropTypes.string.isRequired,
     })
   ),
+  options: PropTypes.array,
+  placeHolder: PropTypes.string,
 };
 
 SimpleSelectyStateless.defaultProps = {
-  options: [],
-  visibility: false,
-  value: "",
   displayField: 'label',
+  filterable: true,
+  options: [],
+  value: "",
+  visibility: false,
 };
 
 export default SimpleSelectyStateless;

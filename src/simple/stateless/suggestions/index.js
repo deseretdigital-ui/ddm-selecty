@@ -4,18 +4,24 @@ import CSSModules from 'react-css-modules';
 import styles from './styles';
 import {
   CreateGrouping,
+  FilterOptions,
   SuggestedGroup,
 } from './option-groups/';
 
 const Suggestions = ({
   displayField,
+  filterable,
   options,
   optionGroups,
+  value,
   visible,
   select,
   selected,
 }) => {
-  const results = CreateGrouping(options, optionGroups);
+  let results = CreateGrouping(options, optionGroups);
+  if (filterable) {
+    results = FilterOptions(displayField, value, results)
+  }
   const applied = classNames({
     'norm': true,
     'visible': visible,
@@ -51,6 +57,7 @@ const Suggestions = ({
 
 Suggestions.propTypes = {
   displayField: PropTypes.string.isRequired,
+  filterable: PropTypes.bool,
   options: PropTypes.array,
   optionGroups: PropTypes.arrayOf(PropTypes.shape({
     order: PropTypes.number.isRequired,
@@ -59,6 +66,7 @@ Suggestions.propTypes = {
   })),
   select: PropTypes.func.isRequired,
   selected: PropTypes.object,
+  value: PropTypes.string,
   visible: PropTypes.bool.isRequired,
 };
 

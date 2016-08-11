@@ -9,26 +9,28 @@ const SuggestedGroup = ({
   selected,
   displayField,
   itemSelected,
-}) => (
-  <div styleName='optionGroup'>
-    { group.label && group.items.length > 0 ? group.label : <noscript/> }
-    {
-      group.items.map(
-        (item, index) => (
-          <SuggestedItem
-            item={item}
-            index={index}
-            displayField={displayField}
-            itemSelected={itemSelected}
-            select={select}
-            selected={selected}
-            key={`autocomplete-${item[displayField]+index}`}
-          />
+}) => {
+  return (
+    <div styleName='optionGroup'>
+      { group.label && group.items.length > 0 ? group.label : <noscript/> }
+      {
+        group.items.map(
+          (item, index) => (
+            <SuggestedItem
+              item={item}
+              index={index}
+              displayField={displayField}
+              itemSelected={itemSelected}
+              select={select}
+              selected={selected}
+              key={`autocomplete-${item[displayField]+index}`}
+            />
+          )
         )
-      )
-    }
-  </div>
-);
+      }
+    </div>
+  );
+}
 
 SuggestedGroup.propTypes = {
   displayField: PropTypes.string.isRequired,

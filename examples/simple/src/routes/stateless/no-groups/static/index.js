@@ -33,6 +33,7 @@ const StatlessNoGroupStatic = ({
         placeHolder={'Stateless Without Groups'}
         focus={() => updateVisible(true)}
         blur={() => updateVisible(false)}
+        value={value}
         visible={visible}
       />
     </div>
