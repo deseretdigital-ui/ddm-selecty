@@ -10,7 +10,7 @@
     "url": "https://github.com/deseretdigital-ui/ddm-selecty/issues"
   },
   "dependencies": {
-    "immutable": "^3.8.1",
+    "invariant": "^2.2.1",
     "react": "^0.14.0",
     "react-addons-css-transition-group": "^0.14.0",
     "react-dom": "0.14.0",
@@ -19,9 +19,9 @@
     "react-router": "^2.6.1",
     "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
-    "redux-immutable": "^3.0.7",
     "redux-saga": "^0.11.0",
     "ui-rating": "^1.0.0",
+    "warning": "^3.0.0",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
@@ -78,6 +78,9 @@
     "react-addons-shallow-compare": "^0.14.0",
     "react-css-modules": "^3.7.9",
     "react-hot-loader": "^3.0.0-beta.2",
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.0.11",
     "rimraf": "^2.5.2",
     "sinon": "2.0.0-pre",
     "style-loader": "0.13.1",

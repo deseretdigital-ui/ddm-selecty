@@ -7,23 +7,24 @@ import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import configureStore from './store';
 import Root from './routes/app';
-import { selectLocationState } from './selectors';
+import DevTools from './devTools';
 
 const initialState = {};
 const store = configureStore(initialState, browserHistory);
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: selectLocationState(),
-});
+const history = syncHistoryWithStore(browserHistory, store);
 
 const routes = require('./routes').default(store)
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router
-      history={history}
-      routes={routes}
-      render={applyRouterMiddleware()}
-    />
+    <div>
+      <Router
+        history={history}
+        routes={routes}
+        render={applyRouterMiddleware()}
+      />
+      <DevTools />
+    </div>
   </Provider>,
   document.getElementById('root')
 );

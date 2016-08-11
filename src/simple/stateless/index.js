@@ -32,7 +32,7 @@ const SimpleSelectyStateless = ({
   };
 
   return (
-    <div onFocus={focus}>
+    <div onFocus={focus} onBlur={blur}>
       <InputElement
         Actions={_actions}
         Change={e => onValueChange(e.target.value)}
