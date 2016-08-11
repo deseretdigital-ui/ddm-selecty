@@ -3,7 +3,7 @@ var WebpackDevServer = require('webpack-dev-server');
 var webpackConfig = require('./webpack.config.js');
 var path = require('path');
 var fs = require('fs');
-var mainPath = path.resolve(__dirname, 'index.js');
+var mainPath = path.resolve(__dirname, 'src/index.js');
 
 var bundleStart = null;
 var compiler = Webpack(webpackConfig);

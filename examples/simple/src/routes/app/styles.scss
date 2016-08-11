@@ -1,0 +1,37 @@
+.main-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+}
+
+.side-menu {
+  margin: 10px;
+  & > * {
+    display: block;
+  }
+  height: 100%;
+  width: 30%;
+}
+
+.content-window {
+  width: 70%;
+}
+
+.parent {
+
+}
+
+.child {
+  margin-left: 10px;
+}
+
+.grandchild {
+  margin-left: 20px;
+}
+
+.great-grandchild {
+  margin-left: 30px;
+}

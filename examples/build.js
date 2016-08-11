@@ -12,7 +12,7 @@ var exampleDirs = fs.readdirSync(__dirname).filter((file) => {
 // Ordering is important here. `npm install` must come first.
 var cmdArgs = [
   { cmd: 'npm', args: ['install'] },
-  { cmd: 'webpack', args: ['index.js'] }
+  { cmd: 'webpack', args: ['src/index.js'] }
 ];
 
 for (let dir of exampleDirs) {

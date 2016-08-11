@@ -1,8 +1,7 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {SimpleSelectyStateless} from '../../dist/ddm.selecty.js';
-import '../../dist/ddm.selecty.css';
+import {SimpleSelectyStateless} from '../../../../../../dist/ddm.selecty.js';
 import 'whatwg-fetch'
 
 function checkStatus(response) {
@@ -19,7 +18,7 @@ function parseJSON(response) {
   return response.json()
 }
 
-class Root extends React.Component {
+export class StatlessNoGroupStatic extends React.Component {
 
   constructor (props){
     super(props);
@@ -94,21 +93,6 @@ class Root extends React.Component {
           Default Options WITHOUT Groups:
           <SimpleSelectyStateless
             options={defaultOptions}
-            load={
-              (query, callback = () => {}) => {
-                // let uri = `//${window.location.host}/api${endpoint}${queryParams}`;
-                let uri = `https://api.github.com/users/mralexgray?${query}`;
-                return fetch(uri)
-                  .then(checkStatus)
-                  .then(parseJSON)
-                  .then(function (response){
-                    //Condition your response here.
-                    callback (response);
-                  }).catch(function (error) {
-                    callback();
-                  })
-              }
-            }
             onValueChange={(e) => this._onValueChange(e, 'StatelessWithoutGroups')}
             onSelected={(e) => this._onSelected(e, 'StatelessWithoutGroups')}
             options={this.state.defaultOptions}
@@ -120,27 +104,4 @@ class Root extends React.Component {
   }
 }
 
-ReactDOM.render(<Root />, document.getElementById('root'));
-
-
-// <div>
-//   API:
-//   <SimpleSelectyStateless load={this._api} options={defaultOptions} optgroups={optgroups}/>
-//   API Without Groups:
-//   <SimpleSelectyStateless load={this._api} options={defaultOptions}/>
-// </div>
-//
-// <div>
-//   Default Options with Groups:
-//   <SimpleSelectyStateless
-//     options={defaultOptions}
-//     optgroups={optgroups}
-//     onValueChange={this._onChange}
-//     onSelected={this._onSelected}
-//   />
-//   <div>
-//     You entered: {this.state.typedText} <br/>
-//     You selected: {this.state.selectedItem}
-//   </div>
-// </div>
-// <br/><br/>
+export default StatlessNoGroupStatic;
