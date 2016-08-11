@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {SimpleSelectyStateless} from '../../../../../../dist/ddm.selecty.js';
+import { SimpleSelectyStateless } from '../../../../../../../dist/ddm.selecty.js';
 import 'whatwg-fetch'
 
 function checkStatus(response) {
@@ -71,20 +70,20 @@ export class StatlessNoGroupStatic extends React.Component {
     const newStateObj = {};
     newStateObj[`${version}Text`] = text;
     this.setState({selected: Object.assign ({}, this.state.text, newStateObj)}, this.updateProps);
-  }
+  };
 
   _onSelected = (item, version) => {
     const newObj = {};
     newObj[`${version}SelectedItem`] = item;
     this.setState({selected: Object.assign ({}, this.state.selected, newObj)}, this.updateProps);
-  }
+  };
 
   _updateProps = () => {
     console.log('Updating', this.state);
-  }
+  };
 
   render() {
-    let {defaultOptions, optgroups} = this.state;
+    // let {defaultOptions, optgroups} = this.state;
     return (
       <div>
         DDM-Selecty (no jquery here):
@@ -92,7 +91,6 @@ export class StatlessNoGroupStatic extends React.Component {
         <div>
           Default Options WITHOUT Groups:
           <SimpleSelectyStateless
-            options={defaultOptions}
             onValueChange={(e) => this._onValueChange(e, 'StatelessWithoutGroups')}
             onSelected={(e) => this._onSelected(e, 'StatelessWithoutGroups')}
             options={this.state.defaultOptions}
