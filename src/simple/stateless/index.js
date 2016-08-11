@@ -15,6 +15,7 @@ const SimpleSelectyStateless = ({
   options,
   onSelected,
   onValueChange,
+  placeholder,
   selected,
   value,
   visible,
@@ -37,6 +38,7 @@ const SimpleSelectyStateless = ({
         Actions={_actions}
         Change={e => onValueChange(e.target.value)}
         inputValue={selected.label}
+        placeholder={placeholder}
       />
       <Suggestions
         displayField={displayField}
@@ -67,7 +69,7 @@ SimpleSelectyStateless.propTypes = {
     })
   ),
   options: PropTypes.array,
-  placeHolder: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 SimpleSelectyStateless.defaultProps = {

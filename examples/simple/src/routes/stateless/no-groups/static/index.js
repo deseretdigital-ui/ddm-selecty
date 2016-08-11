@@ -18,10 +18,6 @@ const StatlessNoGroupStatic = ({
     newObj[`${version}SelectedItem`] = item;
     // this.setState({selected: Object.assign ({}, this.state.selected, newObj)}, this.updateProps);
   };
-
-  const _updateProps = () => {
-    // console.log('Updating', this.state);
-  };
   return (
     <div>
       Default Options WITHOUT Groups:
@@ -30,7 +26,7 @@ const StatlessNoGroupStatic = ({
         onSelected={(selected) => {console.log('Item Selected', selected);}}
         selected={selected}
         options={defaultOptions}
-        placeHolder={'Stateless Without Groups'}
+        placeholder={'Stateless Without Groups'}
         focus={() => updateVisible(true)}
         blur={() => updateVisible(false)}
         value={value}
@@ -44,5 +40,4 @@ function mapStateToProps (state, ownProps) {
   return {...state.global, ...state.SLNGStatic};
 };
 
-// Wrap the component to inject dispatch and state into it
 export default connect(mapStateToProps, {updateValue, updateVisible})(StatlessNoGroupStatic)

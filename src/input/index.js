@@ -6,14 +6,14 @@ const InputElement = ({
   Actions,
   Change,
   inputValue,
-  placeHolder,
+  placeholder,
 }) => {
   return (
     <input
       type="text"
       name="selectize"
       autoComplete="off"
-      placeholder={placeHolder}
+      placeholder={placeholder}
       defaultValue={inputValue}
       onKeyUp={e => Actions && Actions(e)}
       onChange={Change}
@@ -27,7 +27,7 @@ InputElement.propTypes = {
   Actions: PropTypes.func.isRequired,
   Change: PropTypes.func.isRequired,
   value: PropTypes.string,
-  placeHolder: PropTypes.string
+  placeholder: PropTypes.string
 };
 
 export default CSSModules(InputElement, styles);
