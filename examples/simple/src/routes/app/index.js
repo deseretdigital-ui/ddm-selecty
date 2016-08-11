@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router'
 import CSSModules from 'react-css-modules';
 import styles from './styles';
-import {SimpleSelectyStateless} from '../../../../../dist/ddm.selecty.js';
 import '../../../../../dist/ddm.selecty.css';
 
 const Root = (props) => {
