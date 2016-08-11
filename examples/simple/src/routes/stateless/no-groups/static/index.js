@@ -95,13 +95,20 @@ export class StatlessNoGroupStatic extends React.Component {
           <SimpleSelectyStateless
             onValueChange={
               text => {
-                this.setState({
-                  selected: {
-                    id: Symbol('uniq'),
-                    value: text,
-                    label: text,
-                  }
-                });
+                const filter = this.state.defaultOptions.filter(item => item.label === text);
+                if (filter.length === 1) {
+                  this.setState({
+                    selected: filter[0],
+                  });
+                } else {
+                  this.setState({
+                    selected: {
+                      id: Symbol('uniq'),
+                      value: text,
+                      label: text,
+                    }
+                  });
+                }
               }
             }
             onSelected={selected => this.setState({selected})}
