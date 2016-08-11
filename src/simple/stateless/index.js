@@ -31,14 +31,11 @@ const SimpleSelectyStateless = ({
     });
   };
 
-  console.log(selected.label);
-
   return (
-    <div onMouseLeave={blur}>
+    <div onFocus={focus}>
       <InputElement
         Actions={_actions}
         Change={e => onValueChange(e.target.value)}
-        Focus={focus}
         inputValue={selected.label}
       />
       <Suggestions

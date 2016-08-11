@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
 import Root from './routes/app';
 import Homepage from './routes/home';
 import NotFound from './routes/not-found';
@@ -25,6 +24,6 @@ export const createRoutes = (store) => ([
     name: 'notfound',
     component: NotFound
   },
-])
+]);
 
 export default createRoutes

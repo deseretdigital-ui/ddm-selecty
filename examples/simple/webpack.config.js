@@ -2,7 +2,6 @@ var Webpack = require('webpack');
 var path = require('path');
 var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 var buildPath = path.resolve(__dirname, 'build');
-var mainPath = path.resolve(__dirname, 'src/index.js');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
@@ -10,19 +9,19 @@ var initial = require('postcss-initial');
 var autoreset = require('postcss-autoreset');
 
 var config = {
-  devtool: 'eval',
+  devtool: 'cheap-module-source-map',
   entry: [
-    'webpack/hot/dev-server',
+    'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8000',
-    mainPath
+    'webpack/hot/only-dev-server',
+    './src/index.js'
   ],
   output: {
     path: buildPath,
     filename: 'bundle.js',
-    publicPath: '/build/'
+    publicPath: 'http://localhost:8000/build/'
   },
   module: {
-
     loaders: [
       {
         test: /\.js$/,
@@ -47,6 +46,13 @@ var config = {
   resolve: {
     modulesDirectories: [path.join(__dirname, 'node_modules')],
     extensions: ['', '.js', '.jsx', '.scss']
+  },
+  devServer: {
+    host: 'localhost',
+    port: '8000',
+    hot: true,
+    inline: true,
+    historyApiFallback: true
   },
   plugins: [
     new Webpack.HotModuleReplacementPlugin(),

@@ -5,7 +5,6 @@ import styles from './styles'
 const InputElement = ({
   Actions,
   Change,
-  Focus,
   inputValue,
   placeHolder,
 }) => {
@@ -17,10 +16,9 @@ const InputElement = ({
       placeholder={placeHolder}
       defaultValue={inputValue}
       onKeyUp={e => Actions && Actions(e)}
-      onChange={e => Change(e)}
-      onClick={Focus}
+      onChange={Change}
+      value={inputValue}
       styleName='input'
-      { ...(inputValue ? {value: inputValue} : {}) }
     />
   )
 };
@@ -28,7 +26,6 @@ const InputElement = ({
 InputElement.propTypes = {
   Actions: PropTypes.func.isRequired,
   Change: PropTypes.func.isRequired,
-  Focus: PropTypes.func.isRequired,
   value: PropTypes.string,
   placeHolder: PropTypes.string
 };

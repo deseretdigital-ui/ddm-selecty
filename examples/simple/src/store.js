@@ -27,11 +27,11 @@ export default function configureStore(initialState = {}, history) {
   store.runSaga = sagaMiddleware.run;
   /* istanbul ignore next */
   if (module.hot) {
-    require.ensure('./reducers', (require) => {
-      const createReducers = require('./reducers').default;
-      const nextReducers = createReducers(store.asyncReducers);
+    module.hot.accept('./reducers', () => {
+      // const createReducers = require('./reducers').default;
+      //const nextReducers = createReducers(store.asyncReducers);
 
-      store.replaceReducer(nextReducers);
+      store.replaceReducer(createReducer);
     });
   }
 
