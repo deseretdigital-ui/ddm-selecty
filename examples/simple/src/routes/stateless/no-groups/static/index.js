@@ -50,10 +50,13 @@ const StatlessNoGroupStatic = ({
             case 'tab':
                 updateSelected(defaultOptions[index]);
                 updateValue(defaultOptions[index].label);
-                updateVisible(false);
+                document.activeElement.blur();
               break;
             case 'enter':
                 console.log('do submit');
+              break;
+            case 'esc':
+                document.activeElement.blur();
               break;
           }
         }

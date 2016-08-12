@@ -1,5 +1,5 @@
 export const KEY_MAP = {
-  8: 'backspace',
+  // 8: 'backspace',
   9: 'tab',
   13: 'enter',
   27: 'esc',

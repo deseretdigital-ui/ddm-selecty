@@ -17,9 +17,9 @@ const InputElement = ({
     defaultValue={inputValue}
     onKeyDown={
       e => {
-        e.preventDefault();
         const key = KEY_MAP[e.keyCode];
         if (key) {
+          e.preventDefault();
           onKeyDown(key);
         }
       }
