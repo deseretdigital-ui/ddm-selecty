@@ -1,4 +1,4 @@
-export const FilterOptions = (displayField, searchTerm, groups) => {
+export const filterOptions = (displayField, searchTerm, groups) => {
   let filteredGroups = Object.assign({}, groups);
   const proceed = groups ? (Object.keys(groups).length > 0) : false;
   if(searchTerm != '' && proceed){

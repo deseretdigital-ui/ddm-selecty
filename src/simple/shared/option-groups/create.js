@@ -1,6 +1,6 @@
 import {createHash} from './hash';
 
-export const CreateGrouping = (options, groups = null, optGroupHashed = null) => {
+export const createGrouping = (options, groups = null, optGroupHashed = null) => {
   let groupsHashed = {};
 
   if (optGroupHashed === null) {
