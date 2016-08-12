@@ -1,30 +1,38 @@
 import React, { PropTypes } from 'react'
 import CSSModules from 'react-css-modules';
+import { KEY_MAP } from '../utils/constants'
 import styles from './styles'
 
 const InputElement = ({
-  Actions,
+  onKeyDown = () => {},
   Change,
   inputValue,
   placeholder,
-}) => {
-  return (
-    <input
-      type="text"
-      name="selectize"
-      autoComplete="off"
-      placeholder={placeholder}
-      defaultValue={inputValue}
-      onKeyUp={e => Actions && Actions(e)}
-      onChange={Change}
-      value={inputValue}
-      styleName='input'
-    />
-  )
-};
+}) => (
+  <input
+    type="text"
+    name="selectize"
+    autoComplete="off"
+    placeholder={placeholder}
+    defaultValue={inputValue}
+    onKeyDown={
+      e => {
+        e.preventDefault();
+        const key = KEY_MAP[e.keyCode];
+        if (key) {
+          onKeyDown(key);
+        }
+      }
+    }
+
+    onChange={Change}
+    value={inputValue}
+    styleName='input'
+  />
+);
 
 InputElement.propTypes = {
-  Actions: PropTypes.func.isRequired,
+  onKeyDown: PropTypes.func.isRequired,
   Change: PropTypes.func.isRequired,
   value: PropTypes.string,
   placeholder: PropTypes.string

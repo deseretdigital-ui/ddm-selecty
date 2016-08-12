@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import InputElement from '../../input/';
 import Suggestions from './suggestions/';
-// import {KEY_MAP} from '../../utils/constants'
-// import {default as css} from './mainStyles'
+import CSSModules from 'react-css-modules';
+import styles from './styles';
 
 const SimpleSelectyStateless = ({
   blur = () => {},
@@ -10,6 +10,7 @@ const SimpleSelectyStateless = ({
   focus = () => {},
   displayField,
   load = () => {},
+  onKeyDown = () => {},
   optionGroups,
   options,
   onSelected,
@@ -18,41 +19,32 @@ const SimpleSelectyStateless = ({
   selected,
   value,
   visible,
-}) => {
-  const _actions = e => {
-    /*
-    let {selected} = this.state;
-    var keyCode = ev.keyCode;
-    var stateUpdate = {};
-    */
-    load(e.target.value, result => {
-      options = result;
-      console.log(result);
-    });
-  };
-
-  return (
-    <div onFocus={focus} onBlur={blur} tabIndex="1">
-      <InputElement
-        Actions={_actions}
-        Change={e => onValueChange(e.target.value)}
-        inputValue={value}
-        placeholder={placeholder}
-      />
-      <Suggestions
-        displayField={displayField}
-        filterable={filterable}
-        optionGroups={optionGroups}
-        options={options}
-        searchTerm={value}
-        onSelect={onSelected}
-        selected={selected}
-        value={value}
-        visible={visible}
-      />
-    </div>
-  )
-};
+}) => (
+  <div
+    onFocus={focus}
+    onBlur={blur}
+    styleName="wrapper"
+    tabIndex="1"
+  >
+    <InputElement
+      onKeyDown={onKeyDown}
+      Change={e => onValueChange(e.target.value)}
+      inputValue={value}
+      placeholder={placeholder}
+    />
+    <Suggestions
+      displayField={displayField}
+      filterable={filterable}
+      optionGroups={optionGroups}
+      options={options}
+      searchTerm={value}
+      onSelect={onSelected}
+      selected={selected}
+      value={value}
+      visible={visible}
+    />
+  </div>
+);
 
 SimpleSelectyStateless.propTypes = {
   displayField: PropTypes.string,
@@ -79,4 +71,4 @@ SimpleSelectyStateless.defaultProps = {
   visibility: false,
 };
 
-export default SimpleSelectyStateless;
+export default CSSModules(SimpleSelectyStateless, styles, {allowMultiple: true});
