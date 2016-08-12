@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import InputElement from '../../input/';
 import Suggestions from './suggestions/';
-
 // import {KEY_MAP} from '../../utils/constants'
 // import {default as css} from './mainStyles'
 
@@ -33,11 +32,11 @@ const SimpleSelectyStateless = ({
   };
 
   return (
-    <div onFocus={focus} onBlur={blur}>
+    <div onFocus={focus}>
       <InputElement
         Actions={_actions}
         Change={e => onValueChange(e.target.value)}
-        inputValue={selected.label}
+        inputValue={value}
         placeholder={placeholder}
       />
       <Suggestions
@@ -46,7 +45,7 @@ const SimpleSelectyStateless = ({
         optionGroups={optionGroups}
         options={options}
         searchTerm={value}
-        select={item => onSelected && onSelected(item)}
+        onSelect={onSelected}
         selected={selected}
         value={value}
         visible={visible}

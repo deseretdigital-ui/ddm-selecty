@@ -15,7 +15,7 @@ const Suggestions = ({
   optionGroups,
   value,
   visible,
-  select,
+  onSelect,
   selected,
 }) => {
   let results = CreateGrouping(options, optionGroups);
@@ -45,7 +45,7 @@ const Suggestions = ({
               group={results[groupName]}
               selected={selected}
               displayField={displayField}
-              select={select}
+              onSelect={onSelect}
               key={index}
             />
           )
@@ -64,7 +64,7 @@ Suggestions.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired
   })),
-  select: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
   selected: PropTypes.object,
   value: PropTypes.string,
   visible: PropTypes.bool.isRequired,

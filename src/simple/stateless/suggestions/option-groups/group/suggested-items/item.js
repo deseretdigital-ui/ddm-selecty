@@ -6,7 +6,7 @@ import styles from './styles'
 const SuggestedItem = ({
   item,
   selected,
-  select,
+  onSelect,
   displayField,
 }) => {
   const applied = classNames({
@@ -15,7 +15,7 @@ const SuggestedItem = ({
   });
 
   return (
-    <div styleName={applied} onClick={() => select(item)}>
+    <div styleName={applied} onClick={() => onSelect(item)}>
       {item[displayField]}
     </div>
   )
@@ -25,7 +25,7 @@ SuggestedItem.propTypes = {
   item: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
   displayField: PropTypes.string.isRequired,
-  select: PropTypes.func.isRequired
+  onSelect: PropTypes.func.isRequired
 };
 
 
