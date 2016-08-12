@@ -24,7 +24,7 @@
   },
   "pre-commit": {
      "run": [
-       "lint:fix",
+       "lint:fix"
      ]
   },
   "repository": {
