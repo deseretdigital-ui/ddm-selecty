@@ -3,4 +3,4 @@ import SimpleSelectyStateless from './stateless';
 
 export {
   SimpleSelectyStateless,
-}
+};

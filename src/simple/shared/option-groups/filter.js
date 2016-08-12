@@ -1,12 +1,12 @@
 export const filterOptions = (displayField, searchTerm, groups) => {
-  let filteredGroups = Object.assign({}, groups);
+  const filteredGroups = Object.assign({}, groups);
   const proceed = groups ? (Object.keys(groups).length > 0) : false;
-  if(searchTerm != '' && proceed){
+  if (searchTerm != '' && proceed) {
     const term = searchTerm.toLowerCase();
 
     Object.keys(groups).map((groupName, index) => {
       filteredGroups[groupName].items = groups[groupName].items.filter((result) => {
-        let lowerResult = result[displayField].toLowerCase();
+        const lowerResult = result[displayField].toLowerCase();
         return lowerResult.indexOf(term) > -1;
       });
     });
@@ -19,4 +19,4 @@ export const filterOptions = (displayField, searchTerm, groups) => {
     // return results;
     return groups;
   }
-}
+};

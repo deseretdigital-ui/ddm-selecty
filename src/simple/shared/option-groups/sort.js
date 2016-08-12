@@ -1,16 +1,14 @@
-export const sort = (props, results) => {
-  let term = props.searchTerm.toLowerCase();
-  //TODO Reduce calls toLowerCase function
-  function compare (a, b) {
-    let displayFieldA = a[props.displayField];
-    let displayFieldB = b[props.displayField];
-    let sortA = displayFieldA.toLowerCase().indexOf(term);
-    let sortB = displayFieldB.toLowerCase().indexOf(term);
-
-    if (sortA === sortB) {
-      return displayFieldA.localeCompare(displayFieldB);
+export const sortOptions = (options) => {
+  function compare(a, b) {
+    const lableA = a.label.toLowerCase();
+    const lableB = b.label.toLowerCase();
+    if (lableA < lableB) {
+      return -1;
     }
-    return (sortA > sortB ? 1 : -1);
+    if (lableA > lableB) {
+      return 1;
+    }
+    return 0;
   }
-  return results.sort(compare);
-}
+  return options.sort(compare);
+};

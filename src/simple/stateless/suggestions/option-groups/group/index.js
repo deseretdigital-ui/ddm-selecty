@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'
-import SuggestedItem from './suggested-items/item'
+import React, { PropTypes } from 'react';
+import SuggestedItem from './suggested-items/item';
 import CSSModules from 'react-css-modules';
-import styles from './styles'
+import styles from './styles';
 
 const SuggestedGroup = ({
   group,
@@ -11,12 +11,12 @@ const SuggestedGroup = ({
   itemSelected,
 }) => {
   if (!group.items.length) {
-    return <noscript/>;
+    return <noscript />;
   }
 
   return (
-    <div styleName='optionGroup'>
-      { group.label || <noscript/> }
+    <div styleName="optionGroup">
+      { group.label || <noscript /> }
       {
         group.items.map(
           (item, index) => (
@@ -26,26 +26,26 @@ const SuggestedGroup = ({
               itemSelected={itemSelected}
               onSelect={onSelect}
               selected={selected}
-              key={`autocomplete-${item[displayField]+index}`}
+              key={`autocomplete-${item[displayField] + index}`}
             />
           )
         )
       }
     </div>
   );
-}
+};
 
 SuggestedGroup.propTypes = {
   displayField: PropTypes.string.isRequired,
   group: PropTypes.object.isRequired,
   itemSelected: PropTypes.bool.isRequired,
   selected: PropTypes.object.isRequired,
-  onSelect: PropTypes.func.isRequired
+  onSelect: PropTypes.func.isRequired,
 };
 
 SuggestedGroup.defaultProps = {
   itemSelected: false,
-  selected: {id: "198", label: "Donut Shops"}
+  selected: { id: '198', label: 'Donut Shops' },
 };
 
 

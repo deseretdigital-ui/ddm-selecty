@@ -1,4 +1,4 @@
-import {createHash} from './hash';
+import { createHash } from './hash';
 
 export const createGrouping = (options, groups = null, optGroupHashed = null) => {
   let groupsHashed = {};
@@ -16,13 +16,13 @@ export const createGrouping = (options, groups = null, optGroupHashed = null) =>
 
   // If no groups everything go under default
   if (groups === null) {
-    groupsHashed["__default__"].items = (options ? options : []);
+    groupsHashed['__default__'].items = (options ? options : []);
   } else {
-    if(options) {
-      for (var i=0; i< options.length; i++) {
-        let item = options[i];
+    if (options) {
+      for (var i = 0; i < options.length; i++) {
+        const item = options[i];
         if (!item.group) {
-          item.group = "__default__";
+          item.group = '__default__';
         }
         groupsHashed[item.group.toLowerCase()].items.push(item);
       }
@@ -30,4 +30,4 @@ export const createGrouping = (options, groups = null, optGroupHashed = null) =>
   }
 
   return groupsHashed;
-}
+};

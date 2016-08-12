@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
-import { KEY_MAP } from '../utils/constants'
-import styles from './styles'
+import { KEY_MAP } from '../utils/constants';
+import styles from './styles';
 
 const InputElement = ({
   onKeyDown = () => {},
@@ -27,7 +27,7 @@ const InputElement = ({
 
     onChange={Change}
     value={inputValue}
-    styleName='input'
+    styleName="input"
   />
 );
 
@@ -35,7 +35,7 @@ InputElement.propTypes = {
   onKeyDown: PropTypes.func.isRequired,
   Change: PropTypes.func.isRequired,
   value: PropTypes.string,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
 };
 
 export default CSSModules(InputElement, styles);

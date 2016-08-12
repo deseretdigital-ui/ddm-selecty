@@ -5,5 +5,5 @@ export const KEY_MAP = {
   27: 'esc',
   38: 'up',
   40: 'down',
-  46: 'delete'
+  46: 'delete',
 };

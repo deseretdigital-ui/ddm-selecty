@@ -3,8 +3,9 @@ import classNames from 'classnames';
 import CSSModules from 'react-css-modules';
 import styles from './styles';
 import {
-  CreateGrouping,
-  FilterOptions,
+  createGrouping,
+  sortOptions,
+  filterOptions,
   SuggestedGroup,
 } from './option-groups/';
 
@@ -18,22 +19,22 @@ const Suggestions = ({
   onSelect,
   selected,
 }) => {
-  let results = CreateGrouping(options, optionGroups);
+  let results = createGrouping(sortOptions(options), optionGroups);
   if (filterable) {
-    results = FilterOptions(displayField, value, results)
+    results = filterOptions(displayField, value, results);
   }
   const applied = classNames({
-    'norm': true,
-    'visible': visible,
-    'suggestion': Object.keys(results).length > 0,
+    norm: true,
+    visible,
+    suggestion: Object.keys(results).length > 0,
   });
 
   if (!results) {
-    return <div styleName={applied}>Loading...</div>
+    return <div styleName={applied}>Loading...</div>;
   }
 
   if (Object.keys(results).length == 0) {
-    return <div styleName={applied}>No results found.</div>
+    return <div styleName={applied}>No results found.</div>;
   }
 
   return (
@@ -52,7 +53,7 @@ const Suggestions = ({
         )
       }
     </div>
-  )
+  );
 };
 
 Suggestions.propTypes = {
@@ -62,7 +63,7 @@ Suggestions.propTypes = {
   optionGroups: PropTypes.arrayOf(PropTypes.shape({
     order: PropTypes.number.isRequired,
     value: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired,
   })),
   onSelect: PropTypes.func.isRequired,
   selected: PropTypes.object,
@@ -75,4 +76,4 @@ Suggestions.defaultProps = {
   visible: false,
 };
 
-export default CSSModules(Suggestions, styles, {allowMultiple: true});
+export default CSSModules(Suggestions, styles, { allowMultiple: true });

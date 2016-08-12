@@ -15,6 +15,7 @@ const initialState = {
     {id: "197", label: "Diners"},
     {id: "198", label: "Donut Shops"},
     {id: "199", label: "Computer Repair"},
+    {id: "200", label: "computer repair"},
     {id: "201", label: "Other Electronic Services"}
   ],
   defaultOptGroups: [

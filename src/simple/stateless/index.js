@@ -67,8 +67,8 @@ SimpleSelectyStateless.defaultProps = {
   displayField: 'label',
   filterable: true,
   options: [],
-  value: "",
+  value: '',
   visibility: false,
 };
 
-export default CSSModules(SimpleSelectyStateless, styles, {allowMultiple: true});
+export default CSSModules(SimpleSelectyStateless, styles, { allowMultiple: true });
