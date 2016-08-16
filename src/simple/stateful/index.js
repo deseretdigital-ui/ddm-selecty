@@ -31,7 +31,6 @@
 //       if (Array.isArray(res)) {
 //         for(var i = 0; i < res.length; i++) {
 //           if(typeof res[i] !== "object"){
-//             console.warn("Warning: UI-Elements SimpleSelecty has a non-object variable in its array. Unable to use api results.");
 //             proceed = false;
 //             break;
 //           }
@@ -40,7 +39,7 @@
 //           opts = res;
 //         }
 //       } else {
-//         console.warn("Warning: UI-Elements SimpleSelecty requries an array of objects. Unable to use api results.");
+//         console.warn("Warning: UI-Elements SimpleSelecty requries an array of objects.");
 //       }
 //     } else {
 //       console.warn("Warning: UI-Elements SimpleSelecty API request did not return correctly");

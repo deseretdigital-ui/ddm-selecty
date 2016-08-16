@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import SuggestedItem from './suggested-items/item';
 import CSSModules from 'react-css-modules';
-import styles from './styles';
+import SuggestedItem from './suggested-items/item';
+import styles from './styles.scss';
 
 const SuggestedGroup = ({
   group,
@@ -47,6 +47,5 @@ SuggestedGroup.defaultProps = {
   itemSelected: false,
   selected: { id: '198', label: 'Donut Shops' },
 };
-
 
 export default CSSModules(SuggestedGroup, styles);

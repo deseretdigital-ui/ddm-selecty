@@ -1,6 +1,6 @@
-import { defaultGroup } from './constants';
+import defaultGroup from './constants';
 
-export const createHash = (optGroups = null) => {
+export default (optGroups = null) => {
   let finalOptGroups = [];
   const optGroupHash = {};
 
@@ -11,7 +11,7 @@ export const createHash = (optGroups = null) => {
     finalOptGroups = [defaultGroup];
   }
 
-  for (var i = 0; i < finalOptGroups.length; i++) {
+  for (let i = 0; i < finalOptGroups.length; i++) {
     const group = finalOptGroups[i];
     group.items = [];
     optGroupHash[group.value.toLowerCase()] = group;

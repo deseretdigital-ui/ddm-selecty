@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
-import { KEY_MAP } from '../utils/constants';
-import styles from './styles';
+import KEY_MAP from '../utils/constants';
+import load from '../utils/api';
+import styles from './styles.scss';
 
 const InputElement = ({
   onKeyDown = () => {},
-  Change,
+  onChange,
   inputValue,
   placeholder,
 }) => (
@@ -14,7 +15,6 @@ const InputElement = ({
     name="selectize"
     autoComplete="off"
     placeholder={placeholder}
-    defaultValue={inputValue}
     onKeyDown={
       e => {
         const key = KEY_MAP[e.keyCode];
@@ -24,8 +24,12 @@ const InputElement = ({
         }
       }
     }
-
-    onChange={Change}
+    onChange={
+      e => {
+        load('//ksllocal.dev/api/autocomplete/get?q=', e.target.value);
+        onChange(e);
+      }
+    }
     value={inputValue}
     styleName="input"
   />
@@ -33,8 +37,8 @@ const InputElement = ({
 
 InputElement.propTypes = {
   onKeyDown: PropTypes.func.isRequired,
-  Change: PropTypes.func.isRequired,
-  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  inputValue: PropTypes.string,
   placeholder: PropTypes.string,
 };
 

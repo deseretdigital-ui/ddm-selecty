@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import CSSModules from 'react-css-modules';
-import styles from './styles';
+import styles from './styles.scss';
 import {
   createGrouping,
   sortOptions,
@@ -33,7 +33,7 @@ const Suggestions = ({
     return <div styleName={applied}>Loading...</div>;
   }
 
-  if (Object.keys(results).length == 0) {
+  if (Object.keys(results).length === 0) {
     return <div styleName={applied}>No results found.</div>;
   }
 

@@ -1,6 +1,10 @@
-import { createHash } from './hash';
+/* eslint no-param-reassign: 0 */
+/* eslint dot-notation: 0 */
+/* eslint no-unneeded-ternary: 0 */
 
-export const createGrouping = (options, groups = null, optGroupHashed = null) => {
+import createHash from './hash';
+
+export default (options, groups = null, optGroupHashed = null) => {
   let groupsHashed = {};
 
   if (optGroupHashed === null) {
@@ -9,23 +13,22 @@ export const createGrouping = (options, groups = null, optGroupHashed = null) =>
     groupsHashed = optGroupHashed;
 
     // Clear out any previous items
-    Object.keys(optgroupHash).map((groupName, index) => {
-      optgroupHash[groupName].items = [];
+    Object.keys(optGroupHashed).map(groupName => {
+      optGroupHashed[groupName].items = [];
+      return null;
     });
   }
 
   // If no groups everything go under default
   if (groups === null) {
     groupsHashed['__default__'].items = (options ? options : []);
-  } else {
-    if (options) {
-      for (var i = 0; i < options.length; i++) {
-        const item = options[i];
-        if (!item.group) {
-          item.group = '__default__';
-        }
-        groupsHashed[item.group.toLowerCase()].items.push(item);
+  } else if (options) {
+    for (let i = 0; i < options.length; i++) {
+      const item = options[i];
+      if (!item.group) {
+        item.group = '__default__';
       }
+      groupsHashed[item.group.toLowerCase()].items.push(item);
     }
   }
 

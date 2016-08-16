@@ -1,5 +1,4 @@
-export const KEY_MAP = {
-  // 8: 'backspace',
+export default {
   9: 'tab',
   13: 'enter',
   27: 'esc',

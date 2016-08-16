@@ -1,6 +1,7 @@
-import { create } from '../../../../shared/option-groups/create';
+/* eslint no-console: ["error", { allow: ["log"] }] */
+import create from '../../../../shared/option-groups/create';
 
-export const createGrouping = (options, groups = null) => {
+export default (options, groups = null) => {
   console.log('About to create grouping');
   return create(options, groups);
 };
