@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules';
 import classNames from 'classnames';
 import styles from './styles.scss';
 
-const suggestedItem = ({
+const SuggestedItem = ({
   item,
   selected,
   onSelect,
@@ -21,11 +21,11 @@ const suggestedItem = ({
   );
 };
 
-suggestedItem.propTypes = {
+SuggestedItem.propTypes = {
   item: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
   displayField: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
 };
 
-export default CSSModules(suggestedItem, styles, { allowMultiple: true });
+export default CSSModules(SuggestedItem, styles, { allowMultiple: true });

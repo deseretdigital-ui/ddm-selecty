@@ -44,9 +44,9 @@ const Suggestions = ({
           (groupName, index) => (
             <SuggestedGroup
               group={results[groupName]}
+              onSelect={onSelect}
               selected={selected}
               displayField={displayField}
-              onSelect={onSelect}
               key={index}
             />
           )
