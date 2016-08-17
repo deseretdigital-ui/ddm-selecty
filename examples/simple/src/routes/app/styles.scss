@@ -11,6 +11,7 @@
   margin: 10px;
   & > * {
     display: block;
+    padding: 5px 0;
   }
   height: 100%;
   width: 20%;
@@ -20,18 +21,22 @@
   width: 80%;
 }
 
-.parent {
+.level-I {
 
 }
 
-.child {
+.level-II {
   margin-left: 10px;
 }
 
-.grandchild {
+.level-III {
   margin-left: 20px;
 }
 
-.great-grandchild {
+.level-IV {
   margin-left: 30px;
+}
+
+.level-V {
+  margin-left: 40px;
 }

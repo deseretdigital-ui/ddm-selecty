@@ -28,6 +28,16 @@ export const createRoutes = (store) => {
               cb(null, require('./routes/stateless/no-groups/static/').default);
             })
           },
+        },
+        {
+          name: "StatefulNoGroupsStatic",
+          path: "/stateful/no-groups/static",
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              injectReducer('SFNGStatic', require('./routes/stateful/no-groups/static/reducer').default);
+              cb(null, require('./routes/stateful/no-groups/static/').default);
+            })
+          },
         }
       ]
     }, {

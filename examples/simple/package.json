@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "invariant": "^2.2.1",
+    "rc-collapse": "^1.6.6",
     "react": "^0.14.0",
     "react-addons-css-transition-group": "^0.14.0",
     "react-dom": "0.14.0",
@@ -34,6 +35,7 @@
     "babel-plugin-transform-react-constant-elements": "6.9.1",
     "babel-plugin-transform-react-inline-elements": "6.8.0",
     "babel-plugin-transform-react-remove-prop-types": "0.2.9",
+    "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "6.13.2",
     "babel-preset-react": "6.11.1",
     "babel-preset-react-hmre": "1.1.1",
