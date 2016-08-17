@@ -23,7 +23,12 @@
     //Temporarirly disabled due to a possible bug in babel-eslint (todomvc example)
     "block-scoped-var": 0,
     // Temporarily disabled for test/* until babel/babel-eslint#33 is resolved
-    "padded-blocks": 0
+    "padded-blocks": 0,
+    "react/sort-prop-types": [1, {
+      "callbacksLast": true,
+      "ignoreCase": true,
+      "requiredFirst": false
+    }]
   },
   "plugins": [
     "react"

@@ -11,15 +11,22 @@ import {
 } from './option-groups/';
 
 const Suggestions = ({
-  label,
+  autoHighlight,
   filterable,
-  options,
+  items,
+  label,
   optionGroups,
+  options,
+  sortable,
   value,
   visible,
   onClicked,
-  items,
+  onFilter,
+  onSelected,
 }) => {
+  // Added to hide eslint errors just for now
+  console.log(sortable, onFilter, onSelected);
+
   let results = createGrouping(sortOptions(options), optionGroups);
   if (filterable) {
     results = filterOptions(label, value, results);
@@ -44,10 +51,11 @@ const Suggestions = ({
         Object.keys(results).map(
           (groupName, index) => (
             <SuggestedGroup
+              autoHighlight={autoHighlight}
               group={results[groupName]}
-              onClicked={onClicked}
               items={items}
               label={label}
+              onClicked={onClicked}
               key={index}
             />
           )
@@ -58,23 +66,24 @@ const Suggestions = ({
 };
 
 Suggestions.propTypes = {
+  autoHighlight: PropTypes.bool.isRequired,
+  filterable: PropTypes.bool.isRequired,
+  items: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
-  filterable: PropTypes.bool,
-  options: PropTypes.array,
-  optionGroups: PropTypes.arrayOf(PropTypes.shape({
-    order: PropTypes.number.isRequired,
-    value: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-  })),
-  onClicked: PropTypes.func.isRequired,
-  items: PropTypes.object,
-  value: PropTypes.string,
+  optionGroups: PropTypes.arrayOf(
+    PropTypes.shape({
+      order: PropTypes.number.isRequired,
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ),
+  options: PropTypes.array.isRequired,
+  sortable: PropTypes.bool.isRequired,
+  value: PropTypes.string.isRequired,
   visible: PropTypes.bool.isRequired,
-};
-
-Suggestions.defaultProps = {
-  label: 'label',
-  visible: false,
+  onClicked: PropTypes.func.isRequired,
+  onFilter: PropTypes.func.isRequired,
+  onSelected: PropTypes.func.isRequired,
 };
 
 export default CSSModules(Suggestions, styles, { allowMultiple: true });

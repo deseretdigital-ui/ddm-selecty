@@ -1,21 +1,29 @@
-/* eslint import/no-unresolved: [2, { ignore: ['react'] }] */
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import KEY_MAP from '../utils/constants';
-import load from '../utils/api';
 import styles from './styles.scss';
 
 const InputElement = ({
-  onKeyDown = () => {},
-  onChange,
-  inputValue,
+  autofocus,
+  disabled,
+  name,
   placeholder,
+  required,
+  value,
+  onChange,
+  onKeyDown,
 }) => (
   <input
-    type="text"
-    name="selectize"
     autoComplete="off"
+    autoFocus={autofocus}
+    disabled={disabled}
+    name={name}
     placeholder={placeholder}
+    required={required}
+    value={value}
+    type="text"
+    styleName="input"
+    onChange={onChange}
     onKeyDown={
       e => {
         const key = KEY_MAP[e.keyCode];
@@ -25,24 +33,18 @@ const InputElement = ({
         }
       }
     }
-    onChange={
-      // TODO remove the call to the API...this should be placed in the
-      // stateful side and will be under a method called onLoad
-      e => {
-        load('//ksllocal.dev/api/autocomplete/get?q=', e.target.value);
-        onChange(e);
-      }
-    }
-    value={inputValue}
-    styleName="input"
   />
 );
 
 InputElement.propTypes = {
-  onKeyDown: PropTypes.func.isRequired,
+  autofocus: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  required: PropTypes.bool.isRequired,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  inputValue: PropTypes.string,
-  placeholder: PropTypes.string,
+  onKeyDown: PropTypes.func.isRequired,
 };
 
 export default CSSModules(InputElement, styles);

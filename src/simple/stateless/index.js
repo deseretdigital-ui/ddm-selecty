@@ -6,55 +6,69 @@ import Suggestions from './suggestions/';
 import styles from './styles.scss';
 
 const SimpleSelectyStateless = ({
-  label,
+  autofocus,
+  autoHighlight,
+  disabled,
   filterable,
-  onBlur = () => {},
-  onFocus = () => {},
-  onKeyDown = () => {},
+  items,
+  label,
+  name,
   optionGroups,
   options,
-  onClicked,
-  onChange,
   placeholder,
-  items,
+  required,
+  sortable,
   value,
   visible,
+  onBlur,
+  onChange,
+  onClicked,
+  onFilter,
+  onFocus,
+  onKeyDown,
+  onSelected,
 }) => (
   <div
-    onFocus={onFocus}
     onBlur={onBlur}
+    onFocus={onFocus}
     styleName="wrapper"
     tabIndex="1"
   >
     <InputElement
-      onKeyDown={onKeyDown}
-      onChange={e => onChange(e.target.value)}
-      inputValue={value}
+      autofocus={autofocus}
+      disabled={disabled}
+      name={name}
       placeholder={placeholder}
+      required={required}
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      onKeyDown={onKeyDown}
     />
     <Suggestions
-      label={label}
+      autoHighlight={autoHighlight}
       filterable={filterable}
+      items={items}
+      label={label}
       optionGroups={optionGroups}
       options={options}
-      searchTerm={value}
-      onClicked={onClicked}
-      items={items}
+      sortable={sortable}
       value={value}
       visible={visible}
+      onClicked={onClicked}
+      onFilter={onFilter}
+      onSelected={onSelected}
     />
   </div>
 );
 
 SimpleSelectyStateless.propTypes = {
-  label: PropTypes.string,
+  autofocus: PropTypes.bool,
+  autoHighlight: PropTypes.bool,
+  disabled: PropTypes.bool,
   filterable: PropTypes.bool,
-  load: PropTypes.func,
-  onClicked: PropTypes.func,
-  onChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
+  items: PropTypes.object,
+  label: PropTypes.string,
+  name: PropTypes.string,
   optionGroups: PropTypes.arrayOf(
     PropTypes.shape({
       order: PropTypes.number.isRequired,
@@ -64,17 +78,41 @@ SimpleSelectyStateless.propTypes = {
   ),
   options: PropTypes.array,
   placeholder: PropTypes.string,
-  items: PropTypes.object,
+  required: PropTypes.bool,
+  sortable: PropTypes.bool,
   value: PropTypes.string,
-  visible: PropTypes.bool.isRequired,
+  visible: PropTypes.bool,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  onClicked: PropTypes.func,
+  onFilter: PropTypes.func,
+  onFocus: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onSelected: PropTypes.func,
 };
 
 SimpleSelectyStateless.defaultProps = {
-  label: 'label',
+  autofocus: false,
+  autoHighlight: false,
+  disabled: false,
   filterable: true,
+  items: [],
+  label: 'label',
+  name: 'selectize',
   options: [],
+  optionGroups: [],
+  placeholder: '',
+  required: false,
+  sortable: false,
   value: '',
-  visibility: false,
+  visible: false,
+  onBlur: () => {},
+  onChange: () => {},
+  onClicked: () => {},
+  onFilter: () => {},
+  onFocus: () => {},
+  onKeyDown: () => {},
+  onSelected: () => {},
 };
 
 export default CSSModules(SimpleSelectyStateless, styles, { allowMultiple: true });
