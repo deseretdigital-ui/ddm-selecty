@@ -11,7 +11,7 @@ import {
 const StatlessNoGroupStatic = ({
   defaultOptions,
   defaultOptGroups,
-  selected,
+  items,
   updateValue,
   updateVisible,
   updateSelected,
@@ -21,20 +21,16 @@ const StatlessNoGroupStatic = ({
   <div>
     Default Options WITHOUT Groups:
     <SimpleSelectyStateless
-      onValueChange={text => updateValue(text)}
-      onSelected={item => {
-        updateValue(item.label);
-        updateSelected(item);
-        updateVisible(false);
-      }}
-      selected={selected}
+      items={items}
       options={defaultOptions}
       placeholder={'Stateless Without Groups'}
-      focus={() => updateVisible(true)}
-      blur={() => updateVisible(false)}
+      value={value}
+      visible={visible}
+      onBlur={() => updateVisible(false)}
+      onFocus={() => updateVisible(true)}
       onKeyDown={
         keyName => {
-          const index = defaultOptions.findIndex(item => item.id === selected.id);
+          const index = defaultOptions.findIndex(item => item.id === items.id);
           const first = defaultOptions[0];
           const last = defaultOptions.length - 1;
           const next = defaultOptions[index + 1];
@@ -61,8 +57,12 @@ const StatlessNoGroupStatic = ({
           }
         }
       }
-      value={value}
-      visible={visible}
+      onClicked={item => {
+        updateValue(item.label);
+        updateSelected(item);
+        updateVisible(false);
+      }}
+      onChange={text => updateValue(text)}
     />
   </div>
 );

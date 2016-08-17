@@ -6,40 +6,40 @@ import Suggestions from './suggestions/';
 import styles from './styles.scss';
 
 const SimpleSelectyStateless = ({
-  blur = () => {},
+  label,
   filterable,
-  focus = () => {},
-  displayField,
+  onBlur = () => {},
+  onFocus = () => {},
   onKeyDown = () => {},
   optionGroups,
   options,
-  onSelected,
-  onValueChange,
+  onClicked,
+  onChange,
   placeholder,
-  selected,
+  items,
   value,
   visible,
 }) => (
   <div
-    onFocus={focus}
-    onBlur={blur}
+    onFocus={onFocus}
+    onBlur={onBlur}
     styleName="wrapper"
     tabIndex="1"
   >
     <InputElement
       onKeyDown={onKeyDown}
-      onChange={e => onValueChange(e.target.value)}
+      onChange={e => onChange(e.target.value)}
       inputValue={value}
       placeholder={placeholder}
     />
     <Suggestions
-      displayField={displayField}
+      label={label}
       filterable={filterable}
       optionGroups={optionGroups}
       options={options}
       searchTerm={value}
-      onSelect={onSelected}
-      selected={selected}
+      onClicked={onClicked}
+      items={items}
       value={value}
       visible={visible}
     />
@@ -47,14 +47,14 @@ const SimpleSelectyStateless = ({
 );
 
 SimpleSelectyStateless.propTypes = {
-  displayField: PropTypes.string,
+  label: PropTypes.string,
   filterable: PropTypes.bool,
   load: PropTypes.func,
-  onSelected: PropTypes.func,
-  onValueChange: PropTypes.func,
+  onClicked: PropTypes.func,
+  onChange: PropTypes.func,
   onKeyDown: PropTypes.func,
-  focus: PropTypes.func,
-  blur: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
   optionGroups: PropTypes.arrayOf(
     PropTypes.shape({
       order: PropTypes.number.isRequired,
@@ -64,13 +64,13 @@ SimpleSelectyStateless.propTypes = {
   ),
   options: PropTypes.array,
   placeholder: PropTypes.string,
-  selected: PropTypes.object,
+  items: PropTypes.object,
   value: PropTypes.string,
   visible: PropTypes.bool.isRequired,
 };
 
 SimpleSelectyStateless.defaultProps = {
-  displayField: 'label',
+  label: 'label',
   filterable: true,
   options: [],
   value: '',

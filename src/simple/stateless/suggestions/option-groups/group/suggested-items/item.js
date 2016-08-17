@@ -6,27 +6,27 @@ import styles from './styles.scss';
 
 const SuggestedItem = ({
   item,
-  selected,
-  onSelect,
-  displayField,
+  items,
+  onClicked,
+  label,
 }) => {
   const applied = classNames({
     item: true,
-    selected: selected.id === item.id,
+    selected: items.id === item.id,
   });
 
   return (
-    <div styleName={applied} onClick={() => onSelect(item)}>
-      {item[displayField]}
+    <div styleName={applied} onClick={() => onClicked(item)}>
+      {item[label]}
     </div>
   );
 };
 
 SuggestedItem.propTypes = {
   item: PropTypes.object.isRequired,
-  selected: PropTypes.object.isRequired,
-  displayField: PropTypes.string.isRequired,
-  onSelect: PropTypes.func.isRequired,
+  items: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired,
+  onClicked: PropTypes.func.isRequired,
 };
 
 export default CSSModules(SuggestedItem, styles, { allowMultiple: true });

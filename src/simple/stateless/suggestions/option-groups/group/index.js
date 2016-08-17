@@ -6,9 +6,9 @@ import styles from './styles.scss';
 
 const SuggestedGroup = ({
   group,
-  onSelect,
-  selected,
-  displayField,
+  onClicked,
+  items,
+  label,
 }) => {
   if (!group.items.length) {
     return <noscript />;
@@ -22,9 +22,9 @@ const SuggestedGroup = ({
           (item, index) => (
             <SuggestedItem
               item={item}
-              displayField={displayField}
-              onSelect={onSelect}
-              selected={selected}
+              label={label}
+              onClicked={onClicked}
+              items={items}
               key={index}
             />
           )
@@ -35,10 +35,10 @@ const SuggestedGroup = ({
 };
 
 SuggestedGroup.propTypes = {
-  displayField: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   group: PropTypes.object.isRequired,
-  selected: PropTypes.object.isRequired,
-  onSelect: PropTypes.func.isRequired,
+  items: PropTypes.object.isRequired,
+  onClicked: PropTypes.func.isRequired,
 };
 
 export default CSSModules(SuggestedGroup, styles);

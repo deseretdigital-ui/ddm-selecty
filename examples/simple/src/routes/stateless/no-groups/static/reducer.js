@@ -4,7 +4,7 @@ import { UPDATE_VALUE, UPDATE_VISIBLE, UPDATE_SELECTED } from './constants';
 const initialState = {
   value: '',
   visible: false,
-  selected: {
+  items: {
     id: null,
     label: null,
   },
@@ -19,7 +19,7 @@ function _static(state = initialState, action) {
       return Object.assign({}, state, {visible: action.value});
     }
     case UPDATE_SELECTED: {
-      return Object.assign({}, state, {selected: action.item});
+      return Object.assign({}, state, {items: action.item});
     }
     default:
       return state;

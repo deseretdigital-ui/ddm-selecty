@@ -11,18 +11,18 @@ import {
 } from './option-groups/';
 
 const Suggestions = ({
-  displayField,
+  label,
   filterable,
   options,
   optionGroups,
   value,
   visible,
-  onSelect,
-  selected,
+  onClicked,
+  items,
 }) => {
   let results = createGrouping(sortOptions(options), optionGroups);
   if (filterable) {
-    results = filterOptions(displayField, value, results);
+    results = filterOptions(label, value, results);
   }
   const applied = classNames({
     norm: true,
@@ -45,9 +45,9 @@ const Suggestions = ({
           (groupName, index) => (
             <SuggestedGroup
               group={results[groupName]}
-              onSelect={onSelect}
-              selected={selected}
-              displayField={displayField}
+              onClicked={onClicked}
+              items={items}
+              label={label}
               key={index}
             />
           )
@@ -58,7 +58,7 @@ const Suggestions = ({
 };
 
 Suggestions.propTypes = {
-  displayField: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   filterable: PropTypes.bool,
   options: PropTypes.array,
   optionGroups: PropTypes.arrayOf(PropTypes.shape({
@@ -66,14 +66,14 @@ Suggestions.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
   })),
-  onSelect: PropTypes.func.isRequired,
-  selected: PropTypes.object,
+  onClicked: PropTypes.func.isRequired,
+  items: PropTypes.object,
   value: PropTypes.string,
   visible: PropTypes.bool.isRequired,
 };
 
 Suggestions.defaultProps = {
-  displayField: 'label',
+  label: 'label',
   visible: false,
 };
 

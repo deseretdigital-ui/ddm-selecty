@@ -1,3 +1,5 @@
+// TODO this should be moved to the stateful version. For not we should simply
+// return the original key event e.
 export default {
   9: 'tab',
   13: 'enter',

@@ -26,6 +26,8 @@ const InputElement = ({
       }
     }
     onChange={
+      // TODO remove the call to the API...this should be placed in the
+      // stateful side and will be under a method called onLoad
       e => {
         load('//ksllocal.dev/api/autocomplete/get?q=', e.target.value);
         onChange(e);
