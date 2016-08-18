@@ -1,17 +1,15 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
-const SimpleSelecty = () => {
-  return (
-    <div>
-      Stateful implementation
-    </div>
-  );
-};
+const SimpleSelecty = () => (
+  <div>
+    Stateful implementation
+  </div>
+);
 
 export default SimpleSelecty;
 
 // import React, { PropTypes } from 'react';
-// // import {default as css} from './mainStyles'
+// import {default as css} from './mainStyles'
 //
 // class SimpleSelecty extends React.Component {
 //   constructor(props, context) {

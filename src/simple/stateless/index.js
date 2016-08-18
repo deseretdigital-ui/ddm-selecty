@@ -38,7 +38,8 @@ const SimpleSelectyStateless = ({
   if (filterable) {
     results = filterOptions(label, value, options);
     if (onOptionsFiltered) {
-      onOptionsFiltered(results);
+      // This method call's forever loop of rendering this component.
+      // onOptionsFiltered(results);
     }
   }
 
@@ -86,6 +87,7 @@ SimpleSelectyStateless.propTypes = {
   autoHighlight: PropTypes.bool,
   disabled: PropTypes.bool,
   filterable: PropTypes.bool,
+  filteredOptions: PropTypes.array,
   items: PropTypes.array,
   label: PropTypes.string,
   name: PropTypes.string,

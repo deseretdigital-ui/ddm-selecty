@@ -9,9 +9,7 @@ const Suggestions = ({
   autoHighlight,
   items,
   label,
-  optionGroups,
   options,
-  value,
   visible,
   onClicked,
 }) => {

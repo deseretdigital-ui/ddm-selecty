@@ -21,29 +21,27 @@ const StatlessNoGroupStatic = ({
   updateSelected,
   value,
   visible
-}) => {
-  return (
-    <div>
-      Stateless Static WITHOUT Groups:
-      <SimpleSelectyStateless
-        items={items}
-        options={defaultOptions}
-        placeholder={'Stateless Without Groups'}
-        value={value}
-        visible={visible}
-        onBlur={() => updateVisible(false)}
-        onFocus={() => updateVisible(true)}
-        onClicked={item => {
-          updateValue(item.label);
-          updateSelected(item);
-          updateVisible(false);
-        }}
-        onChange={text => updateValue(text)}
-        onOptionsFiltered={filtered => updateFilteredOptions(filtered)}
-      />
-    </div>
-  );
-}
+}) => (
+  <div>
+    Stateless Static WITHOUT Groups:
+    <SimpleSelectyStateless
+      items={items}
+      options={defaultOptions}
+      placeholder={'Stateless Without Groups'}
+      value={value}
+      visible={visible}
+      onBlur={() => updateVisible(false)}
+      onFocus={() => updateVisible(true)}
+      onClicked={item => {
+        updateValue(item.label);
+        updateSelected(item);
+        updateVisible(false);
+      }}
+      onChange={text => updateValue(text)}
+      onOptionsFiltered={filtered => updateFilteredOptions(filtered)}
+    />
+  </div>
+);
 
 function mapStateToProps (state, ownProps) {
   return {...state.global, ...state.SLNGStatic};

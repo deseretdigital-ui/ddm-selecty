@@ -1,4 +1,3 @@
-/* eslint import/no-unresolved: [2, { ignore: ['react'] }] */
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import SuggestedItem from './suggested-items/item';
@@ -6,9 +5,9 @@ import styles from './styles.scss';
 
 const SuggestedGroup = ({
   group,
-  onClicked,
   items,
   label,
+  onClicked,
 }) => {
   if (!group.items.length) {
     return <noscript />;
@@ -35,9 +34,9 @@ const SuggestedGroup = ({
 };
 
 SuggestedGroup.propTypes = {
-  label: PropTypes.string.isRequired,
   group: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
+  label: PropTypes.string.isRequired,
   onClicked: PropTypes.func.isRequired,
 };
 
