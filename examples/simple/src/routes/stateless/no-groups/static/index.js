@@ -40,6 +40,7 @@ const StatlessNoGroupStatic = ({
       onFocus={() => updateVisible(true)}
       onClicked={item => {
         updateValue(item.label);
+        updateTypedValue(item.label);
         updateSelected(item);
         updateVisible(false);
       }}
