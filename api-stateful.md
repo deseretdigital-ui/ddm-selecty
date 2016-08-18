@@ -91,6 +91,13 @@ different in their implementation, compared to the stateless version.
       A boolean value to specify if options list should be sorted.
     </td>
 	</tr>
+	<tr>
+		<td valign="top"><code>tabIndex</code></td>
+		<td valign="top">
+      An integer that will be assigned to the input element to allow tabbing in
+			specific order for form elements.
+    </td>
+	</tr>
   <tr>
     <td valign="top"><code>value</code></td>
     <td valign="top">
@@ -141,6 +148,7 @@ different in their implementation, compared to the stateless version.
 			<code>({ string: label, string :: inputText, array :: options }) { return array; }</code>
     </td>
 	</tr>
+
   <tr>
 		<td valign="top"><code>onFocus</code></td>
 		<td valign="top">
@@ -159,13 +167,11 @@ different in their implementation, compared to the stateless version.
   <tr>
 		<td valign="top"><code>onKeyDown</code></td>
 		<td valign="top">
-      Callback function triggered when any key is pressed down. <br/>
-      <code>({ originalEvent :: e }) { }</code>
+			Callback function triggered when any key is pressed down. We also pass back the filtered options. <br/>
+			<code>({ originalEvent :: e, array: filterOptions }) { }</code>
     </td>
 	</tr>
-
-
-	</tr>
+	<tr>
 		<td valign="top"><code>onLoad</code></td>
 		<td valign="top">
       Function used for loading data from an async process. When completed it
@@ -173,6 +179,13 @@ different in their implementation, compared to the stateless version.
       <code>({ function :: callback }) { }</code>
     </td>
 	</tr>
+	<tr>
+		<td valign="top"><code>onOptionsFiltered</code></td>
+		<td valign="top">
+      Callback function used to return the filtered list of the options.<br/>
+      <code>({ array :: results }) { }</code>
+    </td>
+	</tr>	
 	<tr>
 		<td valign="top"><code>onSelected</code></td>
 		<td valign="top">

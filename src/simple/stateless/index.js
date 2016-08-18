@@ -2,6 +2,9 @@
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import InputElement from '../../input/';
+import createGrouping from '../shared/option-groups/create';
+import sortOptions from '../shared/option-groups/sort';
+import { filterOptions } from '../shared/option-groups/filter';
 import Suggestions from './suggestions/';
 import styles from './styles.scss';
 
@@ -26,47 +29,64 @@ const SimpleSelectyStateless = ({
   onFilter,
   onFocus,
   onKeyDown,
+  onOptionsFiltered,
   onSelected,
-}) => (
-  <div
-    onBlur={onBlur}
-    onFocus={onFocus}
-    styleName="wrapper"
-    tabIndex="1"
-  >
-    <InputElement
-      autofocus={autofocus}
-      disabled={disabled}
-      name={name}
-      placeholder={placeholder}
-      required={required}
-      value={value}
-      onChange={e => onChange(e.target.value)}
-      onKeyDown={onKeyDown}
-    />
-    <Suggestions
-      autoHighlight={autoHighlight}
-      filterable={filterable}
-      items={items}
-      label={label}
-      optionGroups={optionGroups}
-      options={options}
-      sortable={sortable}
-      value={value}
-      visible={visible}
-      onClicked={onClicked}
-      onFilter={onFilter}
-      onSelected={onSelected}
-    />
-  </div>
-);
+}) => {
+  // console.log('TEMP to bypass eslint', onFilter, onSelected)
+  let results = options.slice(0);
+
+  if (filterable) {
+    results = filterOptions(label, value, options);
+    if (onOptionsFiltered) {
+      onOptionsFiltered(results);
+    }
+  }
+
+  results = createGrouping(sortOptions(results), optionGroups);
+
+  return (
+    <div
+      onBlur={onBlur}
+      onFocus={onFocus}
+      styleName="wrapper"
+      tabIndex="1"
+    >
+      <InputElement
+        autofocus={autofocus}
+        disabled={disabled}
+        label={label}
+        name={name}
+        options={options}
+        placeholder={placeholder}
+        required={required}
+        value={value}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+      />
+      <Suggestions
+        autoHighlight={autoHighlight}
+        filterable={filterable}
+        items={items}
+        label={label}
+        optionGroups={optionGroups}
+        options={results}
+        sortable={sortable}
+        value={value}
+        visible={visible}
+        onClicked={onClicked}
+        onFilter={onFilter}
+        onSelected={onSelected}
+      />
+    </div>
+  );
+};
 
 SimpleSelectyStateless.propTypes = {
   autofocus: PropTypes.bool,
   autoHighlight: PropTypes.bool,
   disabled: PropTypes.bool,
   filterable: PropTypes.bool,
-  items: PropTypes.object,
+  items: PropTypes.array,
   label: PropTypes.string,
   name: PropTypes.string,
   optionGroups: PropTypes.arrayOf(
@@ -88,6 +108,7 @@ SimpleSelectyStateless.propTypes = {
   onFilter: PropTypes.func,
   onFocus: PropTypes.func,
   onKeyDown: PropTypes.func,
+  onOptionsFiltered: PropTypes.func,
   onSelected: PropTypes.func,
 };
 

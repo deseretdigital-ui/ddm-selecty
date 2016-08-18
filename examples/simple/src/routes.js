@@ -20,12 +20,32 @@ export const createRoutes = (store) => {
       },
       childRoutes: [
         {
+          name: "StatelessNoGroupsAsync",
+          path: "/stateless/no-groups/async",
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              injectReducer('SLNGAsync', require('./routes/stateless/no-groups/async/reducer').default);
+              cb(null, require('./routes/stateless/no-groups/async/').default);
+            })
+          },
+        },
+        {
           name: "StatelessNoGroupsStatic",
           path: "/stateless/no-groups/static",
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
               injectReducer('SLNGStatic', require('./routes/stateless/no-groups/static/reducer').default);
               cb(null, require('./routes/stateless/no-groups/static/').default);
+            })
+          },
+        },
+        {
+          name: "StatefulNoGroupsAsync",
+          path: "/stateful/no-groups/async",
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              injectReducer('SFNGAsync', require('./routes/stateful/no-groups/async/reducer').default);
+              cb(null, require('./routes/stateful/no-groups/async/').default);
             })
           },
         },

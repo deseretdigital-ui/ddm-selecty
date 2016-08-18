@@ -1,13 +1,19 @@
-import { UPDATE_VALUE, UPDATE_VISIBLE, UPDATE_SELECTED } from './constants';
+import {
+  UPDATE_FILTERED,
+  UPDATE_VALUE,
+  UPDATE_VISIBLE,
+  UPDATE_SELECTED,
+} from './constants';
 
 // The initial state of the App
 const initialState = {
   value: '',
   visible: false,
-  items: {
+  items: [{
     id: null,
     label: null,
-  },
+  }],
+  filteredOptions: [],
 };
 
 function _static(state = initialState, action) {
@@ -19,7 +25,10 @@ function _static(state = initialState, action) {
       return Object.assign({}, state, {visible: action.value});
     }
     case UPDATE_SELECTED: {
-      return Object.assign({}, state, {items: action.item});
+      return Object.assign({}, state, {items: [action.item]});
+    }
+    case UPDATE_FILTERED: {
+      return Object.assign({}, state, {filteredOptions: action.options});
     }
     default:
       return state;

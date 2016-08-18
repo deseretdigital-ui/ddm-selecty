@@ -37,7 +37,7 @@ const SuggestedGroup = ({
 SuggestedGroup.propTypes = {
   label: PropTypes.string.isRequired,
   group: PropTypes.object.isRequired,
-  items: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
   onClicked: PropTypes.func.isRequired,
 };
 

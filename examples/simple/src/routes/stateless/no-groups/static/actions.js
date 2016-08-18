@@ -1,4 +1,5 @@
 import {
+  UPDATE_FILTERED,
   UPDATE_VALUE,
   UPDATE_VISIBLE,
   UPDATE_SELECTED,
@@ -22,5 +23,12 @@ export function updateSelected(item) {
   return {
     type: UPDATE_SELECTED,
     item,
+  };
+}
+
+export function updateFilteredOptions(opts) {
+  return {
+    type: UPDATE_FILTERED,
+    options: opts,
   };
 }

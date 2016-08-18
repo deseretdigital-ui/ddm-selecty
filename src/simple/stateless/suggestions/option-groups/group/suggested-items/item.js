@@ -10,9 +10,17 @@ const SuggestedItem = ({
   onClicked,
   label,
 }) => {
+  let highlight = false;
+  for(let i = 0; i < items.length; i++) {
+    if (items[i].id === item.id) {
+      highlight = true;
+      break;
+    }
+  }
+
   const applied = classNames({
     item: true,
-    selected: items.id === item.id,
+    selected: highlight,
   });
 
   return (
@@ -24,7 +32,7 @@ const SuggestedItem = ({
 
 SuggestedItem.propTypes = {
   item: PropTypes.object.isRequired,
-  items: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
   onClicked: PropTypes.func.isRequired,
 };

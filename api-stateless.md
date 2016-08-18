@@ -116,22 +116,29 @@
           A boolean value to specify if options list should be sorted.
         </td>
 	</tr>
-    <tr>
-        <td valign="top"><code>value</code></td>
-        <td valign="top" width="100px" align="center">""</td>
-        <td valign="top" width="100px" align="center">string</td>
-        <td valign="top">
-          The specific value used in populating the input element.
-          If empty/null then it will default back to the placeholder property.
-        </td>
-    </tr>
-    <tr>
-        <td valign="top"><code>visible</code></td>
-        <td valign="top" align="center">false</td>
-        <td valign="top" align="center">bool</td>
-        <td valign="top">
-          Dropdown is visible or hidden. 
-        </td>
+	<tr>
+		<td valign="top"><code>tabIndex</code></td>
+		<td valign="top">
+      An integer that will be assigned to the input element to allow tabbing in
+			specific order for form elements.
+    </td>
+	</tr>
+  <tr>
+      <td valign="top"><code>value</code></td>
+      <td valign="top" width="100px" align="center">""</td>
+      <td valign="top" width="100px" align="center">string</td>
+      <td valign="top">
+        The specific value used in populating the input element.
+        If empty/null then it will default back to the placeholder property.
+      </td>
+  </tr>
+  <tr>
+      <td valign="top"><code>visible</code></td>
+      <td valign="top" align="center">false</td>
+      <td valign="top" align="center">bool</td>
+      <td valign="top">
+        Dropdown is visible or hidden.
+      </td>
 	</tr>
 </table>
 
@@ -186,15 +193,22 @@
     <tr>
 		<td valign="top"><code>onKeyDown</code></td>
 		<td valign="top">
-            Callback function triggered when any key is pressed down. <br/>
-            <code>({ originalEvent :: e }) { }</code>
-        </td>
+        Callback function triggered when any key is pressed down. We also pass back the filtered options. <br/>
+        <code>({ originalEvent :: e, array: filterOptions }) { }</code>
+    </td>
 	</tr>
-    <tr>
+	<tr>
+		<td valign="top"><code>onOptionsFiltered</code></td>
+		<td valign="top">
+      Callback function used to return the filtered list of the options.<br/>
+      <code>({ array :: results }) { }</code>
+    </td>
+	</tr>
+  <tr>
 		<td valign="top"><code>onSelected</code></td>
 		<td valign="top">
 			Callback function triggered when item is selected via a keyboard event. <br/>
 			<code>({ value :: Item }) { }</code>
-        </td>
+    </td>
 	</tr>
 </table>
