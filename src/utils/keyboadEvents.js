@@ -1,6 +1,7 @@
 import KEY_MAP from './keyMapping';
+import { filterOptions } from '../simple/shared/option-groups/filter';
 
-export default (e, options, selected, onSelected, onChange, typedValue) => {
+export default (e, label, options, selected, onSelected, onChange, typedValue, onOptionsFiltered) => {
   const key = KEY_MAP[e.keyCode];
 
   if (key) {
@@ -11,7 +12,6 @@ export default (e, options, selected, onSelected, onChange, typedValue) => {
     const last = options.length - 1;
     const next = options[index + 1];
     const prev = options[index - 1];
-
     switch (key) {
       case 'down':
         if (index < 0) {
@@ -32,7 +32,10 @@ export default (e, options, selected, onSelected, onChange, typedValue) => {
         }
         break;
       case 'tab':
+        onChange(options[index][label]);
         onSelected(options[index]);
+        const filtered = filterOptions(label, options[index][label], options);
+        onOptionsFiltered(filtered);
         document.activeElement.blur();
         break;
       case 'enter':

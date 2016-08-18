@@ -5,6 +5,7 @@ import createGrouping from '../shared/option-groups/create';
 import sortOptions from '../shared/option-groups/sort';
 import { filterOptions } from '../shared/option-groups/filter';
 import keyboardEvents from '../../utils/keyboadEvents';
+import KEY_MAP from '../../utils/keyMapping';
 import Suggestions from './suggestions/';
 import styles from './styles.scss';
 
@@ -56,9 +57,10 @@ const SimpleSelectyStateless = ({
         onChange={onChange}
         onKeyDown={
           e => {
+            const suggested = filteredOptions.length > 0 ? filteredOptions : options;
             onKeyDown instanceof Function
               ? onKeyDown(e)
-              : keyboardEvents(e, filteredOptions, items[0], onSelected, onChange, typedValue);
+              : keyboardEvents(e, label, suggested, items[0], onSelected, onChange, typedValue, onOptionsFiltered);
           }
         }
         onKeyUp={

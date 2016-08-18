@@ -9,7 +9,6 @@ import {
   updateVisible,
   updateSelected,
 } from './actions';
-import KEY_MAP from '../../../../utils/keyMapping';
 
 const StatlessNoGroupStatic = ({
   defaultOptions,
