@@ -1,4 +1,3 @@
-/* eslint import/no-unresolved: [2, { ignore: ['react'] }] */
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import InputElement from '../../input/';
@@ -13,6 +12,7 @@ const SimpleSelectyStateless = ({
   autoHighlight,
   disabled,
   filterable,
+  filteredOptions,
   items,
   label,
   name,
@@ -32,18 +32,8 @@ const SimpleSelectyStateless = ({
   onOptionsFiltered,
   onSelected,
 }) => {
-  // console.log('TEMP to bypass eslint', onFilter, onSelected)
-  let results = options.slice(0);
-
-  if (filterable) {
-    results = filterOptions(label, value, options);
-    if (onOptionsFiltered) {
-      // This method call's forever loop of rendering this component.
-      // onOptionsFiltered(results);
-    }
-  }
-
-  results = createGrouping(sortOptions(results), optionGroups);
+  const data = (filterable && filteredOptions.length) || value.length ? filteredOptions : options;
+  const results = createGrouping(sortOptions(sortable, data), optionGroups);
 
   return (
     <div
@@ -55,28 +45,33 @@ const SimpleSelectyStateless = ({
       <InputElement
         autofocus={autofocus}
         disabled={disabled}
-        label={label}
+        items={items}
         name={name}
-        options={options}
+        options={data}
         placeholder={placeholder}
         required={required}
         value={value}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        onKeyUp={
+          e => {
+            if (onFilter instanceof Function) {
+              onFilter(e);
+            } else if (filterable) {
+              const filtered = filterOptions(label, value, options);
+              onOptionsFiltered(filtered);
+            }
+          }
+        }
+        onSelected={onSelected}
       />
       <Suggestions
         autoHighlight={autoHighlight}
-        filterable={filterable}
         items={items}
         label={label}
-        optionGroups={optionGroups}
         options={results}
-        sortable={sortable}
-        value={value}
         visible={visible}
         onClicked={onClicked}
-        onFilter={onFilter}
-        onSelected={onSelected}
       />
     </div>
   );
@@ -107,9 +102,15 @@ SimpleSelectyStateless.propTypes = {
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   onClicked: PropTypes.func,
-  onFilter: PropTypes.func,
+  onFilter: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.bool,
+  ]),
   onFocus: PropTypes.func,
-  onKeyDown: PropTypes.func,
+  onKeyDown: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.bool,
+  ]),
   onOptionsFiltered: PropTypes.func,
   onSelected: PropTypes.func,
 };
@@ -119,6 +120,7 @@ SimpleSelectyStateless.defaultProps = {
   autoHighlight: false,
   disabled: false,
   filterable: true,
+  filteredOptions: [],
   items: [],
   label: 'label',
   name: 'selectize',
@@ -132,9 +134,10 @@ SimpleSelectyStateless.defaultProps = {
   onBlur: () => {},
   onChange: () => {},
   onClicked: () => {},
-  onFilter: () => {},
+  onFilter: false,
   onFocus: () => {},
-  onKeyDown: () => {},
+  onKeyDown: false,
+  onOptionsFiltered: () => {},
   onSelected: () => {},
 };
 

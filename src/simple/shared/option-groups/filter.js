@@ -1,6 +1,6 @@
 export const filterOptions = (label, value, opts) => {
   const options = opts.slice(0);
-  if (value !== '' && options.length > 0) {
+  if (value !== '') {
     const TERM = value.toLowerCase();
     const filtered = [];
     for (let i = 0; i < options.length; i++) {

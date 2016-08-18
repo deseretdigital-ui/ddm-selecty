@@ -28,6 +28,9 @@
       "callbacksLast": true,
       "ignoreCase": true,
       "requiredFirst": false
+    }],
+    "no-unused-expressions": [2, {
+      "allowTernary": true,
     }]
   },
   "plugins": [

@@ -1,4 +1,3 @@
-/* eslint import/no-unresolved: [2, { ignore: ['react'] }] */
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import CSSModules from 'react-css-modules';
@@ -51,15 +50,7 @@ Suggestions.propTypes = {
   autoHighlight: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
-  optionGroups: PropTypes.arrayOf(
-    PropTypes.shape({
-      order: PropTypes.number.isRequired,
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })
-  ),
   options: PropTypes.object.isRequired,
-  value: PropTypes.string.isRequired,
   visible: PropTypes.bool.isRequired,
   onClicked: PropTypes.func.isRequired,
 };

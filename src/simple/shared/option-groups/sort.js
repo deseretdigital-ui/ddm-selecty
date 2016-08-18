@@ -1,4 +1,4 @@
-export default options => {
+export default (sortable, options) => {
   function compare(a, b) {
     const lableA = a.label.toLowerCase();
     const lableB = b.label.toLowerCase();
@@ -10,5 +10,5 @@ export default options => {
     }
     return 0;
   }
-  return options.sort(compare);
+  return sortable ? options.slice(0).sort(compare) : options.slice(0);
 };

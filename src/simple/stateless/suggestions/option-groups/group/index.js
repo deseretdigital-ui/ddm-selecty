@@ -21,9 +21,9 @@ const SuggestedGroup = ({
           (item, index) => (
             <SuggestedItem
               item={item}
+              items={items}
               label={label}
               onClicked={onClicked}
-              items={items}
               key={index}
             />
           )

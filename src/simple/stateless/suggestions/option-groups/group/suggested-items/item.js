@@ -1,4 +1,3 @@
-/* eslint import/no-unresolved: [2, { ignore: ['react'] }] */
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import classNames from 'classnames';
