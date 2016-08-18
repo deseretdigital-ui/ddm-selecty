@@ -1,6 +1,6 @@
 import KEY_MAP from './keyMapping';
 
-export default (e, options, selected, onSelected) => {
+export default (e, options, selected, onSelected, onChange, typedValue) => {
   const key = KEY_MAP[e.keyCode];
 
   if (key) {
@@ -14,10 +14,22 @@ export default (e, options, selected, onSelected) => {
 
     switch (key) {
       case 'down':
-        index < 0 || index === last ? onSelected(first) : onSelected(next);
+        if (index < 0) {
+          onSelected(first);
+        } else if (index === last) {
+          onChange(typedValue);
+        } else {
+          onSelected(next);
+        }
         break;
       case 'up':
-        index <= 0 ? onSelected(options[last]) : onSelected(prev);
+        if (index < 0) {
+          onSelected(options[last]);
+        } else if (index === 0) {
+          onChange(typedValue);
+        } else {
+          onSelected(prev);
+        }
         break;
       case 'tab':
         onSelected(options[index]);

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { SimpleSelectyStateless } from '../../../../../../../dist/ddm.selecty.js';
 import {
   updateFilteredOptions,
+  updateTypedValue,
   updateValue,
   updateVisible,
   updateSelected,
@@ -16,10 +17,12 @@ const StatlessNoGroupStatic = ({
   filteredOptions,
   items,
   updateFilteredOptions,
+  updateTypedValue,
   updateValue,
   updateVisible,
   updateSelected,
   value,
+  typedValue,
   visible
 }) => (
   <div>
@@ -31,6 +34,7 @@ const StatlessNoGroupStatic = ({
       options={defaultOptions}
       placeholder={'Stateless Without Groups'}
       value={value}
+      typedValue={typedValue}
       visible={visible}
       onBlur={() => updateVisible(false)}
       onFocus={() => updateVisible(true)}
@@ -39,9 +43,12 @@ const StatlessNoGroupStatic = ({
         updateSelected(item);
         updateVisible(false);
       }}
-      onChange={text => updateValue(text)}
+      onChange={text => {
+        updateTypedValue(text);
+        updateValue(text);
+        updateSelected(null);
+      }}
       onOptionsFiltered={filtered => {
-        console.log("FILTERED", filtered);
         updateFilteredOptions(filtered)
       }}
       onSelected={
@@ -60,6 +67,7 @@ function mapStateToProps (state, ownProps) {
 
 export default connect(mapStateToProps, {
   updateFilteredOptions,
+  updateTypedValue,
   updateValue,
   updateVisible,
   updateSelected,

@@ -22,6 +22,7 @@ const SimpleSelectyStateless = ({
   placeholder,
   required,
   sortable,
+  typedValue,
   value,
   visible,
   onBlur,
@@ -57,7 +58,7 @@ const SimpleSelectyStateless = ({
           e => {
             onKeyDown instanceof Function
               ? onKeyDown(e)
-              : keyboardEvents(e, options, items[0], onSelected);
+              : keyboardEvents(e, filteredOptions, items[0], onSelected, onChange, typedValue);
           }
         }
         onKeyUp={
@@ -112,6 +113,7 @@ SimpleSelectyStateless.propTypes = {
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   sortable: PropTypes.bool,
+  typedValue: PropTypes.string,
   value: PropTypes.string,
   visible: PropTypes.bool,
   onBlur: PropTypes.func,

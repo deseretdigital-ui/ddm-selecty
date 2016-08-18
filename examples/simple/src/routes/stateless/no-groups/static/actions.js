@@ -1,9 +1,17 @@
 import {
   UPDATE_FILTERED,
   UPDATE_VALUE,
+  UPDATE_TYPED_VALUE,
   UPDATE_VISIBLE,
   UPDATE_SELECTED,
 } from './constants';
+
+export function updateTypedValue(value) {
+  return {
+    type: UPDATE_TYPED_VALUE,
+    value,
+  };
+}
 
 export function updateValue(value) {
   return {
