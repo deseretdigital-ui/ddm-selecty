@@ -2,6 +2,7 @@ import KEY_MAP from './keyMapping';
 
 export default (e, options, selected, onSelected) => {
   const key = KEY_MAP[e.keyCode];
+
   if (key) {
     e.preventDefault();
     const index = options.findIndex(item => item.id === selected.id);

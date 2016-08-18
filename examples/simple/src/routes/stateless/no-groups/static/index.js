@@ -40,7 +40,10 @@ const StatlessNoGroupStatic = ({
         updateVisible(false);
       }}
       onChange={text => updateValue(text)}
-      onOptionsFiltered={filtered => updateFilteredOptions(filtered)}
+      onOptionsFiltered={filtered => {
+        console.log("FILTERED", filtered);
+        updateFilteredOptions(filtered)
+      }}
       onSelected={
         item => {
           updateValue(item.label);

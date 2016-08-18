@@ -4,6 +4,7 @@ import InputElement from '../../input/';
 import createGrouping from '../shared/option-groups/create';
 import sortOptions from '../shared/option-groups/sort';
 import { filterOptions } from '../shared/option-groups/filter';
+import keyboardEvents from '../../utils/keyboadEvents';
 import Suggestions from './suggestions/';
 import styles from './styles.scss';
 
@@ -32,7 +33,7 @@ const SimpleSelectyStateless = ({
   onOptionsFiltered,
   onSelected,
 }) => {
-  const data = (filterable && filteredOptions.length) || value.length ? filteredOptions : options;
+  const data = (filterable && filteredOptions.length) && value.length ? filteredOptions : options;
   const results = createGrouping(sortOptions(sortable, data), optionGroups);
 
   return (
@@ -52,14 +53,24 @@ const SimpleSelectyStateless = ({
         required={required}
         value={value}
         onChange={onChange}
-        onKeyDown={onKeyDown}
-        onKeyUp={
+        onKeyDown={
           e => {
-            if (onFilter instanceof Function) {
-              onFilter(e);
-            } else if (filterable) {
-              const filtered = filterOptions(label, value, options);
-              onOptionsFiltered(filtered);
+            onKeyDown instanceof Function
+              ? onKeyDown(e)
+              : keyboardEvents(e, options, items[0], onSelected);
+          }
+        }
+        onKeyUp={
+          (e) => {
+            const charCode = e.keyCode;
+            // Enter for every character except for the tab, enter, and arrow keys
+            if (charCode !== 9 && charCode !== 13 && (charCode < 37 || charCode > 40)) {
+              if (onFilter instanceof Function) {
+                onFilter(e);
+              } else if (filterable) {
+                const filtered = filterOptions(label, e.target.value, options);
+                onOptionsFiltered(filtered);
+              }
             }
           }
         }
@@ -71,7 +82,11 @@ const SimpleSelectyStateless = ({
         label={label}
         options={results}
         visible={visible}
-        onClicked={onClicked}
+        onClicked={item => {
+          const filtered = filterOptions(label, item.label, options);
+          onOptionsFiltered(filtered);
+          onClicked(item);
+        }}
       />
     </div>
   );
