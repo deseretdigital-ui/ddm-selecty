@@ -33,7 +33,7 @@ const InputElement = ({
       />
     </div>
   );
-}
+};
 
 InputElement.propTypes = {
   autofocus: PropTypes.bool.isRequired,

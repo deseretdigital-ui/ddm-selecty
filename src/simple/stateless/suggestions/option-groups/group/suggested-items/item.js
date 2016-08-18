@@ -11,7 +11,7 @@ const SuggestedItem = ({
   label,
 }) => {
   let highlight = false;
-  for(let i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     if (items[i].id === item.id) {
       highlight = true;
       break;

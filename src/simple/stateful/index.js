@@ -6,7 +6,7 @@ const SimpleSelecty = () => {
       Stateful implementation
     </div>
   );
-}
+};
 
 export default SimpleSelecty;
 
