@@ -19,6 +19,12 @@
     "no-var": 0,
     "new-cap": 0,
     "vars-on-top": 0,
+    "max-len": ["error", {
+      "code": 120,
+      "ignoreComments": true,
+      "ignoreTrailingComments": true,
+      "ignoreUrls": true
+    }],
 
     //Temporarirly disabled due to a possible bug in babel-eslint (todomvc example)
     "block-scoped-var": 0,
@@ -30,7 +36,7 @@
       "requiredFirst": false
     }],
     "no-unused-expressions": [2, {
-      "allowTernary": true,
+      "allowTernary": true
     }]
   },
   "plugins": [

@@ -23,6 +23,7 @@ const SimpleSelectyStateless = ({
   placeholder,
   required,
   sortable,
+  tabIndex,
   typedValue,
   value,
   visible,
@@ -35,7 +36,7 @@ const SimpleSelectyStateless = ({
   onOptionsFiltered,
   onSelected,
 }) => {
-  const data = (filterable && filteredOptions.length) && value.length ? filteredOptions : options;
+  const data = filterable && typedValue.length ? filteredOptions : options;
   const results = createGrouping(sortOptions(sortable, data), optionGroups);
 
   return (
@@ -43,7 +44,7 @@ const SimpleSelectyStateless = ({
       onBlur={onBlur}
       onFocus={onFocus}
       styleName="wrapper"
-      tabIndex="1"
+      tabIndex={tabIndex}
     >
       <InputElement
         autofocus={autofocus}
@@ -64,10 +65,10 @@ const SimpleSelectyStateless = ({
           }
         }
         onKeyUp={
-          (e) => {
-            const charCode = e.keyCode;
+          e => {
             // Enter for every character except for the tab, enter, and arrow keys
-            if (charCode !== 9 && charCode !== 13 && (charCode < 37 || charCode > 40)) {
+            const key = KEY_MAP[e.keyCode];
+            if (!key) {
               if (onFilter instanceof Function) {
                 onFilter(e);
               } else if (filterable) {
@@ -85,11 +86,13 @@ const SimpleSelectyStateless = ({
         label={label}
         options={results}
         visible={visible}
-        onClicked={item => {
-          const filtered = filterOptions(label, item.label, options);
-          onOptionsFiltered(filtered);
-          onClicked(item);
-        }}
+        onClicked={
+          item => {
+            const filtered = filterOptions(label, item.label, options);
+            onOptionsFiltered(filtered);
+            onClicked(item);
+          }
+        }
       />
     </div>
   );
@@ -115,6 +118,10 @@ SimpleSelectyStateless.propTypes = {
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   sortable: PropTypes.bool,
+  tabIndex: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   typedValue: PropTypes.string,
   value: PropTypes.string,
   visible: PropTypes.bool,
@@ -148,6 +155,8 @@ SimpleSelectyStateless.defaultProps = {
   placeholder: '',
   required: false,
   sortable: false,
+  tabIndex: 1,
+  typedValue: '',
   value: '',
   visible: false,
   onBlur: () => {},
