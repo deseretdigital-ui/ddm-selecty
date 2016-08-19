@@ -2,24 +2,42 @@
   "extends": "eslint-config-airbnb",
   "env": {
     "mocha": true,
-    "node": true
+    "node": true,
+    "browser": true,
+    "jquery": true,
+    "es6": true
   },
   "parser": "babel-eslint",
   "rules": {
     "valid-jsdoc": 2,
-
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
+    "react/jsx-filename-extension": 0,
 
     // Disable until Flow supports let and const
     "no-var": 0,
+    "new-cap": 0,
     "vars-on-top": 0,
+    "max-len": ["error", {
+      "code": 120,
+      "ignoreComments": true,
+      "ignoreTrailingComments": true,
+      "ignoreUrls": true
+    }],
 
     //Temporarirly disabled due to a possible bug in babel-eslint (todomvc example)
     "block-scoped-var": 0,
     // Temporarily disabled for test/* until babel/babel-eslint#33 is resolved
-    "padded-blocks": 0
+    "padded-blocks": 0,
+    "react/sort-prop-types": [1, {
+      "callbacksLast": true,
+      "ignoreCase": true,
+      "requiredFirst": false
+    }],
+    "no-unused-expressions": [2, {
+      "allowTernary": true
+    }]
   },
   "plugins": [
     "react"

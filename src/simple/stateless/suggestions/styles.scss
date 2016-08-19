@@ -1,0 +1,20 @@
+.suggestion {
+  background: #E1E1E1;
+  border: 0;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
+  font-size: 14px;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  &:empty {
+    display: none;
+  }
+}
+
+.norm {
+  display: none;
+}
+
+.visible {
+  display: inline-block;
+}

@@ -1,0 +1,7 @@
+.optionGroup {
+  font-weight: bold;
+  display: block;
+  &:first-child {
+    padding-top: 10px;
+  }
+}

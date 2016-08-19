@@ -1,56 +1,47 @@
-import React, { PropTypes } from 'react'
-// import {default as css} from './selectStyles'
+import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
-import styles from './styles'
+import styles from './styles.scss';
 
-class InputElement extends React.Component {
-  static propTypes = {
-    Actions: PropTypes.func.isRequired,
-    Change: PropTypes.func.isRequired,
-    Focus: PropTypes.func.isRequired,
-    value: PropTypes.string,
-    placeHolder: PropTypes.string
-  };
+const InputElement = ({
+  autofocus,
+  disabled,
+  name,
+  placeholder,
+  required,
+  value,
+  onChange,
+  onKeyDown,
+  onKeyUp,
+}) => (
+  <input
+    autoComplete="off"
+    autoFocus={autofocus}
+    disabled={disabled}
+    name={name}
+    placeholder={placeholder}
+    required={required}
+    value={value}
+    type="text"
+    styleName="input"
+    onChange={e => onChange(e.target.value)}
+    onKeyDown={e => onKeyDown(e)}
+    onKeyUp={e => onKeyUp(e)}
+  />
+);
 
-  constructor(props, context) {
-    super(props, context);
-    // this.state = {
-    //   value: this.props.value
-    // }
-  }
+InputElement.propTypes = {
+  autofocus: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  required: PropTypes.bool.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onKeyDown: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.bool,
+  ]).isRequired,
+  onKeyUp: PropTypes.func.isRequired,
+};
 
-  // componentWillReceiveProps (nextProps) {
-  //   if(this.props.value != nextProps.value) {
-  //     console.log("HERE", nextProps)
-  //     this.setState({value: nextProps.value})
-  //   }
-  // }
-  //
-
-
-  // shouldComponentUpdate (nextProps, nextState) {
-  //   return (nextState != this.state);
-  // }
-
-  render() {
-    let {Actions, Change, Focus, placeHolder, className} = this.props;
-    // style={css.inputStyles}
-
-    return (
-      <div className='input' styleName='input'>
-        <input
-          type="text"
-          name="selectize"
-          autoComplete="off"
-          placeholder={placeHolder}
-          value={this.props.value}
-          onKeyDown={Actions}
-          onChange={Change}
-          onClick={Focus}
-        />
-      </div>
-    );
-  }
-}
-
-export default  CSSModules(InputElement, styles);
+export default CSSModules(InputElement, styles);

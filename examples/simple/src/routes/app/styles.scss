@@ -1,0 +1,51 @@
+.main-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+}
+
+.side-menu {
+  margin: 10px;
+  & > * {
+    display: block;
+    padding: 5px 0;
+  }
+  height: 100%;
+  width: 20%;
+  ul
+  {
+    list-style-type: none;
+  }
+}
+
+.content-window {
+  width: 80%;
+}
+
+.level-I {
+  display: inline-block;
+  margin: 10px 0 0 0;
+}
+
+.level-II {
+  display: inline-block;
+  margin: 10px 0 0 10px;
+}
+
+.level-III {
+  display: inline-block;
+  margin: 10px 0 0 20px;
+}
+
+.level-IV {
+  display: inline-block;
+  margin: 10px 0 0 30px;
+}
+
+.level-V {
+  display: inline-block;
+  margin: 10px 0 0 40px;
+}

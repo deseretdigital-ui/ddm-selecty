@@ -1,8 +1,7 @@
-import 'cq-prolyfill/cq-prolyfill.js'
-import SimpleSelecty from './simple/';
-// import MultiSelecty from '';
-// import HighlightSelecty from '';
+import SimpleSelecty from './simple/stateful/';
+import SimpleSelectyStateless from './simple/stateless/';
 
 export {
   SimpleSelecty,
-}
+  SimpleSelectyStateless,
+};

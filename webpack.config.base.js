@@ -9,7 +9,7 @@ var initial = require('postcss-initial');
 var autoreset = require('postcss-autoreset');
 // autoprefixer({ browsers: ['last 2 versions'] }),
 
-
+// ?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]
 module.exports = {
   entry: {
     UISelecty: './src/index.js',
@@ -21,7 +21,7 @@ module.exports = {
   resolve: {
     root: path.resolve(__dirname, './src'),
     modulesDirectories: [path.join(__dirname, 'node_modules')],
-    extensions: ["", ".js", ".jsx", ".css"]
+    extensions: ["", ".js", ".jsx", ".css", ".scss"]
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
@@ -53,14 +53,13 @@ module.exports = {
         loader: 'file-loader'
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss')
       },
     ]
   },
   postcss: function () {
      return [
-       require('cq-prolyfill/postcss-plugin')(),
        precss,
        initial,
        autoreset,
