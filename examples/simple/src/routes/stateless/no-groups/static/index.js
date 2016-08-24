@@ -32,7 +32,6 @@ const StatlessNoGroupStatic = ({
   <div>
     Stateless Static WITHOUT Groups:
     <SimpleSelectyStateless
-      filterable={true}
       filteredOptions={filteredOptions_1}
       items={items_1}
       onBlur={() => updateVisible(false, 1)}
@@ -72,7 +71,6 @@ const StatlessNoGroupStatic = ({
       will fill up 100% of its container's width.
       <div style={{width: '500px', marginTop: '20px'}}>
         <SimpleSelectyStateless
-          filterable={true}
           filteredOptions={filteredOptions_2}
           items={items_2}
           noResults={{show: true, label: 'Nothing!!'}}
