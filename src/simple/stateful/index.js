@@ -6,13 +6,13 @@ class SimpleSelecty extends React.Component {
     super(props, context);
     this.state = {
       filteredOptions: [],
-      items: [],
-      options: [],
-      placeholder: 'Stateless Without Groups',
-      tabIndex: 1,
+      items: this.props.items ? this.props.items : [{ id: null, label: null }],
+      options: this.props.options ? this.props.options : [],
+      placeholder: this.props.placeHolder ? this.props.placeHolder : '',
+      tabIndex: this.props.tabIndex ? this.props.tabIndex : 1,
       typedValue: '',
-      value: '',
-      visible: false,
+      value: this.props.value ? this.props.value : '',
+      visible: this.props.visible ? this.props.visible : false,
     };
   }
 
@@ -48,40 +48,42 @@ class SimpleSelecty extends React.Component {
     this.setState({ options: opts });
   }
 
-  updateFilteredOptions = filtered => this.setState({ filteredOptions: filtered });
-  updateSelected = item => {
+  onBlur = () => this.setState({ visible: false });
+  onFocus = () => this.setState({ visible: true });
+
+  onClicked = item => {
+    this.setState({
+      items: [item],
+      typedValue: item.label,
+      value: item.label,
+      visible: false,
+    }, () => {
+      this.updateSelected(item);
+    });
+  }
+
+  onChange = text => {
+    this.setState({
+      typedValue: text,
+      value: text,
+      items: [{ id: null, label: null }],
+    });
+  }
+
+  onOptionsFiltered = filtered => {
+    this.setState({ filteredOptions: filtered });
+  }
+
+  onSelected = item => {
     const { items } = this.state;
     if (items.indexOf(item) > -1) {
       return;
     }
-    this.setState({ items: [items] });
-  }
-  updateTypedValue = text => this.setState({ typedValue: text });
-  updateVisible = value => this.setState({ visible: value });
-  updateValue = text => this.setState({ value: text });
 
-  onBlur = () => this.updateVisible(false);
-  onFocus = () => this.updateVisible(true);
-  onClicked = item => {
-    this.updateValue(item.label);
-    this.updateTypedValue(item.label);
-    this.updateSelected(item);
-    this.updateVisible(false);
-  }
-
-  onChange = text => {
-    this.updateTypedValue(text);
-    this.updateValue(text);
-    this.updateSelected(null);
-  }
-
-  onOptionsFiltered = filtered => {
-    this.updateFilteredOptions(filtered);
-  }
-
-  onSelected = item => {
-    this.updateValue(item.label);
-    this.updateSelected(item);
+    this.setState({
+      items: [item],
+      value: item.label,
+    });
   }
 
   render() {
@@ -107,6 +109,7 @@ class SimpleSelecty extends React.Component {
 }
 
 SimpleSelecty.propTypes = {
+  items: PropTypes.array,
   load: PropTypes.func,
   options: PropTypes.array,
   placeHolder: PropTypes.string,
@@ -117,6 +120,12 @@ SimpleSelecty.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
   })),
+  tabIndex: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  value: PropTypes.string,
+  visible: PropTypes.bool,
 };
 
 export default SimpleSelecty;
