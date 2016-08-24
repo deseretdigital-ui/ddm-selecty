@@ -31,38 +31,41 @@ const StatlessNoGroupStatic = ({
 }) => (
   <div>
     Stateless Static WITHOUT Groups:
-    <SimpleSelectyStateless
-      filteredOptions={filteredOptions_1}
-      items={items_1}
-      onBlur={() => updateVisible(false, 1)}
-      onFocus={() => updateVisible(true, 1)}
-      onClicked={item => {
-        updateValue(item.label, 1);
-        updateTypedValue(item.label, 1);
-        updateSelected(item, 1);
-        updateVisible(false, 1);
-      }}
-      onChange={text => {
-        updateTypedValue(text, 1);
-        updateValue(text, 1);
-        updateSelected(null, 1);
-      }}
-      onOptionsFiltered={filtered => {
-        updateFilteredOptions(filtered, 1)
-      }}
-      onSelected={
-        item => {
+    <div style={{'zIndex':'100', 'position':'relative'}}>
+      <SimpleSelectyStateless
+        style={{'zIndex':'100'}}
+        filteredOptions={filteredOptions_1}
+        items={items_1}
+        onBlur={() => updateVisible(false, 1)}
+        onFocus={() => updateVisible(true, 1)}
+        onClicked={item => {
           updateValue(item.label, 1);
+          updateTypedValue(item.label, 1);
           updateSelected(item, 1);
+          updateVisible(false, 1);
+        }}
+        onChange={text => {
+          updateTypedValue(text, 1);
+          updateValue(text, 1);
+          updateSelected(null, 1);
+        }}
+        onOptionsFiltered={filtered => {
+          updateFilteredOptions(filtered, 1)
+        }}
+        onSelected={
+          item => {
+            updateValue(item.label, 1);
+            updateSelected(item, 1);
+          }
         }
-      }
-      options={defaultOptions}
-      placeholder={'Stateless Without Groups'}
-      tabIndex={1}
-      typedValue={typedValue_1}
-      value={value_1}
-      visible={visible_1}
-    />
+        options={defaultOptions}
+        placeholder={'Stateless Without Groups'}
+        tabIndex={1}
+        typedValue={typedValue_1}
+        value={value_1}
+        visible={visible_1}
+      />
+    </div>
 
     <div style={{width: '100%', display: 'inline-block', marginTop: '50px'}}>
       The below SimpleSelecty component is an exact duplicate of the one above
