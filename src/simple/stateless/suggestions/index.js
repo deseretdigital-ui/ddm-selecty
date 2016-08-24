@@ -8,6 +8,7 @@ const Suggestions = ({
   autoHighlight,
   items,
   label,
+  noResults,
   options,
   visible,
   onClicked,
@@ -24,9 +25,13 @@ const Suggestions = ({
   }
 
   if (Object.keys(options).length === 1 && options[Object.keys(options)[0]].items.length === 0) {
+    if (!noResults.show) {
+      return <noscript />;
+    }
     baseStyles.empty = true;
     const applied = classNames(baseStyles);
-    return <div styleName={applied}>No results found.</div>;
+
+    return <div styleName={applied}>{noResults.label}</div>;
   }
 
   const applied = classNames(baseStyles);
@@ -54,6 +59,10 @@ Suggestions.propTypes = {
   autoHighlight: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
+  noResults: PropTypes.shape({
+    show: PropTypes.bool.isRequired,
+    label: PropTypes.string.isRequired,
+  }),
   options: PropTypes.object.isRequired,
   visible: PropTypes.bool.isRequired,
   onClicked: PropTypes.func.isRequired,

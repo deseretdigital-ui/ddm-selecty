@@ -18,6 +18,7 @@ const SimpleSelectyStateless = ({
   items,
   label,
   name,
+  noResults,
   optionGroups,
   options,
   placeholder,
@@ -84,6 +85,7 @@ const SimpleSelectyStateless = ({
         autoHighlight={autoHighlight}
         items={items}
         label={label}
+        noResults={noResults}
         options={results}
         visible={visible}
         onClicked={
@@ -107,6 +109,10 @@ SimpleSelectyStateless.propTypes = {
   items: PropTypes.array,
   label: PropTypes.string,
   name: PropTypes.string,
+  noResults: PropTypes.shape({
+    show: PropTypes.bool.isRequired,
+    label: PropTypes.string.isRequired,
+  }),
   optionGroups: PropTypes.arrayOf(
     PropTypes.shape({
       order: PropTypes.number.isRequired,
@@ -149,7 +155,8 @@ SimpleSelectyStateless.defaultProps = {
   filteredOptions: [],
   items: [],
   label: 'label',
-  name: 'selectize',
+  name: 'selecty',
+  noResults: { show: true, label: 'No results found.' },
   options: [],
   optionGroups: [],
   placeholder: '',
