@@ -44,8 +44,7 @@ function _static(state = initialState, action) {
     }
     case UPDATE_SELECTED: {
       const newState = {};
-      newState[`items_${action.num}`] = initialState.items;
-
+      newState[`items_${action.num}`] = initialState[`items_${action.num}`];
       if (action.item) {
         newState[`items_${action.num}`] = [action.item];
       }

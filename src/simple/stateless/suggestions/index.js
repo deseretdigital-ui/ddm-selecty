@@ -22,7 +22,7 @@ const Suggestions = ({
     return <div styleName={applied}>Loading...</div>;
   }
 
-  if (Object.keys(options).length === 0) {
+  if (Object.keys(options).length === 1 && options[Object.keys(options)[0]].items.length === 0) {
     return <div styleName={applied}>No results found.</div>;
   }
 

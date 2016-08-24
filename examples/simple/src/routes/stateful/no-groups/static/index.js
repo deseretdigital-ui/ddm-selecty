@@ -1,35 +1,17 @@
-import 'babel-polyfill';
 import React from 'react';
+import 'whatwg-fetch';
 import { connect } from 'react-redux';
 import { SimpleSelecty } from '../../../../../../../dist/ddm.selecty.js';
-import {
-  updateValue,
-  updateVisible,
-  updateSelected,
-} from './actions';
-import 'whatwg-fetch';
+// import { } from './actions';
 
 const StatfulNoGroupStatic = ({
   defaultOptions,
   defaultOptGroups,
-  items,
-  updateValue,
-  updateVisible,
-  updateSelected,
-  value,
-  visible
 }) => (
   <div>
     Stateful Static Data WITHOUT Groups:
+    <SimpleSelecty />
   </div>
 );
 
-function mapStateToProps (state, ownProps) {
-  return {...state.global, ...state.SLNGStatic};
-}
-
-export default connect(mapStateToProps, {
-  updateValue,
-  updateVisible,
-  updateSelected,
-})(StatfulNoGroupStatic)
+export default StatfulNoGroupStatic;
