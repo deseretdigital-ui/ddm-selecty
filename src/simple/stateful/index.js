@@ -6,22 +6,19 @@ class SimpleSelecty extends React.Component {
     super(props, context);
     this.state = {
       filteredOptions: [],
-      items: this.props.items ? this.props.items : [{ id: null, label: null }],
-      options: this.props.options ? this.props.options : [],
-      placeholder: this.props.placeHolder ? this.props.placeHolder : '',
-      tabIndex: this.props.tabIndex ? this.props.tabIndex : 1,
+      items: this.props.items,
+      options: this.props.options,
+      placeholder: this.props.placeHolder,
+      tabIndex: this.props.tabIndex,
       typedValue: '',
-      value: this.props.value ? this.props.value : '',
-      visible: this.props.visible ? this.props.visible : false,
+      value: this.props.value,
+      visible: this.props.visible,
     };
   }
 
   componentWillMount() {
     if (this.props.load) {
       (this.props.load())({}, this.api);
-    } else {
-      const options = (this.props.options ? this.props.options : []);
-      this.setState({ options });
     }
   }
 
@@ -48,8 +45,20 @@ class SimpleSelecty extends React.Component {
     this.setState({ options: opts });
   }
 
-  onBlur = () => this.setState({ visible: false });
-  onFocus = () => this.setState({ visible: true });
+  onBlur = () => {
+    this.setState({ visible: false }, () => {
+      if (this.props.onBlur) {
+        this.props.onBlur();
+      }
+    });
+  }
+  onFocus = () => {
+    this.setState({ visible: true }, () => {
+      if (this.props.onFocus) {
+        this.props.onFocus();
+      }
+    });
+  }
 
   onClicked = item => {
     this.setState({
@@ -58,7 +67,9 @@ class SimpleSelecty extends React.Component {
       value: item.label,
       visible: false,
     }, () => {
-      this.updateSelected(item);
+      if (this.props.onClicked) {
+        this.props.onClicked(item);
+      }
     });
   }
 
@@ -67,11 +78,19 @@ class SimpleSelecty extends React.Component {
       typedValue: text,
       value: text,
       items: [{ id: null, label: null }],
+    }, () => {
+      if (this.props.onChange) {
+        this.props.onClicked(text);
+      }
     });
   }
 
   onOptionsFiltered = filtered => {
-    this.setState({ filteredOptions: filtered });
+    this.setState({ filteredOptions: filtered }, () => {
+      if (this.props.onOptionsFiltered) {
+        this.props.onOptionsFiltered(filtered);
+      }
+    });
   }
 
   onSelected = item => {
@@ -83,22 +102,37 @@ class SimpleSelecty extends React.Component {
     this.setState({
       items: [item],
       value: item.label,
+    }, () => {
+      if (this.props.onSelected) {
+        this.props.onSelected(item);
+      }
     });
   }
 
   render() {
     return (
       <SimpleSelectyStateless
-        onBlur={this.onBlur}
-        onFocus={this.onFocus}
-        onClicked={this.onClicked}
-        onChange={this.onChange}
-        onOptionsFiltered={this.onOptionsFiltered}
-        onSelected={this.onSelected}
+        autofocus={this.props.autofocus}
+        autoHighlight={this.props.autoHighlight}
+        disabled={this.props.disabled}
+        filterable={this.props.filterable}
         filteredOptions={this.state.filteredOptions}
         items={this.state.items}
+        label={this.props.label}
+        name={this.props.name}
+        noResults={this.props.noResults}
+        onBlur={this.onBlur}
+        onClicked={this.onClicked}
+        onChange={this.onChange}
+        onFilter={this.props.onFilter}
+        onFocus={this.onFocus}
+        onKeyDown={this.props.onKeyDown}
+        onOptionsFiltered={this.onOptionsFiltered}
+        onSelected={this.onSelected}
         options={this.state.options}
         placeholder={this.state.placeholder}
+        required={this.props.required}
+        sortable={this.props.sortable}
         tabIndex={this.state.tabIndex}
         typedValue={this.state.typedValue}
         value={this.state.value}
@@ -109,17 +143,35 @@ class SimpleSelecty extends React.Component {
 }
 
 SimpleSelecty.propTypes = {
+  autofocus: PropTypes.bool,
+  autoHighlight: PropTypes.bool,
+  disabled: PropTypes.bool,
+  filterable: PropTypes.bool,
   items: PropTypes.array,
+  label: PropTypes.string,
   load: PropTypes.func,
+  name: PropTypes.string,
+  noResults: PropTypes.shape({
+    show: PropTypes.bool.isRequired,
+    label: PropTypes.string.isRequired,
+  }),
   options: PropTypes.array,
-  placeHolder: PropTypes.string,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func,
+  onClicked: PropTypes.func,
+  onFilter: PropTypes.func,
+  onFocus: PropTypes.func,
+  onKeyDown: PropTypes.func,
   onSelected: PropTypes.func,
+  onOptionsFiltered: PropTypes.func,
   optgroups: PropTypes.arrayOf(PropTypes.shape({
     order: PropTypes.number.isRequired,
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
   })),
+  placeHolder: PropTypes.string,
+  required: PropTypes.bool,
+  sortable: PropTypes.bool,
   tabIndex: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -127,5 +179,35 @@ SimpleSelecty.propTypes = {
   value: PropTypes.string,
   visible: PropTypes.bool,
 };
+
+SimpleSelecty.defaultProps = {
+  autofocus: false,
+  autoHighlight: false,
+  disabled: false,
+  filterable: true,
+  filteredOptions: [],
+  items: [{ id: null, label: null }],
+  label: 'label',
+  name: 'selecty',
+  noResults: { show: true, label: 'No results found.' },
+  options: [],
+  optionGroups: [],
+  placeholder: '',
+  required: false,
+  sortable: false,
+  tabIndex: 1,
+  typedValue: '',
+  value: '',
+  visible: false,
+  onBlur: null,
+  onChange: null,
+  onClicked: null,
+  onFilter: null,
+  onFocus: null,
+  onKeyDown: null,
+  onOptionsFiltered: null,
+  onSelected: null,
+};
+
 
 export default SimpleSelecty;
