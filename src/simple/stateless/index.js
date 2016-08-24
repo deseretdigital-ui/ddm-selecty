@@ -58,7 +58,7 @@ const SimpleSelectyStateless = ({
         onChange={onChange}
         onKeyDown={
           e => {
-            const suggested = filteredOptions.length > 0 ? filteredOptions : options;
+            const suggested = (filteredOptions.length > 0 || typedValue.length > 0) ? filteredOptions : options;
             onKeyDown instanceof Function
               ? onKeyDown(e)
               : keyboardEvents(e, label, suggested, items[0], onSelected, onChange, typedValue, onOptionsFiltered);

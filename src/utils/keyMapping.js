@@ -5,5 +5,4 @@ export default {
   27: 'esc',
   38: 'up',
   40: 'down',
-  46: 'delete',
 };

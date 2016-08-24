@@ -12,20 +12,24 @@ const Suggestions = ({
   visible,
   onClicked,
 }) => {
-  const applied = classNames({
+  const baseStyles = {
     norm: true,
     visible,
     suggestion: Object.keys(options).length > 0,
-  });
+  };
 
   if (!options) {
+    const applied = classNames(baseStyles);
     return <div styleName={applied}>Loading...</div>;
   }
 
   if (Object.keys(options).length === 1 && options[Object.keys(options)[0]].items.length === 0) {
+    baseStyles.empty = true;
+    const applied = classNames(baseStyles);
     return <div styleName={applied}>No results found.</div>;
   }
 
+  const applied = classNames(baseStyles);
   return (
     <div styleName={applied}>
       {

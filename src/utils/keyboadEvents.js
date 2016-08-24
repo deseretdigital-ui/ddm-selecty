@@ -6,6 +6,10 @@ export default (e, label, options, selected, onSelected, onChange, typedValue, o
 
   if (key) {
     e.preventDefault();
+    if (options.length === 0) {
+      return;
+    }
+
     const index = options.findIndex(item => item.id === selected.id);
     const first = options[0];
     const last = options.length - 1;
