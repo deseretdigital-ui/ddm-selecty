@@ -9,7 +9,7 @@ import KEY_MAP from '../../utils/keyMapping';
 import Suggestions from './suggestions/';
 import styles from './styles.scss';
 
-const SimpleSelectyStateless = ({
+export const SimpleSelectyStateless = ({
   autofocus,
   autoHighlight,
   disabled,
