@@ -1,7 +1,7 @@
 import expect from 'expect';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import {SuggestedItem} from './item';
+import { SuggestedItem } from './item';
 import classNames from 'classnames';
 
 const applied = classNames({
@@ -10,7 +10,7 @@ const applied = classNames({
 });
 
 const ITEMS = [];
-const ITEM = {label: 'option_one', value: 1};
+const ITEM = { label: 'option_one', value: 1 };
 const LABEL = 'label';
 
 describe('<SuggestedItem />', () => {

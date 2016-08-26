@@ -36,6 +36,7 @@ const StatlessNoGroupStatic = ({
         style={{'zIndex':'100'}}
         filteredOptions={filteredOptions_1}
         items={items_1}
+        sortable={true}
         optLabel={'label'}
         optValue={'id'}
         onBlur={() => updateVisible(false, 1)}
@@ -81,6 +82,7 @@ const StatlessNoGroupStatic = ({
           optLabel={'label'}
           optValue={'id'}
           noResults={{show: true, label: 'Nothing!!'}}
+          sortable={true}
           onBlur={() => updateVisible(false, 2)}
           onFocus={() => updateVisible(true, 2)}
           onClicked={item => {

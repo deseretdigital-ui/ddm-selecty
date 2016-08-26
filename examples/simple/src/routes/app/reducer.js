@@ -16,7 +16,13 @@ const initialState = {
     {id: "198", label: "Donut Shops"},
     {id: "199", label: "Computer Repair"},
     {id: "200", label: "computer repair"},
-    {id: "201", label: "Other Electronic Services"}
+    {id: "201", label: "Other Electronic Services"},
+    {id: "202", label: "Plumbers"},
+    {id: "203", label: "Plumbing Supplies"},
+    {id: "204", label: "Carpenter"},
+    {id: "205", label: "Auto Mechanic"},
+    {id: "206", label: "Painting"},
+    {id: "207", label: "Italian Restuarants"}
   ],
   defaultOptGroups: [
     {

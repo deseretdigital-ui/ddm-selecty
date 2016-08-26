@@ -32,6 +32,12 @@ different in their implementation, compared to the stateless version.
     </td>
   </tr>
 	<tr>
+    <td valign="top"><code>autoSuggest</code></td>
+    <td valign="top">
+      A boolean value to specify if the suggestions dropdown should be opened when the component gains focus, but the user hasn't entered any text yet. 
+    </td>
+  </tr>
+	<tr>
 		<td valign="top"><code>delimiters</code></td>
 		<td valign="top">
       An array of character keycodes that will select the currently highlighted
@@ -185,7 +191,7 @@ different in their implementation, compared to the stateless version.
       Callback function used to return the filtered list of the options.<br/>
       <code>({ array :: results }) { }</code>
     </td>
-	</tr>	
+	</tr>
 	<tr>
 		<td valign="top"><code>onSelected</code></td>
 		<td valign="top">

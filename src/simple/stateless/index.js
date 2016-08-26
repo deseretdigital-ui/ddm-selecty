@@ -12,6 +12,7 @@ import styles from './styles.scss';
 export const SimpleSelectyStateless = ({
   autofocus,
   autoHighlight,
+  autoSuggest,
   disabled,
   filterable,
   filteredOptions,
@@ -84,11 +85,13 @@ export const SimpleSelectyStateless = ({
       />
       <Suggestions
         autoHighlight={autoHighlight}
+        autoSuggest={autoSuggest}
         items={items}
         optLabel={optLabel}
         optValue={optValue}
         noResults={noResults}
         options={results}
+        value={value}
         visible={visible}
         onClicked={
           item => {
@@ -105,6 +108,7 @@ export const SimpleSelectyStateless = ({
 SimpleSelectyStateless.propTypes = {
   autofocus: PropTypes.bool,
   autoHighlight: PropTypes.bool,
+  autoSuggest: PropTypes.bool,
   disabled: PropTypes.bool,
   filterable: PropTypes.bool,
   filteredOptions: PropTypes.array,
@@ -153,6 +157,7 @@ SimpleSelectyStateless.propTypes = {
 SimpleSelectyStateless.defaultProps = {
   autofocus: false,
   autoHighlight: false,
+  autoSuggest: true,
   disabled: false,
   filterable: true,
   filteredOptions: [],

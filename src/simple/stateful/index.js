@@ -8,7 +8,7 @@ class SimpleSelecty extends React.Component {
       filteredOptions: [],
       items: this.props.items,
       options: this.props.options,
-      placeholder: this.props.placeHolder,
+      placeholder: this.props.placeholder,
       tabIndex: this.props.tabIndex,
       typedValue: '',
       value: this.props.value,
@@ -74,7 +74,7 @@ class SimpleSelecty extends React.Component {
   }
 
   onChange = text => {
-    const selected = {}
+    const selected = {};
     const value = this.props.optValue ? this.props.optValue : 'id';
     const label = this.props.optLabel ? this.props.optLabel : 'label';
     selected[value] = null;
@@ -120,6 +120,7 @@ class SimpleSelecty extends React.Component {
       <SimpleSelectyStateless
         autofocus={this.props.autofocus}
         autoHighlight={this.props.autoHighlight}
+        autoSuggest={this.props.autoSuggest}
         disabled={this.props.disabled}
         filterable={this.props.filterable}
         filteredOptions={this.state.filteredOptions}
@@ -152,6 +153,7 @@ class SimpleSelecty extends React.Component {
 SimpleSelecty.propTypes = {
   autofocus: PropTypes.bool,
   autoHighlight: PropTypes.bool,
+  autoSuggest: PropTypes.bool,
   disabled: PropTypes.bool,
   filterable: PropTypes.bool,
   items: PropTypes.array,
@@ -177,7 +179,7 @@ SimpleSelecty.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
   })),
-  placeHolder: PropTypes.string,
+  placeholder: PropTypes.string,
   required: PropTypes.bool,
   sortable: PropTypes.bool,
   tabIndex: PropTypes.oneOfType([
@@ -191,6 +193,7 @@ SimpleSelecty.propTypes = {
 SimpleSelecty.defaultProps = {
   autofocus: false,
   autoHighlight: false,
+  autoSuggest: true,
   disabled: false,
   filterable: true,
   filteredOptions: [],

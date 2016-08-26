@@ -17,7 +17,7 @@ const routes = require('./routes').default(store)
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>
+    <div style={{height: '100%', width: '100%'}}>
       <Router
         history={history}
         routes={routes}
