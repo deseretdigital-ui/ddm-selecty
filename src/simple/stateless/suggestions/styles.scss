@@ -5,10 +5,17 @@
   font-size: 14px;
   width: 100%;
   max-height: 200px;
-  overflow-y: auto;
+  overflow: auto;
+  position: absolute;
+  left: 0;
+  top: 25px;
   &:empty {
     display: none;
   }
+}
+
+.empty {
+  padding: 5px 0 5px 7px;
 }
 
 .norm {

@@ -66,9 +66,15 @@
 	</tr>
   <tr>
 		<td valign="top"><code>name</code></td>
-    <td valign="top" align="center">selectize</td>
+    <td valign="top" align="center">selecty</td>
     <td valign="top" align="center">string</td>
 		<td valign="top">Specifies the name of the input element.</td>
+	</tr>
+	<tr>
+		<td valign="top"><code>noResults</code></td>
+    <td valign="top" align="center">{show: true, label: 'No results found.'}</td>
+    <td valign="top" align="center">object</td>
+		<td valign="top">Used to hide, show, and change the output when there aren't any results found.</td>
 	</tr>
   <tr>
 		<td valign="top"><code>optionGroups</code></td>

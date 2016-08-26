@@ -1,26 +1,24 @@
-import { UPDATE_VALUE, UPDATE_VISIBLE, UPDATE_SELECTED } from './constants';
+import {
+  UPDATE_FILTERED,
+  UPDATE_TYPED_VALUE,
+  UPDATE_VALUE,
+  UPDATE_VISIBLE,
+  UPDATE_SELECTED,
+} from './constants';
 
 // The initial state of the App
+const defaultState = (num) => {
+  const state = {};
+  state.stateful = true;
+  return state;
+}
+
 const initialState = {
-  value: 'HELLO!!!',
-  visible: false,
-  items: {
-    id: null,
-    label: null,
-  },
+  ...defaultState(1),
 };
 
 function _static(state = initialState, action) {
   switch (action.type) {
-    case UPDATE_VALUE: {
-      return Object.assign({}, state, {value: action.value});
-    }
-    case UPDATE_VISIBLE: {
-      return Object.assign({}, state, {visible: action.value});
-    }
-    case UPDATE_SELECTED: {
-      return Object.assign({}, state, {items: action.item});
-    }
     default:
       return state;
   }
