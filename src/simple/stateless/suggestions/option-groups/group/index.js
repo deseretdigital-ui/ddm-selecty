@@ -6,7 +6,8 @@ import styles from './styles.scss';
 const SuggestedGroup = ({
   group,
   items,
-  label,
+  optLabel,
+  optValue,
   onClicked,
 }) => {
   if (!group.items.length) {
@@ -22,7 +23,8 @@ const SuggestedGroup = ({
             <SuggestedItem
               item={item}
               items={items}
-              label={label}
+              optLabel={optLabel}
+              optValue={optValue}
               onClicked={onClicked}
               key={index}
             />
@@ -36,7 +38,8 @@ const SuggestedGroup = ({
 SuggestedGroup.propTypes = {
   group: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-  label: PropTypes.string.isRequired,
+  optLabel: PropTypes.string.isRequired,
+  optValue: PropTypes.string.isRequired,
   onClicked: PropTypes.func.isRequired,
 };
 

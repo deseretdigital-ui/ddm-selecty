@@ -16,14 +16,12 @@
     "preversion": "npm run clean && npm run check",
     "postversion": "git push && git push --tags && npm run clean",
     "prepublish": "npm run clean && npm run build",
-    "testOld": "mocha --compilers js:babel/register --recursive",
-    "test:examples": "babel-node examples/tests.js",
     "test": "cross-env NODE_ENV=test karma start testing/karma.conf.js --single-run",
+    "test:examples": "babel-node examples/tests.js",
     "test:watch": "npm run test -- --auto-watch --no-single-run",
     "test:firefox": "npm run test -- --browsers Firefox",
     "test:safari": "npm run test -- --browsers Safari",
     "test:ie": "npm run test -- --browsers IE",
-    "coveralls": "cat ./coverage/lcov/lcov.info | coveralls",
     "version": "npm run build"
   },
   "pre-commit": {

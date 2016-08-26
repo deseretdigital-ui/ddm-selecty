@@ -36,6 +36,8 @@ const StatlessNoGroupStatic = ({
         style={{'zIndex':'100'}}
         filteredOptions={filteredOptions_1}
         items={items_1}
+        optLabel={'label'}
+        optValue={'id'}
         onBlur={() => updateVisible(false, 1)}
         onFocus={() => updateVisible(true, 1)}
         onClicked={item => {
@@ -76,6 +78,8 @@ const StatlessNoGroupStatic = ({
         <SimpleSelectyStateless
           filteredOptions={filteredOptions_2}
           items={items_2}
+          optLabel={'label'}
+          optValue={'id'}
           noResults={{show: true, label: 'Nothing!!'}}
           onBlur={() => updateVisible(false, 2)}
           onFocus={() => updateVisible(true, 2)}

@@ -7,7 +7,8 @@ import SuggestedGroup from './option-groups/group/';
 const Suggestions = ({
   autoHighlight,
   items,
-  label,
+  optLabel,
+  optValue,
   noResults,
   options,
   visible,
@@ -44,7 +45,8 @@ const Suggestions = ({
               autoHighlight={autoHighlight}
               group={options[groupName]}
               items={items}
-              label={label}
+              optLabel={optLabel}
+              optValue={optValue}
               onClicked={onClicked}
               key={index}
             />
@@ -58,7 +60,8 @@ const Suggestions = ({
 Suggestions.propTypes = {
   autoHighlight: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
-  label: PropTypes.string.isRequired,
+  optLabel: PropTypes.string.isRequired,
+  optValue: PropTypes.string.isRequired,
   noResults: PropTypes.shape({
     show: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,

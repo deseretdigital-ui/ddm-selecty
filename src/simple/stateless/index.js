@@ -16,7 +16,8 @@ export const SimpleSelectyStateless = ({
   filterable,
   filteredOptions,
   items,
-  label,
+  optLabel,
+  optValue,
   name,
   noResults,
   optionGroups,
@@ -62,7 +63,7 @@ export const SimpleSelectyStateless = ({
             const suggested = (filteredOptions.length > 0 || typedValue.length > 0) ? filteredOptions : options;
             onKeyDown instanceof Function
               ? onKeyDown(e)
-              : keyboardEvents(e, label, suggested, items[0], onSelected, onChange, typedValue, onOptionsFiltered);
+              : keyboardEvents(e, optLabel, suggested, items[0], onSelected, onChange, typedValue, onOptionsFiltered);
           }
         }
         onKeyUp={
@@ -73,7 +74,7 @@ export const SimpleSelectyStateless = ({
               if (onFilter instanceof Function) {
                 onFilter(e);
               } else if (filterable) {
-                const filtered = filterOptions(label, e.target.value, options);
+                const filtered = filterOptions(optLabel, e.target.value, options);
                 onOptionsFiltered(filtered);
               }
             }
@@ -84,13 +85,14 @@ export const SimpleSelectyStateless = ({
       <Suggestions
         autoHighlight={autoHighlight}
         items={items}
-        label={label}
+        optLabel={optLabel}
+        optValue={optValue}
         noResults={noResults}
         options={results}
         visible={visible}
         onClicked={
           item => {
-            const filtered = filterOptions(label, item.label, options);
+            const filtered = filterOptions(optLabel, item[optLabel], options);
             onOptionsFiltered(filtered);
             onClicked(item);
           }
@@ -107,7 +109,8 @@ SimpleSelectyStateless.propTypes = {
   filterable: PropTypes.bool,
   filteredOptions: PropTypes.array,
   items: PropTypes.array,
-  label: PropTypes.string,
+  optLabel: PropTypes.string,
+  optValue: PropTypes.string,
   name: PropTypes.string,
   noResults: PropTypes.shape({
     show: PropTypes.bool.isRequired,
@@ -154,7 +157,8 @@ SimpleSelectyStateless.defaultProps = {
   filterable: true,
   filteredOptions: [],
   items: [],
-  label: 'label',
+  optLabel: 'label',
+  optValue: 'value',
   name: 'selecty',
   noResults: { show: true, label: 'No results found.' },
   options: [],

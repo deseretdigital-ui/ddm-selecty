@@ -3,15 +3,16 @@ import CSSModules from 'react-css-modules';
 import classNames from 'classnames';
 import styles from './styles.scss';
 
-const SuggestedItem = ({
+export const SuggestedItem = ({
   item,
   items,
   onClicked,
-  label,
+  optLabel,
+  optValue
 }) => {
   let highlight = false;
   for (let i = 0; i < items.length; i++) {
-    if (items[i].id === item.id) {
+    if (items[i][optLabel] === item[optLabel] && item[optValue] === items[i][optValue]) {
       highlight = true;
       break;
     }
@@ -22,9 +23,10 @@ const SuggestedItem = ({
     selected: highlight,
   });
 
+
   return (
     <div styleName={applied} onClick={() => onClicked(item)}>
-      {item[label]}
+      {item[optLabel]}
     </div>
   );
 };
@@ -32,7 +34,8 @@ const SuggestedItem = ({
 SuggestedItem.propTypes = {
   item: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-  label: PropTypes.string.isRequired,
+  optLabel: PropTypes.string.isRequired,
+  optValue: PropTypes.string.isRequired,
   onClicked: PropTypes.func.isRequired,
 };
 

@@ -63,8 +63,8 @@ class SimpleSelecty extends React.Component {
   onClicked = item => {
     this.setState({
       items: [item],
-      typedValue: item.label,
-      value: item.label,
+      typedValue: this.props.optLabel ? item[this.props.optLabel] : item.label,
+      value: item[this.props.optLabel],
       visible: false,
     }, () => {
       if (this.props.onClicked) {
@@ -74,10 +74,16 @@ class SimpleSelecty extends React.Component {
   }
 
   onChange = text => {
+    const selected = {}
+    const value = this.props.optValue ? this.props.optValue : 'id';
+    const label = this.props.optLabel ? this.props.optLabel : 'label';
+    selected[value] = null;
+    selected[label] = null;
+
     this.setState({
       typedValue: text,
       value: text,
-      items: [{ id: null, label: null }],
+      items: [selected],
     }, () => {
       if (this.props.onChange) {
         this.props.onClicked(text);
@@ -101,7 +107,7 @@ class SimpleSelecty extends React.Component {
 
     this.setState({
       items: [item],
-      value: item.label,
+      value: this.props.optLabel ? item[this.props.optLabel] : item.label,
     }, () => {
       if (this.props.onSelected) {
         this.props.onSelected(item);
@@ -118,7 +124,8 @@ class SimpleSelecty extends React.Component {
         filterable={this.props.filterable}
         filteredOptions={this.state.filteredOptions}
         items={this.state.items}
-        label={this.props.label}
+        optLabel={this.props.optLabel}
+        optValue={this.props.optValue}
         name={this.props.name}
         noResults={this.props.noResults}
         onBlur={this.onBlur}
@@ -148,7 +155,8 @@ SimpleSelecty.propTypes = {
   disabled: PropTypes.bool,
   filterable: PropTypes.bool,
   items: PropTypes.array,
-  label: PropTypes.string,
+  optLabel: PropTypes.string,
+  optValue: PropTypes.string,
   load: PropTypes.func,
   name: PropTypes.string,
   noResults: PropTypes.shape({
@@ -187,7 +195,8 @@ SimpleSelecty.defaultProps = {
   filterable: true,
   filteredOptions: [],
   items: [{ id: null, label: null }],
-  label: 'label',
+  optLabel: 'label',
+  optValue: 'id',
   name: 'selecty',
   noResults: { show: true, label: 'No results found.' },
   options: [],
