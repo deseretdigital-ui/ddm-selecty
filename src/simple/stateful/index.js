@@ -8,7 +8,7 @@ class SimpleSelecty extends React.Component {
       filteredOptions: [],
       items: this.props.items,
       options: this.props.options,
-      placeholder: this.props.placeHolder,
+      placeholder: this.props.placeholder,
       tabIndex: this.props.tabIndex,
       typedValue: '',
       value: this.props.value,
@@ -177,7 +177,7 @@ SimpleSelecty.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
   })),
-  placeHolder: PropTypes.string,
+  placeholder: PropTypes.string,
   required: PropTypes.bool,
   sortable: PropTypes.bool,
   tabIndex: PropTypes.oneOfType([
