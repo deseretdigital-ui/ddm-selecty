@@ -42,6 +42,11 @@ module.exports = {
       { test: /\.js$/,
         loader: 'babel',
         exclude: [/node_modules/],
+        query: {
+          cacheDirectory: true,
+          plugins: ['transform-decorators-legacy'],
+          presets: ['react', 'es2015', 'stage-0']
+        },
       },
       { test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
         loader: 'null-loader',

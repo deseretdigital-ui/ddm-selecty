@@ -1,11 +1,10 @@
-// needed for regenerator-runtime
-// (ES7 generator support is required by redux-saga)
 import 'babel-polyfill';
 
-// If we need to use Chai, we'll have already chaiEnzyme loaded
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 chai.use(chaiEnzyme());
 
-const context = require.context('./tests', true, /^.*\.js$/);
+// If you want to skip files matching a certain pattern use the following
+// const context = require.context('../../app', true, /^^((?!(app|reducers|rutes)).)*\.js$/);
+const context = require.context('../src', true, /^.*\.js$/);
 context.keys().forEach(context);
