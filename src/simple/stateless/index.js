@@ -75,8 +75,13 @@ export const SimpleSelectyStateless = ({
               if (onFilter instanceof Function) {
                 onFilter(e);
               } else if (filterable) {
-                const filtered = filterOptions(optLabel, e.target.value, options);
-                onOptionsFiltered(filtered);
+                if (sortable) {
+                  const filtered = sortOptions(sortable, filterOptions(optLabel, e.target.value, options));
+                  onOptionsFiltered(filtered);
+                } else {
+                  const filtered = filterOptions(optLabel, e.target.value, options);
+                  onOptionsFiltered(filtered);
+                }
               }
             }
           }
