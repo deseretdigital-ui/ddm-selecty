@@ -26,7 +26,6 @@ const Suggestions = ({
     baseStyles.visible = false;
   }
 
-
   if (!options) {
     const applied = classNames(baseStyles);
     return <div styleName={applied}>Loading...</div>;

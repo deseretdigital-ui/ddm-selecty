@@ -30,6 +30,12 @@
             default, once the user begins to type text into the input element.
     </td>
   </tr>
+	<tr>
+    <td valign="top"><code>autoSuggest</code></td>
+    <td valign="top">
+      A boolean value to specify if the suggestions dropdown should be opened when the component gains focus, but the user hasn't entered any text yet.
+    </td>
+  </tr>
   <tr>
     <td valign="top"><code>disabled</code></td>
     <td valign="top" align="center">false</td>
