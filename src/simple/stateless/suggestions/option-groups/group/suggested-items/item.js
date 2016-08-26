@@ -8,7 +8,7 @@ export const SuggestedItem = ({
   items,
   onClicked,
   optLabel,
-  optValue
+  optValue,
 }) => {
   let highlight = false;
   for (let i = 0; i < items.length; i++) {

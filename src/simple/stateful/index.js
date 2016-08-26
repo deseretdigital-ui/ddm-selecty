@@ -74,7 +74,7 @@ class SimpleSelecty extends React.Component {
   }
 
   onChange = text => {
-    const selected = {}
+    const selected = {};
     const value = this.props.optValue ? this.props.optValue : 'id';
     const label = this.props.optLabel ? this.props.optLabel : 'label';
     selected[value] = null;
