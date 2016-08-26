@@ -9,9 +9,11 @@ const StatfulNoGroupStatic = ({
 }) => (
   <div>
     Stateful Static Data WITHOUT Groups:
-    <SimpleSelecty
-      options={defaultOptions}
-    />
+    <div style={{'zIndex':'100', 'position':'relative'}}>
+      <SimpleSelecty
+        options={defaultOptions}
+      />
+    </div>
     <div style={{width: '100%', display: 'inline-block', marginTop: '20px'}}>
       The below SimpleSelecty component is an exact duplicate of the one above
       but is included to demonstrate the responsive nature of SimpleSelecty.
