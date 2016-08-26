@@ -46,8 +46,18 @@ const Root = (props) => {
               </li>
               <ul>
                 <li data-level="1.1">
+                  <Link styleName="level-IV" to="/stateless/grouping/async">
+                    <b>-</b> Async & Grouping
+                  </Link>
+                </li>
+                <li data-level="1.1">
                   <Link styleName="level-IV" to="/stateless/no-groups/async">
                     <b>-</b> Async & No Group
+                  </Link>
+                </li>
+                <li data-level="1.1">
+                  <Link styleName="level-IV" to="/stateless/grouping/static">
+                    <b>-</b> Static & Grouping
                   </Link>
                 </li>
                 <li data-level="1.1">

@@ -10,7 +10,7 @@ export default (optGroups = null) => {
   } else {
     finalOptGroups = [defaultGroup];
   }
-
+  console.log("HERE!!!!!", finalOptGroups);
   for (let i = 0; i < finalOptGroups.length; i++) {
     const group = finalOptGroups[i];
     group.items = [];

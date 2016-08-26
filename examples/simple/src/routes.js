@@ -40,6 +40,26 @@ export const createRoutes = (store) => {
           },
         },
         {
+          name: "StatelessGroupingAsync",
+          path: "/stateless/grouping/async",
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              injectReducer('SLGAsync', require('./routes/stateless/grouping/async/reducer').default);
+              cb(null, require('./routes/stateless/grouping/async/').default);
+            })
+          },
+        },
+        {
+          name: "StatelessGroupingStatic",
+          path: "/stateless/grouping/static",
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              injectReducer('SLGStatic', require('./routes/stateless/grouping/static/reducer').default);
+              cb(null, require('./routes/stateless/grouping/static/').default);
+            })
+          },
+        },
+        {
           name: "StatefulNoGroupsAsync",
           path: "/stateful/no-groups/async",
           getComponent (nextState, cb) {
