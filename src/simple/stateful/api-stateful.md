@@ -59,9 +59,9 @@ different in their implementation, compared to the stateless version.
 	<tr>
 		<td valign="top"><code>label</code></td>
 		<td valign="top">
-			Specifies the ```key``` to use as the displayed field in option list. for
-			example using ```id``` would display ```197``` in the option list for the
-			object ```{id: 197, value: painter, description: someone who paints}```
+			Specifies the <code>key</code> to use as the displayed field in option list. for
+			example using <code>id</code> would display <code>197</code> in the option list for the
+			object <code>{id: 197, value: painter, description: someone who paints}</code>
 		</td>
 	</tr>
   <tr>
