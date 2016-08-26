@@ -120,6 +120,7 @@ class SimpleSelecty extends React.Component {
       <SimpleSelectyStateless
         autofocus={this.props.autofocus}
         autoHighlight={this.props.autoHighlight}
+        autoSuggest={this.props.autoSuggest}
         disabled={this.props.disabled}
         filterable={this.props.filterable}
         filteredOptions={this.state.filteredOptions}
@@ -152,6 +153,7 @@ class SimpleSelecty extends React.Component {
 SimpleSelecty.propTypes = {
   autofocus: PropTypes.bool,
   autoHighlight: PropTypes.bool,
+  autoSuggest: PropTypes.bool,
   disabled: PropTypes.bool,
   filterable: PropTypes.bool,
   items: PropTypes.array,
@@ -191,6 +193,7 @@ SimpleSelecty.propTypes = {
 SimpleSelecty.defaultProps = {
   autofocus: false,
   autoHighlight: false,
+  autoSuggest: true,
   disabled: false,
   filterable: true,
   filteredOptions: [],

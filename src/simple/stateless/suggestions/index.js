@@ -6,12 +6,14 @@ import SuggestedGroup from './option-groups/group/';
 
 const Suggestions = ({
   autoHighlight,
+  autoSuggest,
   items,
   optLabel,
   optValue,
   noResults,
   options,
   visible,
+  value,
   onClicked,
 }) => {
   const baseStyles = {
@@ -19,6 +21,11 @@ const Suggestions = ({
     visible,
     suggestion: Object.keys(options).length > 0,
   };
+
+  if (!autoSuggest && value.length === 0) {
+    baseStyles.visible = false;
+  }
+
 
   if (!options) {
     const applied = classNames(baseStyles);
@@ -59,6 +66,7 @@ const Suggestions = ({
 
 Suggestions.propTypes = {
   autoHighlight: PropTypes.bool.isRequired,
+  autoSuggest: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   optLabel: PropTypes.string.isRequired,
   optValue: PropTypes.string.isRequired,
@@ -67,6 +75,7 @@ Suggestions.propTypes = {
     label: PropTypes.string.isRequired,
   }),
   options: PropTypes.object.isRequired,
+  value: PropTypes.string,
   visible: PropTypes.bool.isRequired,
   onClicked: PropTypes.func.isRequired,
 };
