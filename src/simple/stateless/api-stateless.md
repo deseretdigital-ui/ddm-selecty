@@ -82,13 +82,13 @@
     <td valign="top" align="center">array (array of objects)</td>
 		<td valign="top">
       An array containing objects used for groups in suggestions
-      ```javascript
+      <code>
       [{
           order: 0,
           value: 'some string value',
           name: 'string name'
       }]
-      ```
+      </code>
     </td>
 	</tr>
   <tr>
