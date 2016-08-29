@@ -39,9 +39,9 @@ export const SimpleSelectyStateless = ({
   onOptionsFiltered,
   onSelected,
 }) => {
+  console.log("Opt Groups", optionGroups);
   const data = filterable && typedValue.length ? filteredOptions : options;
   const results = createGrouping(sortOptions(sortable, data), optionGroups);
-
   return (
     <div
       onBlur={onBlur}
