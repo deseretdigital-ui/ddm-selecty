@@ -1,36 +1,70 @@
 import expect from 'expect';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import { SuggestedItem } from './item';
 import classNames from 'classnames';
+import { SuggestedItem } from './item';
 
-const applied = classNames({
-  item: true,
-  selected: false,
-});
-
-const ITEMS = [];
-const ITEM = { label: 'option_one', value: 1 };
-const LABEL = 'label';
 
 describe('<SuggestedItem />', () => {
   it('should render an item unhighlighted', () => {
+    // Arrange
+    const item = { label: 'option_one', value: 1 };
+    const expectedOutput = '<div>option_one</div>';
+
+    // Act
     const renderedComponent = shallow(
       <SuggestedItem
-        items={ITEMS}
-        item={ITEM}
+        items={[]}
+        item={item}
         onClicked={() => {}}
-        label={LABEL}
+        optLabel="label"
+        optValue="value"
       />
     );
-    expect(renderedComponent.contains(
-      <div styleName={applied}>
-        {ITEM[LABEL]}
-      </div>
-    )).toEqual(true);
-  });
-});
 
-// <div styleName={applied} onClick={() => onClicked(ITEM)}>
-//   {ITEM[LABEL]}
-// </div>
+    // Assert
+    expect(renderedComponent.prop('styleName')).toEqual('item');
+    expect(renderedComponent.html()).toEqual(expectedOutput);
+  });
+
+  it('should render an item highlighted', () => {
+    // Arrange
+    const item = { label: 'option_one', value: 1 };
+
+    // Act
+    const renderedComponent = shallow(
+      <SuggestedItem
+        items={[item]}
+        item={item}
+        onClicked={() => {}}
+        optLabel="label"
+        optValue="value"
+      />
+    );
+
+    // Assert
+    expect(renderedComponent.prop('styleName')).toEqual('item selected');
+  });
+
+  it('onClicked callback should be called on click event', () => {
+    // Arrange
+    const item = { label: 'option_one', value: 1 };
+    const onClickSpy = expect.createSpy();
+    const renderedComponent = shallow(
+      <SuggestedItem
+        items={[]}
+        item={item}
+        onClicked={onClickSpy}
+        optLabel="label"
+        optValue="value"
+      />
+    );
+
+    // Act
+    renderedComponent.simulate('click');
+
+    // Assert
+    expect(onClickSpy).toHaveBeenCalled();
+  });
+
+});

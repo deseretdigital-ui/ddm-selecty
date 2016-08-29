@@ -26,7 +26,7 @@ export const SuggestedItem = ({
 
   return (
     <div styleName={applied} onClick={() => onClicked(item)}>
-      {item[optLabel]}
+        {item[optLabel]}
     </div>
   );
 };
