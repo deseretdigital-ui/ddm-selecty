@@ -32,7 +32,7 @@ export class StatlessNoGroupAsync extends React.Component {
       })
       .then((response) => {
         console.log('API', response);
-        this.props.updateOptions(response, user[i]);
+        this.props.updateOptions(response);
       }).catch((error) => {
         console.error(`Unsuccessful api call ${error}`);
       });

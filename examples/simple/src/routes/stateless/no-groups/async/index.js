@@ -18,9 +18,7 @@ export class StatlessNoGroupAsync extends React.Component {
   }
 
   componentWillMount() {
-    const uri = 'https://api.github.com/users/janiv/repos';
-
-    fetch(uri)
+    fetch('https://api.github.com/users/janiv/repos')
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           return response;
@@ -33,6 +31,7 @@ export class StatlessNoGroupAsync extends React.Component {
         return response.json();
       })
       .then((response) => {
+        console.log("HERE", response);
         this.props.updateOptions(response);
       }).catch((error) => {
         console.error(`Unsuccessful api call ${error}`);
