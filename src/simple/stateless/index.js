@@ -59,10 +59,20 @@ export const SimpleSelectyStateless = ({
         onChange={onChange}
         onKeyDown={
           e => {
-            let suggested = (filteredOptions.length > 0 || typedValue.length > 0) ? filteredOptions : options;
+            let suggested = options;
+
+            if (filterable) {
+              suggested = (filteredOptions.length > 0 || typedValue.length > 0) ? filteredOptions : options;
+            }
+
+            if (sortable) {
+              suggested = sortOptions(sortable, suggested, optLabel);
+            }
+
             if (optionGroups.length > 0) {
               suggested = createGrouping(suggested, optionGroups);
             }
+
             onKeyDown instanceof Function
               ? onKeyDown(e)
               : keyboardEvents(e, optLabel, suggested, items[0], onSelected,
@@ -83,10 +93,6 @@ export const SimpleSelectyStateless = ({
                   filtered = sortOptions(sortable, filterOptions(optLabel, e.target.value, options), optLabel);
                 } else {
                   filtered = filterOptions(optLabel, e.target.value, options);
-                }
-
-                if (optionGroups.length > 0) {
-                  filtered = createGrouping(filtered, optionGroups);
                 }
 
                 onOptionsFiltered(filtered);

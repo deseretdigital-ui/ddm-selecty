@@ -24,17 +24,17 @@ export default (key, index, first, last, next, prev, label, options,
       break;
     }
     case 'tab': {
-      onChange(label);
+      onChange(options[index][label]);
       onSelected(options[index]);
-      const filtered = filterOptions(label, label, options);
+      const filtered = filterOptions(label, options[index][label], options);
       onOptionsFiltered(filtered);
       document.activeElement.blur();
       break;
     }
     case 'enter': {
-      onChange(label);
+      onChange(options[index][label]);
       onSelected(options[index]);
-      const filtered = filterOptions(label, label, options);
+      const filtered = filterOptions(label, options[index][label], options);
       onOptionsFiltered(filtered);
       document.activeElement.blur();
       break;
