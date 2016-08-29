@@ -39,7 +39,6 @@ export const SimpleSelectyStateless = ({
   onOptionsFiltered,
   onSelected,
 }) => {
-  console.log("Opt Groups", optionGroups);
   const data = filterable && typedValue.length ? filteredOptions : options;
   const results = createGrouping(sortOptions(sortable, data), optionGroups);
   return (
@@ -128,7 +127,8 @@ SimpleSelectyStateless.propTypes = {
   optionGroups: PropTypes.arrayOf(
     PropTypes.shape({
       order: PropTypes.number.isRequired,
-      value: PropTypes.string.isRequired,
+      groupKey: PropTypes.string.isRequired,
+      groupValue: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })
   ),

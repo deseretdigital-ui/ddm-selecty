@@ -3,7 +3,7 @@ import defaultGroup from './constants';
 export default (optGroups = null) => {
   let finalOptGroups = [];
   const optGroupHash = {};
-
+  console.log("INITIAL OPT GROUPS", optGroups);
   if (optGroups) {
     finalOptGroups = optGroups;
     finalOptGroups.push(defaultGroup);
