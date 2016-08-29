@@ -18,19 +18,25 @@ export default (options, groups = null, optGroupHashed = null) => {
       return null;
     });
   }
-
   // If no groups everything go under default
-  if (groups === null) {
+  if (groups === null || groups.length === 0) {
     groupsHashed['__default__'].items = (options ? options : []);
-  } else if (options) {
+  } else if (options && options.length > 0) {
     for (let i = 0; i < options.length; i++) {
       const item = options[i];
-      if (!item.group) {
-        item.group = '__default__';
+
+      for (let marker = 0; marker < groups.length; marker++) {
+        if (item[groups[marker].groupKey] && item[groups[marker].groupKey] === groups[marker].groupValue) {
+          groupsHashed[groups[marker].groupValue.toLowerCase()].items.push(item);
+          break;
+        }
+
+        if (marker === groups.length - 1) {
+          groupsHashed['__default__'].items.push(item);
+          break;
+        }
       }
-      groupsHashed[item.group.toLowerCase()].items.push(item);
     }
   }
-
   return groupsHashed;
 };

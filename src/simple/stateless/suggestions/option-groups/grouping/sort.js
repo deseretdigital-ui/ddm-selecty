@@ -1,7 +1,7 @@
-export default (sortable, options) => {
+export default (sortable, options, optLabel) => {
   function compare(a, b) {
-    const lableA = a.label.toLowerCase();
-    const lableB = b.label.toLowerCase();
+    const lableA = a[optLabel].toLowerCase();
+    const lableB = b[optLabel].toLowerCase();
     if (lableA < lableB) {
       return -1;
     }

@@ -36,7 +36,7 @@ const StatlessGroupingStatic = ({
         style={{'zIndex':'100'}}
         filteredOptions={filteredOptions_1}
         items={items_1}
-        sortable={true}
+        sortable={false}
         optLabel={'label'}
         optValue={'id'}
         onBlur={() => updateVisible(false, 1)}
@@ -63,7 +63,7 @@ const StatlessGroupingStatic = ({
         }
         options={defaultOptions}
         optionGroups={defaultOptGroups}
-        placeholder={'Stateless Without Groups'}
+        placeholder={'Stateless WITH Groupings'}
         tabIndex={1}
         typedValue={typedValue_1}
         value={value_1}
@@ -74,7 +74,7 @@ const StatlessGroupingStatic = ({
 );
 
 function mapStateToProps (state, ownProps) {
-  return {...state.global, ...state.SLNGStatic};
+  return {...state.global, ...state.SLGStatic};
 }
 
 export default connect(mapStateToProps, {
