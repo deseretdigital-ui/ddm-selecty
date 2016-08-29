@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
+import classNames from 'classnames';
 import SuggestedItem from './suggested-items/item';
 import styles from './styles.scss';
 
@@ -10,11 +11,16 @@ const SuggestedGroup = ({
   optValue,
   onClicked,
 }) => {
+  const styling = classNames({
+    optionGroup: true,
+    grouping: group.label,
+  });
+
   if (!group.items.length) {
     return <noscript />;
   }
   return (
-    <div styleName="optionGroup">
+    <div styleName={styling}>
       { group.label || <noscript /> }
       {
         group.items.map(
@@ -42,4 +48,4 @@ SuggestedGroup.propTypes = {
   onClicked: PropTypes.func.isRequired,
 };
 
-export default CSSModules(SuggestedGroup, styles);
+export default CSSModules(SuggestedGroup, styles, { allowMultiple: true });
