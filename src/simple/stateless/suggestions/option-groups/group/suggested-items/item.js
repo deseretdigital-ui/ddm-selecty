@@ -25,7 +25,7 @@ export const SuggestedItem = ({
 
 
   return (
-    <div styleName={applied} onClick={() => onClicked(item)}>
+    <div className={applied} styleName={applied} onClick={() => onClicked(item)}>
         {item[optLabel]}
     </div>
   );
