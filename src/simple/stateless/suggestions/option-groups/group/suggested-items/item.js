@@ -5,14 +5,14 @@ import styles from './styles.scss';
 
 export const SuggestedItem = ({
   item,
-  items,
+  selected,
   onClicked,
   optLabel,
   optValue,
 }) => {
   let highlight = false;
-  for (let i = 0; i < items.length; i++) {
-    if (items[i][optLabel] === item[optLabel] && item[optValue] === items[i][optValue]) {
+  for (let i = 0; i < selected.length; i++) {
+    if (selected[i][optLabel] === item[optLabel] && item[optValue] === selected[i][optValue]) {
       highlight = true;
       break;
     }
@@ -33,7 +33,7 @@ export const SuggestedItem = ({
 
 SuggestedItem.propTypes = {
   item: PropTypes.object.isRequired,
-  items: PropTypes.array.isRequired,
+  selected: PropTypes.array.isRequired,
   optLabel: PropTypes.string.isRequired,
   optValue: PropTypes.string.isRequired,
   onClicked: PropTypes.func.isRequired,

@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import InputElement from '../../input/';
-import createGrouping from '../shared/option-groups/create';
-import sortOptions from '../shared/option-groups/sort';
-import { filterOptions } from '../shared/option-groups/filter';
-import keyboardEvents from '../../utils/keyboadEvents';
-import KEY_MAP from '../../utils/keyMapping';
+import createGrouping from './suggestions/option-groups/grouping/create';
+import sortOptions from './suggestions/option-groups/grouping/sort';
+import { filterOptions } from './suggestions/option-groups/grouping/filter';
+import keyboardEvents from './utils/keyboadEvents';
+import KEY_MAP from './utils/keyMapping';
 import Suggestions from './suggestions/';
 import styles from './styles.scss';
 
@@ -39,9 +39,8 @@ export const SimpleSelectyStateless = ({
   onOptionsFiltered,
   onSelected,
 }) => {
-  console.log("Opt Groups", optionGroups);
   const data = filterable && typedValue.length ? filteredOptions : options;
-  const results = createGrouping(sortOptions(sortable, data), optionGroups);
+  const results = createGrouping(sortOptions(sortable, data, optLabel), optionGroups);
   return (
     <div
       onBlur={onBlur}
@@ -52,7 +51,6 @@ export const SimpleSelectyStateless = ({
       <InputElement
         autofocus={autofocus}
         disabled={disabled}
-        items={items}
         name={name}
         options={data}
         placeholder={placeholder}
@@ -61,10 +59,24 @@ export const SimpleSelectyStateless = ({
         onChange={onChange}
         onKeyDown={
           e => {
-            const suggested = (filteredOptions.length > 0 || typedValue.length > 0) ? filteredOptions : options;
+            let suggested = options;
+
+            if (filterable) {
+              suggested = (filteredOptions.length > 0 || typedValue.length > 0) ? filteredOptions : options;
+            }
+
+            if (sortable) {
+              suggested = sortOptions(sortable, suggested, optLabel);
+            }
+
+            if (optionGroups.length > 0) {
+              suggested = createGrouping(suggested, optionGroups);
+            }
+
             onKeyDown instanceof Function
               ? onKeyDown(e)
-              : keyboardEvents(e, optLabel, suggested, items[0], onSelected, onChange, typedValue, onOptionsFiltered);
+              : keyboardEvents(e, optLabel, suggested, items[0], onSelected,
+                onChange, typedValue, onOptionsFiltered, optionGroups);
           }
         }
         onKeyUp={
@@ -75,13 +87,15 @@ export const SimpleSelectyStateless = ({
               if (onFilter instanceof Function) {
                 onFilter(e);
               } else if (filterable) {
+                let filtered = null;
+
                 if (sortable) {
-                  const filtered = sortOptions(sortable, filterOptions(optLabel, e.target.value, options));
-                  onOptionsFiltered(filtered);
+                  filtered = sortOptions(sortable, filterOptions(optLabel, e.target.value, options), optLabel);
                 } else {
-                  const filtered = filterOptions(optLabel, e.target.value, options);
-                  onOptionsFiltered(filtered);
+                  filtered = filterOptions(optLabel, e.target.value, options);
                 }
+
+                onOptionsFiltered(filtered);
               }
             }
           }
@@ -91,7 +105,7 @@ export const SimpleSelectyStateless = ({
       <Suggestions
         autoHighlight={autoHighlight}
         autoSuggest={autoSuggest}
-        items={items}
+        selected={items}
         optLabel={optLabel}
         optValue={optValue}
         noResults={noResults}
@@ -128,7 +142,8 @@ SimpleSelectyStateless.propTypes = {
   optionGroups: PropTypes.arrayOf(
     PropTypes.shape({
       order: PropTypes.number.isRequired,
-      value: PropTypes.string.isRequired,
+      groupKey: PropTypes.string.isRequired,
+      groupValue: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })
   ),

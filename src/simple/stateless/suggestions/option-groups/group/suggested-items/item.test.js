@@ -9,20 +9,21 @@ describe('<SuggestedItem />', () => {
   it('should render an item unhighlighted', () => {
     // Arrange
     const item = { label: 'option_one', value: 1 };
-    const expectedOutput = '<div class="item">option_one</div>';
+    const expectedOutput = '<div>option_one</div>';
 
     // Act
     const renderedComponent = shallow(
       <SuggestedItem
         items={[]}
         item={item}
-        onClicked={null}
+        onClicked={() => {}}
         optLabel="label"
         optValue="value"
       />
     );
 
     // Assert
+    expect(renderedComponent.prop('styleName')).toEqual('item');
     expect(renderedComponent.html()).toEqual(expectedOutput);
   });
 
@@ -35,7 +36,7 @@ describe('<SuggestedItem />', () => {
       <SuggestedItem
         items={[item]}
         item={item}
-        onClicked={null}
+        onClicked={() => {}}
         optLabel="label"
         optValue="value"
       />
