@@ -125,8 +125,10 @@ class SimpleSelecty extends React.Component {
         filterable={this.props.filterable}
         filteredOptions={this.state.filteredOptions}
         items={this.state.items}
+        limit={this.props.limit}
         optLabel={this.props.optLabel}
         optValue={this.props.optValue}
+        optionGroups={this.props.optionGroups}
         name={this.props.name}
         noResults={this.props.noResults}
         onBlur={this.onBlur}
@@ -157,6 +159,7 @@ SimpleSelecty.propTypes = {
   disabled: PropTypes.bool,
   filterable: PropTypes.bool,
   items: PropTypes.array,
+  limit: PropTypes.number,
   optLabel: PropTypes.string,
   optValue: PropTypes.string,
   load: PropTypes.func,
@@ -174,11 +177,30 @@ SimpleSelecty.propTypes = {
   onKeyDown: PropTypes.func,
   onSelected: PropTypes.func,
   onOptionsFiltered: PropTypes.func,
-  optgroups: PropTypes.arrayOf(PropTypes.shape({
-    order: PropTypes.number.isRequired,
-    value: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-  })),
+  optionGroups: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        order: PropTypes.number.isRequired,
+        key: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        limit: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]),
+      })
+    ),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        limit: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]),
+      })
+    ),
+  ]),
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   sortable: PropTypes.bool,
