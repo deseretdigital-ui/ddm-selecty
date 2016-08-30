@@ -11,6 +11,8 @@ import {
 } from './actions';
 
 const StatlessGroupingStatic = ({
+  alternativeOptions,
+  alternativeOptGroups,
   defaultOptions,
   defaultOptGroups,
   updateFilteredOptions,
@@ -32,6 +34,9 @@ const StatlessGroupingStatic = ({
   <div>
     Stateless Static WITHOUT Groups:
     <div style={{'zIndex':'100', 'position':'relative'}}>
+      This option shows using various fields and values found on the
+      json objects, to specify very specific option groups and ordering
+      without actually changing the api and how the data is returned.
       <SimpleSelectyStateless
         style={{'zIndex':'100'}}
         filteredOptions={filteredOptions_1}
@@ -68,6 +73,49 @@ const StatlessGroupingStatic = ({
         typedValue={typedValue_1}
         value={value_1}
         visible={visible_1}
+      />
+    </div>
+
+    <div style={{zIndex:'80', marginTop: '20px', position:'relative'}}>
+      Unlike the option above, this example displays how to using Groupings
+      when the API data has been altered to return a field on the json objects
+      called <i>group</i>.
+      <SimpleSelectyStateless
+        style={{'zIndex':'100'}}
+        filteredOptions={filteredOptions_2}
+        items={items_2}
+        sortable={false}
+        optLabel={'label'}
+        optValue={'id'}
+        onBlur={() => updateVisible(false, 2)}
+        onFocus={() => updateVisible(true, 2)}
+        onClicked={item => {
+          updateValue(item.label, 2);
+          updateTypedValue(item.label, 2);
+          updateSelected(item, 2);
+          updateVisible(false, 2);
+        }}
+        onChange={text => {
+          updateTypedValue(text, 2);
+          updateValue(text, 2);
+          updateSelected(null, 2);
+        }}
+        onOptionsFiltered={filtered => {
+          updateFilteredOptions(filtered, 2)
+        }}
+        onSelected={
+          item => {
+            updateValue(item.label, 2);
+            updateSelected(item, 2);
+          }
+        }
+        options={alternativeOptions}
+        optionGroups={alternativeOptGroups}
+        placeholder={'Stateless WITH Groupings'}
+        tabIndex={2}
+        typedValue={typedValue_2}
+        value={value_2}
+        visible={visible_2}
       />
     </div>
   </div>

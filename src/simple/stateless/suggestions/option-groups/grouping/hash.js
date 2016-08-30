@@ -1,6 +1,7 @@
-import defaultGroup from './constants';
+import base, { alternative } from './constants';
 
 export default (optGroups = null) => {
+  const defaultGroup = optGroups[0].key ? base : alternative;
   let finalOptGroups = [];
   const optGroupHash = {};
   if (optGroups) {
@@ -12,7 +13,7 @@ export default (optGroups = null) => {
   for (let i = 0; i < finalOptGroups.length; i++) {
     const group = finalOptGroups[i];
     group.items = [];
-    optGroupHash[group.groupValue.toLowerCase()] = group;
+    optGroupHash[group.value.toLowerCase()] = group;
   }
   return optGroupHash;
 };

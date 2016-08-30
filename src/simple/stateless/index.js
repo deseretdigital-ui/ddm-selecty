@@ -139,14 +139,22 @@ SimpleSelectyStateless.propTypes = {
     show: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
   }),
-  optionGroups: PropTypes.arrayOf(
-    PropTypes.shape({
-      order: PropTypes.number.isRequired,
-      groupKey: PropTypes.string.isRequired,
-      groupValue: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })
-  ),
+  optionGroups: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        order: PropTypes.number.isRequired,
+        key: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+      })
+    ),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+      })
+    ),
+  ]),
   options: PropTypes.array,
   placeholder: PropTypes.string,
   required: PropTypes.bool,

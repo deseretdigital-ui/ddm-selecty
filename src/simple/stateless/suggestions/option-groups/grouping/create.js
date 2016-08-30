@@ -18,16 +18,18 @@ export default (options, groups = null, optGroupHashed = null) => {
       return null;
     });
   }
+
   // If no groups everything go under default
   if (groups === null || groups.length === 0) {
     groupsHashed['__default__'].items = (options ? options : []);
   } else if (options && options.length > 0) {
+    let groupKey = 'group';
     for (let i = 0; i < options.length; i++) {
       const item = options[i];
-
       for (let marker = 0; marker < groups.length; marker++) {
-        if (item[groups[marker].groupKey] && item[groups[marker].groupKey] === groups[marker].groupValue) {
-          groupsHashed[groups[marker].groupValue.toLowerCase()].items.push(item);
+        if (groups[marker]['key']) { groupKey = groups[marker]['key']; }
+        if (item[groupKey] && item[groupKey] === groups[marker].value) {
+          groupsHashed[groups[marker].value.toLowerCase()].items.push(item);
           break;
         }
 
