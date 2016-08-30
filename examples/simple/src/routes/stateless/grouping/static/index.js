@@ -124,7 +124,7 @@ const StatlessGroupingStatic = ({
       />
     </div>
 
-    <div style={{zIndex:'80', marginTop: '20px', position:'relative'}}>
+    <div style={{zIndex:'70', marginTop: '20px', position:'relative'}}>
       This examples shows that limit will reduce the number found in all
       option groups. However, you can also customize each groups' limit by
       adding a limit field to the objects in optionGroups parameter. The limit

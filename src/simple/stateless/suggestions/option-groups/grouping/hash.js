@@ -10,8 +10,8 @@ export default (optGroups = null) => {
   let finalOptGroups = [];
   const optGroupHash = {};
   if (optGroups) {
-    finalOptGroups = optGroups.slice(0);
     finalOptGroups.push(defaultGroup);
+    finalOptGroups = finalOptGroups.concat(optGroups);
   } else {
     finalOptGroups = [defaultGroup];
   }

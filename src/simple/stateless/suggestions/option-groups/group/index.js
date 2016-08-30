@@ -23,7 +23,7 @@ const SuggestedGroup = ({
   const suggestions = [];
   let numSuggestions = null;
 
-  if (group.limit & group.limit !== 'all') {
+  if (group.limit && group.limit !== 'all') {
     numSuggestions = group.limit;
   } else if (group.limit === 'all') {
     numSuggestions = null;

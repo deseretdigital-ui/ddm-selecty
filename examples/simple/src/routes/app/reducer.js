@@ -40,7 +40,8 @@ const initialState = {
       order: 1,
       key: 'owner',
       value: 'Andriy',
-      label: 'Andriy'
+      label: 'Andriy',
+      limit: 2,
     },
     {
       order: 2,
