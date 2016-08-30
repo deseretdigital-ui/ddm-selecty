@@ -29,9 +29,9 @@ const initialState = {
     {id: "197", label: 'Provo',        group: "saved"},
     {id: "198", label: 'Ogden',        group: "saved"},
     {id: "199", label: 'Cedar Hills',  group: "recent"},
-    {id: "200", label: 'Salt Lake',    group: "search"},
+    {id: "200", label: 'South Jordan', group: "search"},
     {id: "201", label: 'Provo',        group: "search"},
-    {id: "202", label: 'Ogden',        group: "saved"},
+    {id: "202", label: 'South Jordan', group: "saved"},
     {id: "203", label: 'Cedar Hills',  group: "recent"},
     {id: "204", label: 'Sugar House',  group: "saved"},
   ],
@@ -64,15 +64,17 @@ const initialState = {
   alternativeOptGroups: [
     {
       value: 'search',
-      label: ''
+      label: '',
     },
     {
       value: 'saved',
-      label: 'Saved Location'
+      label: 'Saved Location',
+      limit: 'all',
     },
     {
       value: 'recent',
-      label: 'Recent Locations'
+      label: 'Recent Locations',
+      limit: 1,
     }
   ]
 };

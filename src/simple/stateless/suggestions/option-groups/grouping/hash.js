@@ -1,7 +1,12 @@
 import base, { alternative } from './constants';
 
 export default (optGroups = null) => {
-  const defaultGroup = optGroups[0].key ? base : alternative;
+  let defaultGroup = Object.assign({}, base);
+
+  if (optGroups && optGroups.length > 0 && optGroups[0].key) {
+    defaultGroup = Object.assign({}, alternative);
+  }
+
   let finalOptGroups = [];
   const optGroupHash = {};
   if (optGroups) {

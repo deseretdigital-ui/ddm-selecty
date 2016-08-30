@@ -71,14 +71,15 @@ const StatlessNoGroupStatic = ({
     </div>
 
     <div style={{width: '100%', display: 'inline-block', marginTop: '50px'}}>
-      The below SimpleSelecty component is an exact duplicate of the one above
-      but is included to demonstrate the responsive nature of SimpleSelecty.
-      Below's version is wrapped in a div with a width of 500px and SimpleSelecty
-      will fill up 100% of its container's width.
+      The below SimpleSelecty component is an exact duplicate of the one above,
+      except that it has a limit for the number of suggested, and it is wrapped
+      in a smaller div to display SimpleSelecty responsive nature. The div has
+      a width of 500px and SimpleSelecty will fill up 100% of its container's width.
       <div style={{width: '500px', marginTop: '20px'}}>
         <SimpleSelectyStateless
           filteredOptions={filteredOptions_2}
           items={items_2}
+          limit={5}
           optLabel={'label'}
           optValue={'id'}
           noResults={{show: true, label: 'Nothing!!'}}

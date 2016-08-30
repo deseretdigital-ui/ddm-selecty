@@ -17,6 +17,7 @@ export const SimpleSelectyStateless = ({
   filterable,
   filteredOptions,
   items,
+  limit,
   optLabel,
   optValue,
   name,
@@ -106,6 +107,7 @@ export const SimpleSelectyStateless = ({
         autoHighlight={autoHighlight}
         autoSuggest={autoSuggest}
         selected={items}
+        limit={limit}
         optLabel={optLabel}
         optValue={optValue}
         noResults={noResults}
@@ -132,6 +134,7 @@ SimpleSelectyStateless.propTypes = {
   filterable: PropTypes.bool,
   filteredOptions: PropTypes.array,
   items: PropTypes.array,
+  limit: PropTypes.number,
   optLabel: PropTypes.string,
   optValue: PropTypes.string,
   name: PropTypes.string,
@@ -146,12 +149,20 @@ SimpleSelectyStateless.propTypes = {
         key: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
+        limit: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]),
       })
     ),
     PropTypes.arrayOf(
       PropTypes.shape({
         value: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
+        limit: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]),
       })
     ),
   ]),
@@ -190,6 +201,7 @@ SimpleSelectyStateless.defaultProps = {
   filterable: true,
   filteredOptions: [],
   items: [],
+  limit: null,
   optLabel: 'label',
   optValue: 'value',
   name: 'selecty',
