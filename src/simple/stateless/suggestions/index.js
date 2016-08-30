@@ -8,6 +8,7 @@ const Suggestions = ({
   autoHighlight,
   autoSuggest,
   selected,
+  limit,
   optLabel,
   optValue,
   noResults,
@@ -51,6 +52,7 @@ const Suggestions = ({
               autoHighlight={autoHighlight}
               group={options[groupName]}
               selected={selected}
+              limit={limit}
               optLabel={optLabel}
               optValue={optValue}
               onClicked={onClicked}
@@ -67,6 +69,7 @@ Suggestions.propTypes = {
   autoHighlight: PropTypes.bool.isRequired,
   autoSuggest: PropTypes.bool.isRequired,
   selected: PropTypes.array.isRequired,
+  limit: PropTypes.number,
   optLabel: PropTypes.string.isRequired,
   optValue: PropTypes.string.isRequired,
   noResults: PropTypes.shape({

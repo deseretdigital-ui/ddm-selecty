@@ -7,6 +7,7 @@ import styles from './styles.scss';
 const SuggestedGroup = ({
   group,
   selected,
+  limit,
   optLabel,
   optValue,
   onClicked,
@@ -19,11 +20,27 @@ const SuggestedGroup = ({
   if (!group.items.length) {
     return <noscript />;
   }
+  const suggestions = [];
+  let numSuggestions = null;
+
+  if (group.limit && group.limit !== 'all') {
+    numSuggestions = group.limit;
+  } else if (group.limit === 'all') {
+    numSuggestions = null;
+  } else if (limit) {
+    numSuggestions = limit;
+  }
+
+  for (let index = 0; index < group.items.length; index++) {
+    if (numSuggestions && index >= numSuggestions) { break; }
+    suggestions.push(group.items[index]);
+  }
+
   return (
     <div styleName={styling}>
       { group.label || <noscript /> }
       {
-        group.items.map(
+        suggestions.map(
           (item, index) => (
             <SuggestedItem
               item={item}
@@ -43,6 +60,7 @@ const SuggestedGroup = ({
 SuggestedGroup.propTypes = {
   group: PropTypes.object.isRequired,
   selected: PropTypes.array.isRequired,
+  limit: PropTypes.number,
   optLabel: PropTypes.string.isRequired,
   optValue: PropTypes.string.isRequired,
   onClicked: PropTypes.func.isRequired,

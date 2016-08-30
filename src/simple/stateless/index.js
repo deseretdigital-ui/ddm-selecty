@@ -17,6 +17,7 @@ export const SimpleSelectyStateless = ({
   filterable,
   filteredOptions,
   items,
+  limit,
   optLabel,
   optValue,
   name,
@@ -106,6 +107,7 @@ export const SimpleSelectyStateless = ({
         autoHighlight={autoHighlight}
         autoSuggest={autoSuggest}
         selected={items}
+        limit={limit}
         optLabel={optLabel}
         optValue={optValue}
         noResults={noResults}
@@ -132,6 +134,7 @@ SimpleSelectyStateless.propTypes = {
   filterable: PropTypes.bool,
   filteredOptions: PropTypes.array,
   items: PropTypes.array,
+  limit: PropTypes.number,
   optLabel: PropTypes.string,
   optValue: PropTypes.string,
   name: PropTypes.string,
@@ -139,14 +142,30 @@ SimpleSelectyStateless.propTypes = {
     show: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
   }),
-  optionGroups: PropTypes.arrayOf(
-    PropTypes.shape({
-      order: PropTypes.number.isRequired,
-      groupKey: PropTypes.string.isRequired,
-      groupValue: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })
-  ),
+  optionGroups: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        order: PropTypes.number.isRequired,
+        key: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        limit: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]),
+      })
+    ),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        limit: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]),
+      })
+    ),
+  ]),
   options: PropTypes.array,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
@@ -182,6 +201,7 @@ SimpleSelectyStateless.defaultProps = {
   filterable: true,
   filteredOptions: [],
   items: [],
+  limit: null,
   optLabel: 'label',
   optValue: 'value',
   name: 'selecty',

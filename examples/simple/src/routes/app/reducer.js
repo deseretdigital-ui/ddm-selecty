@@ -24,30 +24,58 @@ const initialState = {
     {id: "206", location: 'Unknown',      owner: 'Bogdan', label: "Painting"},
     {id: "207", location: 'Unknown',      owner: 'Bogdan', label: "Italian Restuarants"}
   ],
+  alternativeOptions: [
+    {id: "196", label: 'Salt Lake',    group: "search"},
+    {id: "197", label: 'Provo',        group: "saved"},
+    {id: "198", label: 'Ogden',        group: "saved"},
+    {id: "199", label: 'Cedar Hills',  group: "recent"},
+    {id: "200", label: 'South Jordan', group: "search"},
+    {id: "201", label: 'Provo',        group: "search"},
+    {id: "202", label: 'South Jordan', group: "saved"},
+    {id: "203", label: 'Cedar Hills',  group: "recent"},
+    {id: "204", label: 'Sugar House',  group: "saved"},
+  ],
   defaultOptGroups: [
     {
       order: 1,
-      groupKey: 'owner',
-      groupValue: 'Andriy',
-      label: 'Andriy'
+      key: 'owner',
+      value: 'Andriy',
+      label: 'Andriy',
+      limit: 2,
     },
     {
       order: 2,
-      groupKey: 'location',
-      groupValue: 'Salt Lake',
+      key: 'location',
+      value: 'Salt Lake',
       label: 'Salt Lake'
     },
     {
       order: 3,
-      groupKey: 'owner',
-      groupValue: 'Bogdan',
+      key: 'owner',
+      value: 'Bogdan',
       label: 'Third'
     },
     {
       order: 4,
-      groupKey: 'location',
-      groupValue: 'Unknown',
+      key: 'location',
+      value: 'Unknown',
       label: 'Unknown Location'
+    }
+  ],
+  alternativeOptGroups: [
+    {
+      value: 'search',
+      label: '',
+    },
+    {
+      value: 'saved',
+      label: 'Saved Location',
+      limit: 'all',
+    },
+    {
+      value: 'recent',
+      label: 'Recent Locations',
+      limit: 1,
     }
   ]
 };
