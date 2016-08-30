@@ -78,6 +78,16 @@ export const createRoutes = (store) => {
               cb(null, require('./routes/stateful/no-groups/static/').default);
             })
           },
+        },
+        {
+          name: "StatefulGroupingStatic",
+          path: "/stateful/grouping/static",
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              injectReducer('SFGStatic', require('./routes/stateful/grouping/static/reducer').default);
+              cb(null, require('./routes/stateful/grouping/static/').default);
+            })
+          },
         }
       ]
     }, {
