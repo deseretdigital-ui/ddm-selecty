@@ -17,20 +17,11 @@ export const SimpleSelectyStateless = ({
   filterable,
   filteredOptions,
   items,
+  lazyLoading,
   limit,
-  optLabel,
-  optValue,
+  loading,
   name,
   noResults,
-  optionGroups,
-  options,
-  placeholder,
-  required,
-  sortable,
-  tabIndex,
-  typedValue,
-  value,
-  visible,
   onBlur,
   onChange,
   onClicked,
@@ -39,8 +30,19 @@ export const SimpleSelectyStateless = ({
   onKeyDown,
   onOptionsFiltered,
   onSelected,
+  optionGroups,
+  options,
+  optLabel,
+  optValue,
+  placeholder,
+  required,
+  sortable,
+  tabIndex,
+  typedValue,
+  value,
+  visible,
 }) => {
-  const data = filterable && typedValue.length ? filteredOptions : options;
+  const data = filterable && typedValue.length && !lazyLoading ? filteredOptions : options;
   const results = createGrouping(sortOptions(sortable, data, optLabel), optionGroups);
   return (
     <div
@@ -63,7 +65,10 @@ export const SimpleSelectyStateless = ({
             let suggested = options;
 
             if (filterable) {
-              suggested = (filteredOptions.length > 0 || typedValue.length > 0) ? filteredOptions : options;
+              suggested = options;
+              if ((filteredOptions.length > 0 || typedValue.length > 0) && !lazyLoading) {
+                suggested = filteredOptions;
+              }
             }
 
             if (sortable) {
@@ -108,6 +113,7 @@ export const SimpleSelectyStateless = ({
         autoSuggest={autoSuggest}
         selected={items}
         limit={limit}
+        loading={loading}
         optLabel={optLabel}
         optValue={optValue}
         noResults={noResults}
@@ -134,21 +140,43 @@ SimpleSelectyStateless.propTypes = {
   filterable: PropTypes.bool,
   filteredOptions: PropTypes.array,
   items: PropTypes.array,
+  lazyLoading: PropTypes.bool,
   limit: PropTypes.number,
-  optLabel: PropTypes.string,
-  optValue: PropTypes.string,
+  loading: PropTypes.bool,
   name: PropTypes.string,
   noResults: PropTypes.shape({
     show: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
   }),
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  onClicked: PropTypes.func,
+  onFilter: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.bool,
+  ]),
+  onFocus: PropTypes.func,
+  onKeyDown: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.bool,
+  ]),
+  onOptionsFiltered: PropTypes.func,
+  onSelected: PropTypes.func,
+  optLabel: PropTypes.string,
+  optValue: PropTypes.string,
   optionGroups: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
         order: PropTypes.number.isRequired,
         key: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
+        value: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]).isRequired,
+        label: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]).isRequired,
         limit: PropTypes.oneOfType([
           PropTypes.number,
           PropTypes.string,
@@ -157,8 +185,14 @@ SimpleSelectyStateless.propTypes = {
     ),
     PropTypes.arrayOf(
       PropTypes.shape({
-        value: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
+        value: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]).isRequired,
+        label: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.string,
+        ]).isRequired,
         limit: PropTypes.oneOfType([
           PropTypes.number,
           PropTypes.string,
@@ -175,22 +209,11 @@ SimpleSelectyStateless.propTypes = {
     PropTypes.number,
   ]),
   typedValue: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   visible: PropTypes.bool,
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func,
-  onClicked: PropTypes.func,
-  onFilter: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.bool,
-  ]),
-  onFocus: PropTypes.func,
-  onKeyDown: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.bool,
-  ]),
-  onOptionsFiltered: PropTypes.func,
-  onSelected: PropTypes.func,
 };
 
 SimpleSelectyStateless.defaultProps = {
@@ -201,11 +224,21 @@ SimpleSelectyStateless.defaultProps = {
   filterable: true,
   filteredOptions: [],
   items: [],
+  lazyLoading: false,
   limit: null,
-  optLabel: 'label',
-  optValue: 'value',
+  loading: false,
   name: 'selecty',
   noResults: { show: true, label: 'No results found.' },
+  onBlur: () => {},
+  onChange: () => {},
+  onClicked: () => {},
+  onFilter: false,
+  onFocus: () => {},
+  onKeyDown: false,
+  onOptionsFiltered: () => {},
+  onSelected: () => {},
+  optLabel: 'label',
+  optValue: 'value',
   options: [],
   optionGroups: [],
   placeholder: '',
@@ -215,14 +248,6 @@ SimpleSelectyStateless.defaultProps = {
   typedValue: '',
   value: '',
   visible: false,
-  onBlur: () => {},
-  onChange: () => {},
-  onClicked: () => {},
-  onFilter: false,
-  onFocus: () => {},
-  onKeyDown: false,
-  onOptionsFiltered: () => {},
-  onSelected: () => {},
 };
 
 export default CSSModules(SimpleSelectyStateless, styles, { allowMultiple: true });

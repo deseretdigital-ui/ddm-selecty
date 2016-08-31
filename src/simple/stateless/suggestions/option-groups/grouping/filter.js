@@ -4,7 +4,13 @@ export const filterOptions = (label, value, opts) => {
     const TERM = value.toLowerCase();
     const filtered = [];
     for (let i = 0; i < options.length; i++) {
-      const LABEL = options[i][label].toLowerCase();
+      let LABEL = '';
+      if (typeof options[i][label] === 'string') {
+        LABEL = options[i][label].toLowerCase();
+      } else if (typeof options[i][label] === 'number') {
+        LABEL = options[i][label];
+      }
+
       if (LABEL.indexOf(TERM) > -1) {
         filtered.push(options[i]);
       }
