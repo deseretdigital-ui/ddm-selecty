@@ -1,11 +1,10 @@
-export const filterOptions = (label, value, opts) => {
+export const filterOptions = (label, value, limit, opts) => {
   const options = opts.slice(0);
   if (value !== '') {
     const TERM = value.toLowerCase();
     const filtered = [];
     for (let i = 0; i < options.length; i++) {
       let LABEL = '';
-      console.log('FILTERING', options[i][label], typeof options[i][label]);
       if (typeof options[i][label] === 'string') {
         LABEL = options[i][label].toLowerCase();
       } else if (typeof options[i][label] === 'number') {
@@ -16,9 +15,9 @@ export const filterOptions = (label, value, opts) => {
         filtered.push(options[i]);
       }
     }
-    return filtered;
+    return filtered.slice(0, limit);
   }
-  return options;
+  return options.slice(0, limit);
 };
 
 
@@ -36,11 +35,7 @@ export const filterGroups = (label, value, groups) => {
       return null;
     });
 
-    // filteredResults = this._sort(props, filteredResults);
-    // filteredResults = this._optgroup(props, filteredResults);
     return filteredGroups;
   }
-  // let results = this._optgroup(props, props.options);
-  // return results;
   return groups;
 };
