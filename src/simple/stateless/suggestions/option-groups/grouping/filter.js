@@ -5,10 +5,11 @@ export const filterOptions = (label, value, opts) => {
     const filtered = [];
     for (let i = 0; i < options.length; i++) {
       let LABEL = '';
+      console.log('FILTERING', options[i][label], typeof options[i][label]);
       if (typeof options[i][label] === 'string') {
         LABEL = options[i][label].toLowerCase();
       } else if (typeof options[i][label] === 'number') {
-        LABEL = options[i][label];
+        LABEL = options[i][label].toString();
       }
 
       if (LABEL.indexOf(TERM) > -1) {

@@ -1,6 +1,6 @@
 {
   "name": "ddm-selecty",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A select component patterned after selectize",
   "main": "./dist/ddm.selecty.js",
   "scripts": {

@@ -63,7 +63,7 @@ export const SimpleSelectyStateless = ({
         onKeyDown={
           e => {
             let suggested = options;
-
+            console.log('Filtering ----', filteredOptions, `- ${typedValue} -`, lazyLoading);
             if (filterable) {
               suggested = options;
               if ((filteredOptions.length > 0 || typedValue.length > 0) && !lazyLoading) {
