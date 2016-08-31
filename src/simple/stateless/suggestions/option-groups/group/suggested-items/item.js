@@ -23,9 +23,8 @@ export const SuggestedItem = ({
     selected: highlight,
   });
 
-
   return (
-    <div className={applied} styleName={applied} onClick={() => onClicked(item)}>
+    <div styleName={applied} onClick={() => onClicked(item)}>
         {item[optLabel]}
     </div>
   );
