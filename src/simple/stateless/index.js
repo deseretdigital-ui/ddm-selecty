@@ -63,7 +63,6 @@ export const SimpleSelectyStateless = ({
         onKeyDown={
           e => {
             let suggested = options;
-            console.log('Filtering ----', filteredOptions, `- ${typedValue} -`, lazyLoading);
             if (filterable) {
               suggested = options;
               if ((filteredOptions.length > 0 || typedValue.length > 0) && !lazyLoading) {
@@ -81,7 +80,7 @@ export const SimpleSelectyStateless = ({
 
             onKeyDown instanceof Function
               ? onKeyDown(e)
-              : keyboardEvents(e, optLabel, suggested, items[0], onSelected,
+              : keyboardEvents(e, optLabel, suggested, items[0], limit, onSelected,
                 onChange, typedValue, onOptionsFiltered, optionGroups);
           }
         }
@@ -96,9 +95,9 @@ export const SimpleSelectyStateless = ({
                 let filtered = null;
 
                 if (sortable) {
-                  filtered = sortOptions(sortable, filterOptions(optLabel, e.target.value, options), optLabel);
+                  filtered = sortOptions(sortable, filterOptions(optLabel, e.target.value, limit, options), optLabel);
                 } else {
-                  filtered = filterOptions(optLabel, e.target.value, options);
+                  filtered = filterOptions(optLabel, e.target.value, limit, options);
                 }
 
                 onOptionsFiltered(filtered);

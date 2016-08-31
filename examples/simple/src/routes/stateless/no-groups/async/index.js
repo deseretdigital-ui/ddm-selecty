@@ -31,7 +31,6 @@ export class StatlessNoGroupAsync extends React.Component {
         return response.json();
       })
       .then((response) => {
-        console.log("HERE", response);
         this.props.updateOptions(response);
       }).catch((error) => {
         console.error(`Unsuccessful api call ${error}`);

@@ -1,7 +1,7 @@
 import { filterOptions } from '../suggestions/option-groups/grouping/filter';
 
-export default (key, index, first, last, next, prev, label, options,
-   onSelected, onChange, typedValue, onOptionsFiltered) => {
+export default (key, index, first, last, next, prev, label, limit, options,
+  onSelected, onChange, typedValue, onOptionsFiltered) => {
   switch (key) {
     case 'down': {
       if (index < 0) {
@@ -26,7 +26,7 @@ export default (key, index, first, last, next, prev, label, options,
     case 'tab': {
       onChange(options[index][label]);
       onSelected(options[index]);
-      const filtered = filterOptions(label, options[index][label], options);
+      const filtered = filterOptions(label, options[index][label], limit, options);
       onOptionsFiltered(filtered);
       document.activeElement.blur();
       break;
@@ -34,7 +34,7 @@ export default (key, index, first, last, next, prev, label, options,
     case 'enter': {
       onChange(options[index][label]);
       onSelected(options[index]);
-      const filtered = filterOptions(label, options[index][label], options);
+      const filtered = filterOptions(label, options[index][label], limit, options);
       onOptionsFiltered(filtered);
       document.activeElement.blur();
       break;
