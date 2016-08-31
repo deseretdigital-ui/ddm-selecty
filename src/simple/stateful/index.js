@@ -23,15 +23,6 @@ class SimpleSelecty extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.typedValue !== this.state.typedValue) {
-      if (this.props.lazyLoad && this.state.typedValue) {
-        this.setState({ loading: true });
-        (this.props.lazyLoad())(this.state.typedValue, this.api);
-      }
-    }
-  }
-
   onBlur = () => {
     this.setState({ visible: false }, () => {
       if (this.props.onBlur) {
@@ -65,14 +56,29 @@ class SimpleSelecty extends React.Component {
     const selected = {};
     const value = this.props.optValue ? this.props.optValue : 'id';
     const label = this.props.optLabel ? this.props.optLabel : 'label';
+    const cond = {};
+    cond.loading = false;
     selected[value] = null;
     selected[label] = null;
+
+    if (this.props.lazyLoad) {
+      if (text === '') {
+        cond.options = [];
+      } else {
+        cond.loading = true;
+      }
+    }
 
     this.setState({
       typedValue: text,
       value: text,
       items: [selected],
+      ...cond,
     }, () => {
+      if (this.props.lazyLoad && text !== '') {
+        (this.props.lazyLoad())(this.state.typedValue, this.api);
+      }
+
       if (this.props.onChange) {
         this.props.onClicked(text);
       }
