@@ -5,6 +5,7 @@ class SimpleSelecty extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      loading: (this.props.load !== null),
       filteredOptions: [],
       items: this.props.items,
       options: this.props.options,
@@ -22,27 +23,13 @@ class SimpleSelecty extends React.Component {
     }
   }
 
-  api = (res = null) => {
-    let opts = (this.props.options ? this.props.options : []);
-    let proceed = true;
-    if (res) {
-      if (Array.isArray(res)) {
-        for (var i = 0; i < res.length; i++) {
-          if (typeof res[i] !== 'object') {
-            proceed = false;
-            break;
-          }
-        }
-        if (proceed) {
-          opts = res;
-        }
-      } else {
-        console.warn('Warning: UI-Elements SimpleSelecty requries an array of objects.');
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.typedValue !== this.state.typedValue) {
+      if (this.props.lazyLoad && this.state.typedValue) {
+        this.setState({ loading: true });
+        (this.props.lazyLoad())(this.state.typedValue, this.api);
       }
-    } else {
-      console.warn('Warning: UI-Elements SimpleSelecty API request did not return correctly');
     }
-    this.setState({ options: opts });
   }
 
   onBlur = () => {
@@ -52,6 +39,7 @@ class SimpleSelecty extends React.Component {
       }
     });
   }
+
   onFocus = () => {
     this.setState({ visible: true }, () => {
       if (this.props.onFocus) {
@@ -115,6 +103,31 @@ class SimpleSelecty extends React.Component {
     });
   }
 
+  api = (res = null) => {
+    let opts = (this.props.options ? this.props.options : []);
+    let proceed = true;
+    if (res) {
+      if (Array.isArray(res)) {
+        for (var i = 0; i < res.length; i++) {
+          if (typeof res[i] !== 'object') {
+            proceed = false;
+            break;
+          }
+        }
+        if (proceed) {
+          opts = res;
+        }
+      } else if (typeof res === 'object') {
+        opts = [res];
+      } else {
+        console.warn('Warning: UI-Elements SimpleSelecty requries an array of objects.');
+      }
+    } else {
+      console.warn('Warning: UI-Elements SimpleSelecty API request did not return correctly');
+    }
+    this.setState({ loading: false, options: opts });
+  }
+
   render() {
     return (
       <SimpleSelectyStateless
@@ -125,7 +138,9 @@ class SimpleSelecty extends React.Component {
         filterable={this.props.filterable}
         filteredOptions={this.state.filteredOptions}
         items={this.state.items}
+        lazyLoading={this.props.lazyLoad !== null}
         limit={this.props.limit}
+        loading={this.state.loading}
         optLabel={this.props.optLabel}
         optValue={this.props.optValue}
         optionGroups={this.props.optionGroups}
@@ -159,15 +174,11 @@ SimpleSelecty.propTypes = {
   disabled: PropTypes.bool,
   filterable: PropTypes.bool,
   items: PropTypes.array,
+  lazyLoad: PropTypes.func,
   limit: PropTypes.number,
+  load: PropTypes.func,
   optLabel: PropTypes.string,
   optValue: PropTypes.string,
-  load: PropTypes.func,
-  name: PropTypes.string,
-  noResults: PropTypes.shape({
-    show: PropTypes.bool.isRequired,
-    label: PropTypes.string.isRequired,
-  }),
   options: PropTypes.array,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
@@ -201,6 +212,11 @@ SimpleSelecty.propTypes = {
       })
     ),
   ]),
+  name: PropTypes.string,
+  noResults: PropTypes.shape({
+    show: PropTypes.bool.isRequired,
+    label: PropTypes.string.isRequired,
+  }),
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   sortable: PropTypes.bool,
@@ -220,19 +236,9 @@ SimpleSelecty.defaultProps = {
   filterable: true,
   filteredOptions: [],
   items: [{ id: null, label: null }],
-  optLabel: 'label',
-  optValue: 'id',
-  name: 'selecty',
-  noResults: { show: true, label: 'No results found.' },
-  options: [],
-  optionGroups: [],
-  placeholder: '',
-  required: false,
-  sortable: false,
-  tabIndex: 1,
-  typedValue: '',
-  value: '',
-  visible: false,
+  lazyLoad: null,
+  limit: null,
+  load: null,
   onBlur: null,
   onChange: null,
   onClicked: null,
@@ -240,7 +246,20 @@ SimpleSelecty.defaultProps = {
   onFocus: null,
   onKeyDown: null,
   onOptionsFiltered: null,
+  options: [],
+  optionGroups: [],
+  optLabel: 'label',
+  optValue: 'id',
   onSelected: null,
+  name: 'selecty',
+  noResults: { show: true, label: 'No results found.' },
+  placeholder: '',
+  required: false,
+  sortable: false,
+  tabIndex: 1,
+  typedValue: '',
+  value: '',
+  visible: false,
 };
 
 

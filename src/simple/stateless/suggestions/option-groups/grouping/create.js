@@ -6,7 +6,6 @@ import createHash from './hash';
 
 export default (options, groups = null, optGroupHashed = null) => {
   let groupsHashed = {};
-
   if (optGroupHashed === null) {
     groupsHashed = createHash(groups);
   } else {

@@ -9,6 +9,7 @@ const Suggestions = ({
   autoSuggest,
   selected,
   limit,
+  loading,
   optLabel,
   optValue,
   noResults,
@@ -27,7 +28,7 @@ const Suggestions = ({
     baseStyles.visible = false;
   }
 
-  if (!options) {
+  if (loading) {
     const applied = classNames(baseStyles);
     return <div styleName={applied}>Loading...</div>;
   }
@@ -70,6 +71,7 @@ Suggestions.propTypes = {
   autoSuggest: PropTypes.bool.isRequired,
   selected: PropTypes.array.isRequired,
   limit: PropTypes.number,
+  loading: PropTypes.bool,
   optLabel: PropTypes.string.isRequired,
   optValue: PropTypes.string.isRequired,
   noResults: PropTypes.shape({
@@ -77,7 +79,10 @@ Suggestions.propTypes = {
     label: PropTypes.string.isRequired,
   }),
   options: PropTypes.object.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   visible: PropTypes.bool.isRequired,
   onClicked: PropTypes.func.isRequired,
 };

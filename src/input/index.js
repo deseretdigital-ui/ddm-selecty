@@ -35,7 +35,10 @@ InputElement.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   required: PropTypes.bool.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
   onChange: PropTypes.func.isRequired,
   onKeyDown: PropTypes.oneOfType([
     PropTypes.func,
