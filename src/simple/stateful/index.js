@@ -7,7 +7,7 @@ class SimpleSelecty extends React.Component {
     this.state = {
       loading: (this.props.load !== null),
       filteredOptions: [],
-      items: this.props.items,
+      item: this.props.item,
       options: this.props.options,
       placeholder: this.props.placeholder,
       tabIndex: this.props.tabIndex,
@@ -39,15 +39,15 @@ class SimpleSelecty extends React.Component {
     });
   }
 
-  onClicked = item => {
+  onClicked = clickedItem => {
     this.setState({
-      items: [item],
-      typedValue: this.props.optLabel ? item[this.props.optLabel] : item.label,
-      value: item[this.props.optLabel],
+      item: clickedItem,
+      typedValue: this.props.optLabel ? clickedItem[this.props.optLabel] : clickedItem.label,
+      value: clickedItem[this.props.optLabel],
       visible: false,
     }, () => {
       if (this.props.onClicked) {
-        this.props.onClicked(item);
+        this.props.onClicked(clickedItem);
       }
     });
   }
@@ -72,7 +72,7 @@ class SimpleSelecty extends React.Component {
     this.setState({
       typedValue: text,
       value: text,
-      items: [selected],
+      item: selected,
       ...cond,
     }, () => {
       if (this.props.lazyLoad && text !== '') {
@@ -85,26 +85,26 @@ class SimpleSelecty extends React.Component {
     });
   }
 
-  onOptionsFiltered = filtered => {
+  onFiltered = filtered => {
     this.setState({ filteredOptions: filtered }, () => {
-      if (this.props.onOptionsFiltered) {
-        this.props.onOptionsFiltered(filtered);
+      if (this.props.onFiltered) {
+        this.props.onFiltered(filtered);
       }
     });
   }
 
-  onSelected = item => {
-    const { items } = this.state;
-    if (items.indexOf(item) > -1) {
+  onSelected = selectedItem => {
+    const { item } = this.state;
+    if (item.optLabel === selectedItem.optLabel && item.optValue === selectedItem.optValue) {
       return;
     }
 
     this.setState({
-      items: [item],
-      value: this.props.optLabel ? item[this.props.optLabel] : item.label,
+      item: selectedItem,
+      value: this.props.optLabel ? selectedItem[this.props.optLabel] : selectedItem.label,
     }, () => {
       if (this.props.onSelected) {
-        this.props.onSelected(item);
+        this.props.onSelected(selectedItem);
       }
     });
   }
@@ -143,7 +143,7 @@ class SimpleSelecty extends React.Component {
         disabled={this.props.disabled}
         filterable={this.props.filterable}
         filteredOptions={this.state.filteredOptions}
-        items={this.state.items}
+        item={this.state.item}
         lazyLoading={this.props.lazyLoad !== null}
         limit={this.props.limit}
         loading={this.state.loading}
@@ -158,7 +158,7 @@ class SimpleSelecty extends React.Component {
         onFilter={this.props.onFilter}
         onFocus={this.onFocus}
         onKeyDown={this.props.onKeyDown}
-        onOptionsFiltered={this.onOptionsFiltered}
+        onFiltered={this.onFiltered}
         onSelected={this.onSelected}
         options={this.state.options}
         placeholder={this.state.placeholder}
@@ -179,7 +179,7 @@ SimpleSelecty.propTypes = {
   autoSuggest: PropTypes.bool,
   disabled: PropTypes.bool,
   filterable: PropTypes.bool,
-  items: PropTypes.array,
+  item: PropTypes.array,
   lazyLoad: PropTypes.func,
   limit: PropTypes.number,
   load: PropTypes.func,
@@ -193,7 +193,7 @@ SimpleSelecty.propTypes = {
   onFocus: PropTypes.func,
   onKeyDown: PropTypes.func,
   onSelected: PropTypes.func,
-  onOptionsFiltered: PropTypes.func,
+  onFiltered: PropTypes.func,
   optionGroups: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -241,7 +241,7 @@ SimpleSelecty.defaultProps = {
   disabled: false,
   filterable: true,
   filteredOptions: [],
-  items: [{ id: null, label: null }],
+  item: { id: null, label: null },
   lazyLoad: null,
   limit: null,
   load: null,
@@ -251,7 +251,7 @@ SimpleSelecty.defaultProps = {
   onFilter: null,
   onFocus: null,
   onKeyDown: null,
-  onOptionsFiltered: null,
+  onFiltered: null,
   options: [],
   optionGroups: [],
   optLabel: 'label',

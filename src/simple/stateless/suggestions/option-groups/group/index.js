@@ -59,7 +59,7 @@ const SuggestedGroup = ({
 
 SuggestedGroup.propTypes = {
   group: PropTypes.object.isRequired,
-  selected: PropTypes.array.isRequired,
+  selected: PropTypes.object.isRequired,
   limit: PropTypes.number,
   optLabel: PropTypes.string.isRequired,
   optValue: PropTypes.string.isRequired,

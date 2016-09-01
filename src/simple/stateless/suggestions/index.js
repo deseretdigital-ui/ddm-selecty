@@ -69,7 +69,7 @@ const Suggestions = ({
 Suggestions.propTypes = {
   autoHighlight: PropTypes.bool.isRequired,
   autoSuggest: PropTypes.bool.isRequired,
-  selected: PropTypes.array.isRequired,
+  selected: PropTypes.object.isRequired,
   limit: PropTypes.number,
   loading: PropTypes.bool,
   optLabel: PropTypes.string.isRequired,
