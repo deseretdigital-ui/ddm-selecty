@@ -13,10 +13,10 @@ const defaultState = (num) => {
   state[`value_${num}`] = '';
   state[`typedValue_${num}`] = '';
   state[`visible_${num}`] = false;
-  state[`items_${num}`] = [{
+  state[`item_${num}`] = {
     id: null,
     label: null,
-  }];
+  };
   state[`filtereOptions_${num}`] = [];
   return state;
 }
@@ -45,9 +45,9 @@ function _static(state = initialState, action) {
     }
     case UPDATE_SELECTED: {
       const newState = {};
-      newState[`items_${action.num}`] = initialState[`items_${action.num}`];
+      newState[`item_${action.num}`] = initialState[`item_${action.num}`];
       if (action.item) {
-        newState[`items_${action.num}`] = [action.item];
+        newState[`item_${action.num}`] = action.item;
       }
 
       return Object.assign({}, state, newState);

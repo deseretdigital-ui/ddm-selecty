@@ -23,9 +23,9 @@ const StatlessGroupingStatic = ({
   filteredOptions_1,
   filteredOptions_2,
   filteredOptions_3,
-  items_1,
-  items_2,
-  items_3,
+  item_1,
+  item_2,
+  item_3,
   typedValue_1,
   typedValue_2,
   typedValue_3,
@@ -45,7 +45,7 @@ const StatlessGroupingStatic = ({
       <SimpleSelectyStateless
         style={{'zIndex':'100'}}
         filteredOptions={filteredOptions_1}
-        items={items_1}
+        item={item_1}
         sortable={false}
         optLabel={'label'}
         optValue={'id'}
@@ -62,7 +62,7 @@ const StatlessGroupingStatic = ({
           updateValue(text, 1);
           updateSelected(null, 1);
         }}
-        onOptionsFiltered={filtered => {
+        onFiltered={filtered => {
           updateFilteredOptions(filtered, 1)
         }}
         onSelected={
@@ -88,7 +88,7 @@ const StatlessGroupingStatic = ({
       <SimpleSelectyStateless
         style={{'zIndex':'100'}}
         filteredOptions={filteredOptions_2}
-        items={items_2}
+        item={item_2}
         sortable={false}
         optLabel={'label'}
         optValue={'id'}
@@ -105,7 +105,7 @@ const StatlessGroupingStatic = ({
           updateValue(text, 2);
           updateSelected(null, 2);
         }}
-        onOptionsFiltered={filtered => {
+        onFiltered={filtered => {
           updateFilteredOptions(filtered, 2)
         }}
         onSelected={
@@ -134,7 +134,7 @@ const StatlessGroupingStatic = ({
       <SimpleSelectyStateless
         style={{'zIndex':'100'}}
         filteredOptions={filteredOptions_3}
-        items={items_3}
+        item={item_3}
         sortable={false}
         limit={3}
         optLabel={'label'}
@@ -152,7 +152,7 @@ const StatlessGroupingStatic = ({
           updateValue(text, 3);
           updateSelected(null, 3);
         }}
-        onOptionsFiltered={filtered => {
+        onFiltered={filtered => {
           updateFilteredOptions(filtered, 3)
         }}
         onSelected={

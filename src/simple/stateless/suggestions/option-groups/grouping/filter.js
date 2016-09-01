@@ -62,7 +62,7 @@ export default (options, text, optType = null, index = null) => {
     console.log('GROUPED');
     filtered = filterOpts(options.label, options[optType][index], options);
   } else {
-    console.log("ORIGINAL");
+    console.log('ORIGINAL');
     filtered = filterOpts(options.label, text, options.limit, options['original']);
   }
 
