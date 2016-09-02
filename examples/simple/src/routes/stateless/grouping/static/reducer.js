@@ -16,7 +16,7 @@ const defaultState = (num) => {
     id: null,
     label: null,
   };
-  state[`filtereOptions_${num}`] = [];
+  state[`filteredOptions_${num}`] = [];
   return state;
 }
 

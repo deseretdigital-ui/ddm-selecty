@@ -93,6 +93,7 @@
           order: 0,
           value: 'some string value',
           name: 'string name'
+					fitlerable: (optional) boolean
       }]
       </code>
     </td>

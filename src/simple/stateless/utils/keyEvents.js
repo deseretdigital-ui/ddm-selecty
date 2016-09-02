@@ -1,6 +1,6 @@
 import KEY_MAP from './keyMap';
 import events from './events';
-import sortOptions from '../suggestions/option-groups/grouping/sort';
+import { sortOptions } from '../suggestions/option-groups/grouping/sort';
 import filterOptions from '../suggestions/option-groups/grouping/filter';
 
 export const keyBindings = (key, filterable, lazyLoading, options, sortable, typedText, update) => {
@@ -13,12 +13,10 @@ export const keyBindings = (key, filterable, lazyLoading, options, sortable, typ
 
   if (sortable) { optKey = 'sorted'; }
   if (typeof options.groupings === 'Object') { optKey = 'grouped'; }
-  console.log('BINDING #################', optKey, options);
   if (options[optKey] === 0) { return; }
   if (options.groupings === null) {
-    console.log('--------------- NO GROUPINGS BINDING ---------------');
-    const current = options.selected ? options.selected.id : null;
-    const index = options[optKey].findIndex(item => item.id === current);
+    const current = options.selected ? options.selected[options.value] : null;
+    const index = options[optKey].findIndex(item => item[options.value] === current);
     const first = options[optKey][0];
     const last = options[optKey].length - 1;
     const next = options[optKey][index + 1];
@@ -26,14 +24,13 @@ export const keyBindings = (key, filterable, lazyLoading, options, sortable, typ
 
     events(key, index, first, last, next, prev, options, optKey, typedText, update);
   } else {
-    console.log('+++++++++++++ GROUPINGS BINDING +++++++++++++');
     let displayedOptions = [];
-    const objKeys = Object.keys(options);
+    const objKeys = Object.keys(options.grouped);
     for (let index = 0; index < objKeys.length; index++) {
-      displayedOptions = displayedOptions.concat(options[objKeys[index]].items);
+      displayedOptions = displayedOptions.concat(options.grouped[objKeys[index]].items);
     }
-    const current = options.selected[0] ? options.selected[0] : null;
-    const index = displayedOptions.findIndex(item => item.id === current);
+    const current = options.selected ? options.selected[options.value] : null;
+    const index = displayedOptions.findIndex(item => item[options.value] === current);
     const first = displayedOptions[0];
     const last = displayedOptions.length - 1;
     const next = displayedOptions[index + 1];
@@ -41,26 +38,32 @@ export const keyBindings = (key, filterable, lazyLoading, options, sortable, typ
     const updatedOpts = Object.assign({}, options);
     updatedOpts.displayed = displayedOptions;
 
-    events(key, index, first, last, next, prev, updatedOpts, optKey, typedText, update);
+    events(key, index, first, last, next, prev, updatedOpts, 'displayed', typedText, update);
   }
 };
 
 export const keyEvents = (e, eventType, filterable, lazyLoading, options, sortable, typedText, update) => {
+  const OPTIONS = Object.assign(options);
   const key = KEY_MAP[e.keyCode];
   if (eventType === 'down' && key) {
     e.preventDefault();
     update.onKeyDown instanceof Function
       ? update.onKeyDown(e)
-      : keyBindings(key, filterable, lazyLoading, options, sortable, typedText, update);
+      : keyBindings(key, filterable, lazyLoading, OPTIONS, sortable, typedText, update);
   } else if (eventType === 'up' && !key) {
     if (update.onFilter instanceof Function) {
       update.onFilter(e);
+      return;
     } else if (filterable) {
-      let updatedOptions = filterOptions(options, e.target.value);
+      const originalOpts = Object.assign({}, options);
+      let updatedOptions = filterOptions(OPTIONS, e.target.value);
+      console.log("updated 1 ====", updatedOptions);
       if (sortable) {
         updatedOptions = sortOptions(updatedOptions, options.label, sortable);
       }
+      console.log("UPDATED", updatedOptions);
       update.onFiltered(updatedOptions);
+      return;
     }
   }
 };

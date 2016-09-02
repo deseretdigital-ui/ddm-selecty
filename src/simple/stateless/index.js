@@ -4,8 +4,8 @@ import InputElement from '../../input/';
 import defaultProps from './_defaultProps';
 import propTypes from './_propTypes';
 import createGrouping from './suggestions/option-groups/grouping/create';
-import sortOptions from './suggestions/option-groups/grouping/sort';
-import filterOptions from './suggestions/option-groups/grouping/filter';
+import { sortOptions } from './suggestions/option-groups/grouping/sort';
+import filterOptions, { filterOpts } from './suggestions/option-groups/grouping/filter';
 import { keyEvents } from './utils/keyEvents';
 import Suggestions from './suggestions/';
 import styles from './styles.scss';
@@ -43,10 +43,11 @@ export const SimpleSelectyStateless = ({
   value,
   visible,
 }) => {
-  const filteredOpts = filterable && typedValue.length && !lazyLoading ? filteredOptions : options;
+  let filteredOpts = filterable && typedValue.length && !lazyLoading ? filteredOptions : options;
+  filteredOpts = filteredOpts.length > 0 ? filteredOpts : filterOpts(optLabel, value, limit, options);
   const sortedOpts = sortOptions(filteredOpts, optLabel, sortable);
+  console.log("SORTED", options, sortedOpts);
   const groupedOpts = createGrouping(sortedOpts, optionGroups);
-
   const updateFunctions = {
     onChange,
     onFilter,

@@ -1,4 +1,25 @@
+export const wordFilter = (phrase, term) => {
+  // If nothing is passed back to search for, always return true
+  if (term === null || term === '' || term.length === 0) {
+    return true;
+  } else if (phrase === null || phrase === '') {
+    return false;
+  }
+  const words = phrase.split(' ');
+  let contains = false;
+  for (let index = 0; index < words.length; index++) {
+    const word = words[index].substring(0, term.length);
+    if (word.indexOf(term) > -1) {
+      contains = true;
+      break;
+    }
+  }
+
+  return contains;
+}
+
 export const filterOpts = (label, value, limit, opts) => {
+  let amount = limit;
   const options = opts.slice(0);
   if (value !== '') {
     const TERM = value.toLowerCase();
@@ -11,62 +32,61 @@ export const filterOpts = (label, value, limit, opts) => {
         LABEL = options[i][label].toString();
       }
 
-      if (LABEL.indexOf(TERM) > -1) {
+      if (wordFilter(LABEL, TERM)) {
         filtered.push(options[i]);
       }
     }
-    return filtered.slice(0, limit);
+    amount = amount ? amount : filtered.length;
+    return filtered.slice(0, amount);
   }
-  return options.slice(0, limit);
+  amount = amount ? amount : options.length;
+  return options.slice(0, amount);
 };
 
 
 export const filterGroupings = (label, value, limit, options, groups) => {
-  const filteredGroups = Object.assign({}, groups);
   const proceed = groups ? (Object.keys(groups).length > 0) : false;
   if (value !== '' && proceed) {
     const term = value.toLowerCase();
+    const groupHash = {};
 
-    Object.keys(groups).map(groupName => {
-      if (typeof filteredGroups[groupName].filterable === 'undefined' || filteredGroups[groupName].filterable) {
-        filteredGroups[groupName].items = groups[groupName].items.filter((result) => {
-          const lowerResult = result[label].toLowerCase();
-          return lowerResult.indexOf(term) > -1;
-        });
-        return null;
-      }
+    for (let marker = 0; marker < groups.length; marker++) {
+        groupHash[groups[marker].value.toLowerCase()] = groups[marker];
+    }
 
-      return null;
-    });
-
+    // Determine the options that would be displayed if they weren't grouped
     let displayedOptions = [];
     const objKeys = Object.keys(options);
     for (let index = 0; index < objKeys.length; index++) {
-      displayedOptions = displayedOptions.concat(options[objKeys[index]].items);
+      console.log("HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      let items = options[objKeys[index]].items
+      if (objKeys[index] === '__default__' ||
+            groupHash[objKeys[index]].filterable ||
+            typeof groupHash[objKeys[index]].filterable === 'undefined'
+            ) {
+              console.log("HERE>>>>>>>>>>>");
+              items = items.filter((result) => {
+                const lowerResult = result[label].toLowerCase();
+                return wordFilter(lowerResult, term);
+              });
+      }
+      displayedOptions = displayedOptions.concat(items);
     }
+    console.log("HERE", displayedOptions, label, value, limit, options);
     return displayedOptions;
   }
-  return options;
+  return options.original;
 };
 
-export default (options, text, optType = null, index = null) => {
+export default (options, text) => {
   const opts = Object.assign({}, options);
   let filtered = [];
 
-  if (optType === 'filtered') {
-    console.log('Filtered Options');
-  } else if (optType === 'sorted') {
-    console.log('Sorted Groups', opts.label, text, opts.limit, opts['original']);
-    filtered = filterOpts(opts.label, text, opts.limit, opts['original']);
-    // filtered = filterGroupings(options, limit, options, groups);
-  } else if (optType === 'grouped') {
-    console.log('GROUPED');
-    filtered = filterOpts(opts.label, opts[optType][index], opts);
+  if (options.groupings) {
+    filtered = filterGroupings(opts.label, text, opts.limit, opts['grouped'], opts.groupings);
   } else {
-    console.log('ORIGINAL');
     filtered = filterOpts(opts.label, text, opts.limit, opts['original']);
   }
 
   return filtered;
-  // if (options.groupings && options.groupings.length > 0) {
 };
