@@ -87,25 +87,21 @@ const StatlessNoGroupStatic = ({
           onBlur={() => updateVisible(false, 2)}
           onFocus={() => updateVisible(true, 2)}
           onClicked={item => {
-            console.log("ON CLICKED", item);
             updateValue(item.label, 2);
             updateTypedValue(item.label, 2);
             updateSelected(item, 2);
             updateVisible(false, 2);
           }}
           onChange={text => {
-            console.log("ON CHANGE", text);
             updateTypedValue(text, 2);
             updateValue(text, 2);
             updateSelected(null, 2);
           }}
           onFiltered={filtered => {
-            console.log("ON FILTERED", filtered);
             updateFilteredOptions(filtered, 2)
           }}
           onSelected={
             item => {
-              console.log("ON SELECTED", item);
               updateValue(item.label, 2);
               updateSelected(item, 2);
             }

@@ -24,20 +24,12 @@ export default (key, index, first, last, next, prev, options, optType, typedValu
       }
       break;
     }
+    case 'enter':
     case 'tab': {
-      console.log("~~~~~~~~~~~~~~~~~~~~~ TAB ~~~~~~~~~~~~~~~~~~~~~");
-      update.onChange(options[optType][index][options.label]);
+      const text = options[optType][index][options.label];
+      update.onChange(text);
       update.onSelected(options[optType][index]);
-      const filtered = filterOptions(options, null, optType, index);
-      update.onFiltered(filtered);
-      document.activeElement.blur();
-      break;
-    }
-    case 'enter': {
-      console.log("~~~~~~~~~~~~~~~~~~~~~ ENTER ~~~~~~~~~~~~~~~~~~~~~");
-      update.onChange(options[optType][index][options.label]);
-      update.onSelected(options[optType][index]);
-      const filtered = filterOptions(options, null, optType, index);
+      const filtered = filterOptions(options, text, optType, index);
       update.onFiltered(filtered);
       document.activeElement.blur();
       break;

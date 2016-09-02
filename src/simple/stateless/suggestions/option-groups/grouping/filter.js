@@ -56,7 +56,8 @@ export default (options, text, optType = null, index = null) => {
   if (optType === 'filtered') {
     console.log('Filtered Options');
   } else if (optType === 'sorted') {
-    console.log('Sorted Groups');
+    console.log('Sorted Groups', opts.label, text, opts.limit, opts['original']);
+    filtered = filterOpts(opts.label, text, opts.limit, opts['original']);
     // filtered = filterGroupings(options, limit, options, groups);
   } else if (optType === 'grouped') {
     console.log('GROUPED');

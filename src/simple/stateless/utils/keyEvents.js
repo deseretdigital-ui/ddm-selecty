@@ -5,7 +5,6 @@ import filterOptions from '../suggestions/option-groups/grouping/filter';
 
 export const keyBindings = (key, filterable, lazyLoading, options, sortable, typedText, update) => {
   let optKey = 'original';
-
   if (filterable) {
     if ((options.filtered.length > 0 || typedText.length > 0) && !lazyLoading) {
       optKey = 'filtered';
@@ -19,7 +18,6 @@ export const keyBindings = (key, filterable, lazyLoading, options, sortable, typ
   if (options.groupings === null) {
     console.log('--------------- NO GROUPINGS BINDING ---------------');
     const current = options.selected ? options.selected.id : null;
-    console.log('Current', current);
     const index = options[optKey].findIndex(item => item.id === current);
     const first = options[optKey][0];
     const last = options[optKey].length - 1;
@@ -49,7 +47,6 @@ export const keyBindings = (key, filterable, lazyLoading, options, sortable, typ
 
 export const keyEvents = (e, eventType, filterable, lazyLoading, options, sortable, typedText, update) => {
   const key = KEY_MAP[e.keyCode];
-  console.log("HEREKLEMGFEONG ", key);
   if (eventType === 'down' && key) {
     e.preventDefault();
     update.onKeyDown instanceof Function
