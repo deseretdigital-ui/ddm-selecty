@@ -50,8 +50,8 @@ export const filterGroupings = (label, value, limit, options, groups) => {
 };
 
 export default (options, text, optType = null, index = null) => {
+  const opts = Object.assign({}, options);
   let filtered = [];
-  // console.log('Filtering!!!!!', options, `- ${text} -`, optType, index);
 
   if (optType === 'filtered') {
     console.log('Filtered Options');
@@ -60,13 +60,12 @@ export default (options, text, optType = null, index = null) => {
     // filtered = filterGroupings(options, limit, options, groups);
   } else if (optType === 'grouped') {
     console.log('GROUPED');
-    filtered = filterOpts(options.label, options[optType][index], options);
+    filtered = filterOpts(opts.label, opts[optType][index], opts);
   } else {
     console.log('ORIGINAL');
-    filtered = filterOpts(options.label, text, options.limit, options['original']);
+    filtered = filterOpts(opts.label, text, opts.limit, opts['original']);
   }
 
-  // console.log("FILTERED", filtered);
   return filtered;
   // if (options.groupings && options.groupings.length > 0) {
 };

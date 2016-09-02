@@ -58,7 +58,7 @@ export const SimpleSelectyStateless = ({
   const Options = {
     filtered: filteredOpts,
     grouped: groupedOpts,
-    groupings: optionGroups,
+    groupings: optionGroups.length ? optionGroups : null,
     label: optLabel,
     limit,
     original: options,

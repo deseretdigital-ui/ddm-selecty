@@ -45,10 +45,9 @@ function _static(state = initialState, action) {
     case UPDATE_SELECTED: {
       const newState = {};
       newState[`item_${action.num}`] = initialState[`item_${action.num}`];
-      if (action.item) {
+      if (typeof action.item === 'object' && action.item !== null) {
         newState[`item_${action.num}`] = action.item;
       }
-
       return Object.assign({}, state, newState);
     }
     case UPDATE_FILTERED: {

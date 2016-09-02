@@ -74,7 +74,7 @@ const StatlessNoGroupStatic = ({
       The below SimpleSelecty component is an exact duplicate of the one above,
       except that it has a limit for the number of suggested, and it is wrapped
       in a smaller div to display SimpleSelecty responsive nature. The div has
-      a width of 500px and SimpleSelecty will fill up 100% of its container's width.
+      a width of 500px and SimpleSelecty will fill up 100% of its containers width.
       <div style={{width: '500px', marginTop: '20px'}}>
         <SimpleSelectyStateless
           filteredOptions={filteredOptions_2}
@@ -87,21 +87,25 @@ const StatlessNoGroupStatic = ({
           onBlur={() => updateVisible(false, 2)}
           onFocus={() => updateVisible(true, 2)}
           onClicked={item => {
+            console.log("ON CLICKED", item);
             updateValue(item.label, 2);
             updateTypedValue(item.label, 2);
             updateSelected(item, 2);
             updateVisible(false, 2);
           }}
           onChange={text => {
+            console.log("ON CHANGE", text);
             updateTypedValue(text, 2);
             updateValue(text, 2);
             updateSelected(null, 2);
           }}
           onFiltered={filtered => {
+            console.log("ON FILTERED", filtered);
             updateFilteredOptions(filtered, 2)
           }}
           onSelected={
             item => {
+              console.log("ON SELECTED", item);
               updateValue(item.label, 2);
               updateSelected(item, 2);
             }
