@@ -28,7 +28,7 @@ const StatfulNoGroupStatic = ({
 );
 
 function mapStateToProps (state, ownProps) {
-  return {...state.global, ...state.SFNGStatic};
+  return {...state.global};
 }
 
 export default connect(mapStateToProps, {})(StatfulNoGroupStatic)

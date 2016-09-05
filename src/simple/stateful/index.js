@@ -98,13 +98,16 @@ class SimpleSelecty extends React.Component {
 
   onSelected = selectedItem => {
     const { item } = this.state;
-    if (item.optLabel === selectedItem.optLabel && item.optValue === selectedItem.optValue) {
+    const label = this.props.optLabel ? this.props.optLabel : 'label';
+    const value = this.props.optValue ? this.props.optValue : 'id';
+
+    if (item[label] === selectedItem[label] && item[value] === selectedItem[value]) {
       return;
     }
 
     this.setState({
       item: selectedItem,
-      value: this.props.optLabel ? selectedItem[this.props.optLabel] : selectedItem.label,
+      value: selectedItem[label],
     }, () => {
       if (this.props.onSelected) {
         this.props.onSelected(selectedItem);
