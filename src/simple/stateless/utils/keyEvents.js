@@ -43,27 +43,18 @@ export const keyBindings = (key, filterable, lazyLoading, options, sortable, typ
 };
 
 export const keyEvents = (e, eventType, filterable, lazyLoading, options, sortable, typedText, update) => {
-  const OPTIONS = Object.assign(options);
   const key = KEY_MAP[e.keyCode];
   if (eventType === 'down' && key) {
     e.preventDefault();
     update.onKeyDown instanceof Function
       ? update.onKeyDown(e)
-      : keyBindings(key, filterable, lazyLoading, OPTIONS, sortable, typedText, update);
+      : keyBindings(key, filterable, lazyLoading, options, sortable, typedText, update);
   } else if (eventType === 'up' && !key) {
     if (update.onFilter instanceof Function) {
       update.onFilter(e);
-      return;
     } else if (filterable) {
-      const originalOpts = Object.assign({}, options);
-      let updatedOptions = filterOptions(OPTIONS, e.target.value);
-      console.log("updated 1 ====", updatedOptions);
-      if (sortable) {
-        updatedOptions = sortOptions(updatedOptions, options.label, sortable);
-      }
-      console.log("UPDATED", updatedOptions);
+      let updatedOptions = filterOptions(options, e.target.value);
       update.onFiltered(updatedOptions);
-      return;
     }
   }
 };

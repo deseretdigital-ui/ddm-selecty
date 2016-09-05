@@ -53,11 +53,14 @@ class SimpleSelecty extends React.Component {
   }
 
   onChange = text => {
-    const selected = {};
     const value = this.props.optValue ? this.props.optValue : 'id';
     const label = this.props.optLabel ? this.props.optLabel : 'label';
+
     const cond = {};
     cond.loading = false;
+
+    // Reset the item selected to null
+    const selected = {};
     selected[value] = null;
     selected[label] = null;
 
@@ -80,7 +83,7 @@ class SimpleSelecty extends React.Component {
       }
 
       if (this.props.onChange) {
-        this.props.onClicked(text);
+        this.props.onChange(text);
       }
     });
   }
@@ -179,7 +182,7 @@ SimpleSelecty.propTypes = {
   autoSuggest: PropTypes.bool,
   disabled: PropTypes.bool,
   filterable: PropTypes.bool,
-  item: PropTypes.array,
+  item: PropTypes.object,
   lazyLoad: PropTypes.func,
   limit: PropTypes.number,
   load: PropTypes.func,

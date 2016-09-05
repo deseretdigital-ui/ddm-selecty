@@ -42,8 +42,8 @@ const Suggestions = ({
 
     return <div styleName={applied}>{noResults.label}</div>;
   }
-
   const applied = classNames(baseStyles);
+
   return (
     <div styleName={applied}>
       {

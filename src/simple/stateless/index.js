@@ -5,7 +5,7 @@ import defaultProps from './_defaultProps';
 import propTypes from './_propTypes';
 import createGrouping from './suggestions/option-groups/grouping/create';
 import { sortOptions } from './suggestions/option-groups/grouping/sort';
-import filterOptions, { filterOpts } from './suggestions/option-groups/grouping/filter';
+import filterOptions, { filterOpts, filterGroupings } from './suggestions/option-groups/grouping/filter';
 import { keyEvents } from './utils/keyEvents';
 import Suggestions from './suggestions/';
 import styles from './styles.scss';
@@ -43,11 +43,6 @@ export const SimpleSelectyStateless = ({
   value,
   visible,
 }) => {
-  let filteredOpts = filterable && typedValue.length && !lazyLoading ? filteredOptions : options;
-  filteredOpts = filteredOpts.length > 0 ? filteredOpts : filterOpts(optLabel, value, limit, options);
-  const sortedOpts = sortOptions(filteredOpts, optLabel, sortable);
-  console.log("SORTED", options, sortedOpts);
-  const groupedOpts = createGrouping(sortedOpts, optionGroups);
   const updateFunctions = {
     onChange,
     onFilter,
@@ -57,17 +52,27 @@ export const SimpleSelectyStateless = ({
   };
 
   const Options = {
-    filtered: filteredOpts,
-    grouped: groupedOpts,
+    filtered: null,
+    grouped: null,
     groupings: optionGroups.length ? optionGroups : null,
     label: optLabel,
     limit,
     original: options,
     selected: item,
-    sorted: sortedOpts,
+    sorted: null,
     value: optValue,
   };
 
+  Options.filtered = filterable && typedValue.length && !lazyLoading ? filteredOptions : options;
+
+  if (Options.filtered.length <= 0) {
+    Options.sorted = sortOptions(options, optLabel, sortable);
+    Options.grouped = createGrouping(Options.sorted, optionGroups);
+    Options.filtered = filterGroupings(optLabel, optValue, limit, Options.grouped, optionGroups)
+  } else {
+    Options.sorted = sortOptions(Options.filtered, optLabel, sortable);
+    Options.grouped = createGrouping(Options.sorted, optionGroups);
+  }
   return (
     <div onBlur={onBlur} onFocus={onFocus} tabIndex={tabIndex} styleName="wrapper">
       <InputElement
@@ -90,7 +95,7 @@ export const SimpleSelectyStateless = ({
         noResults={noResults}
         optLabel={optLabel}
         optValue={optValue}
-        options={groupedOpts}
+        options={Options.grouped}
         value={value}
         visible={visible}
         onClicked={
