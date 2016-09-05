@@ -88,6 +88,16 @@ export const createRoutes = (store) => {
               cb(null, require('./routes/stateful/grouping/static/').default);
             })
           },
+        },
+        {
+          name: "StatefulGroupingAsync",
+          path: "/stateful/grouping/async",
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              injectReducer('SFGAsync', require('./routes/stateful/grouping/async/reducer').default);
+              cb(null, require('./routes/stateful/grouping/async/').default);
+            })
+          },
         }
       ]
     }, {
