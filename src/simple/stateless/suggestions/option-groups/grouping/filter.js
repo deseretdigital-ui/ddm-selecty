@@ -53,29 +53,34 @@ export const filterGroupings = (label, value, limit, options, groups) => {
     for (let marker = 0; marker < groups.length; marker++) {
         groupHash[groups[marker].value.toLowerCase()] = groups[marker];
     }
-
     // Determine the options that would be displayed if they weren't grouped
     let displayedOptions = [];
     const objKeys = Object.keys(options);
     for (let index = 0; index < objKeys.length; index++) {
-      console.log("HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      let items = options[objKeys[index]].items
-      if (objKeys[index] === '__default__' ||
-            groupHash[objKeys[index]].filterable ||
-            typeof groupHash[objKeys[index]].filterable === 'undefined'
-            ) {
-              console.log("HERE>>>>>>>>>>>");
+      const current = groupHash[objKeys[index]];
+      if (typeof current === 'undefined') { continue; }
+      let items = options[objKeys[index]].items;
+      if (objKeys[index] === '__default__' || typeof current.filterable === 'undefined' || current.filterable) {
               items = items.filter((result) => {
                 const lowerResult = result[label].toLowerCase();
                 return wordFilter(lowerResult, term);
               });
       }
+      // Longer if statement in case someone passes back a limit of 0 for a group
+      if (current.limit !== null &&
+           typeof current.limit !== 'undefined' && current.limit !== 'all' || limit) {
+        if (current.limit) {
+          items = items.slice(0, current.limit)
+        } else {
+          items = items.slice(0, limit);
+        }
+      }
+
       displayedOptions = displayedOptions.concat(items);
     }
-    console.log("HERE", displayedOptions, label, value, limit, options);
     return displayedOptions;
   }
-  return options.original;
+  return options;
 };
 
 export default (options, text) => {
@@ -87,6 +92,5 @@ export default (options, text) => {
   } else {
     filtered = filterOpts(opts.label, text, opts.limit, opts['original']);
   }
-
   return filtered;
 };

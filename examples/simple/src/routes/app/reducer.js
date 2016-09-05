@@ -65,17 +65,20 @@ const initialState = {
   alternativeOptGroups: [
     {
       value: 'search',
-      label: '',
+      label: 'Search Results',
+      limit: 'all',
     },
     {
       value: 'saved',
       label: 'Saved Location',
-      limit: 'all',
+      limit: 3,
+      filterable: false,
     },
     {
       value: 'recent',
       label: 'Recent Locations',
       limit: 1,
+      filterable: false,
     }
   ]
 };

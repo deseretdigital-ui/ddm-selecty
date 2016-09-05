@@ -97,7 +97,7 @@ export class StatlessNoGroupAsync extends React.Component {
 }
 
 function mapStateToProps (state, ownProps) {
-  return {...state.global, ...state.SLNGAsync};
+  return {...state.global, ...state.SLGAsync};
 }
 
 export default connect(mapStateToProps, {
