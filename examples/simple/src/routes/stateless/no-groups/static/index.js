@@ -20,8 +20,8 @@ const StatlessNoGroupStatic = ({
   updateSelected,
   filteredOptions_1,
   filteredOptions_2,
-  items_1,
-  items_2,
+  item_1,
+  item_2,
   typedValue_1,
   typedValue_2,
   value_1,
@@ -35,7 +35,7 @@ const StatlessNoGroupStatic = ({
       <SimpleSelectyStateless
         style={{'zIndex':'100'}}
         filteredOptions={filteredOptions_1}
-        items={items_1}
+        item={item_1}
         sortable={true}
         optLabel={'label'}
         optValue={'id'}
@@ -52,7 +52,7 @@ const StatlessNoGroupStatic = ({
           updateValue(text, 1);
           updateSelected(null, 1);
         }}
-        onOptionsFiltered={filtered => {
+        onFiltered={filtered => {
           updateFilteredOptions(filtered, 1)
         }}
         onSelected={
@@ -74,11 +74,11 @@ const StatlessNoGroupStatic = ({
       The below SimpleSelecty component is an exact duplicate of the one above,
       except that it has a limit for the number of suggested, and it is wrapped
       in a smaller div to display SimpleSelecty responsive nature. The div has
-      a width of 500px and SimpleSelecty will fill up 100% of its container's width.
+      a width of 500px and SimpleSelecty will fill up 100% of its containers width.
       <div style={{width: '500px', marginTop: '20px'}}>
         <SimpleSelectyStateless
           filteredOptions={filteredOptions_2}
-          items={items_2}
+          item={item_2}
           limit={5}
           optLabel={'label'}
           optValue={'id'}
@@ -97,7 +97,7 @@ const StatlessNoGroupStatic = ({
             updateValue(text, 2);
             updateSelected(null, 2);
           }}
-          onOptionsFiltered={filtered => {
+          onFiltered={filtered => {
             updateFilteredOptions(filtered, 2)
           }}
           onSelected={

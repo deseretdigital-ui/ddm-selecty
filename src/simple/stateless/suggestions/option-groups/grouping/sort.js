@@ -1,4 +1,4 @@
-export default (sortable, options, optLabel) => {
+export const sortOptions = (options, optLabel, sortable) => {
   function compare(a, b) {
     const lableA = a[optLabel].toLowerCase();
     const lableB = b[optLabel].toLowerCase();

@@ -46,7 +46,7 @@ export class StatlessNoGroupAsync extends React.Component {
       updateVisible,
       updateSelected,
       filteredOptions_1,
-      items_1,
+      item_1,
       typedValue_1,
       value_1,
       visible_1,
@@ -60,7 +60,7 @@ export class StatlessNoGroupAsync extends React.Component {
           optValue={'id'}
           style={{'zIndex':'100'}}
           filteredOptions={filteredOptions_1}
-          items={items_1}
+          item={item_1}
           sortable={true}
           onBlur={() => updateVisible(false, 1)}
           onFocus={() => updateVisible(true, 1)}
@@ -75,7 +75,7 @@ export class StatlessNoGroupAsync extends React.Component {
             updateValue(text, 1);
             updateSelected(null, 1);
           }}
-          onOptionsFiltered={filtered => {
+          onFiltered={filtered => {
             updateFilteredOptions(filtered, 1)
           }}
           onSelected={

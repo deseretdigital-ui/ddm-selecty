@@ -34,7 +34,7 @@ different in their implementation, compared to the stateless version.
 	<tr>
     <td valign="top"><code>autoSuggest</code></td>
     <td valign="top">
-      A boolean value to specify if the suggestions dropdown should be opened when the component gains focus, but the user hasn't entered any text yet. 
+      A boolean value to specify if the suggestions dropdown should be opened when the component gains focus, but the user hasn't entered any text yet.
     </td>
   </tr>
 	<tr>
@@ -59,8 +59,8 @@ different in their implementation, compared to the stateless version.
     </td>
 	</tr>
   <tr>
-		<td valign="top"><code>items</code></td>
-		<td valign="top">An array for the initially selected values.</td>
+		<td valign="top"><code>item</code></td>
+		<td valign="top">An object holding the selected values.</td>
 	</tr>
 	<tr>
 		<td valign="top"><code>label</code></td>
@@ -186,7 +186,7 @@ different in their implementation, compared to the stateless version.
     </td>
 	</tr>
 	<tr>
-		<td valign="top"><code>onOptionsFiltered</code></td>
+		<td valign="top"><code>onFiltered</code></td>
 		<td valign="top">
       Callback function used to return the filtered list of the options.<br/>
       <code>({ array :: results }) { }</code>
