@@ -5,7 +5,7 @@ import defaultProps from './_defaultProps';
 import propTypes from './_propTypes';
 import createGrouping from './suggestions/option-groups/grouping/create';
 import { sortOptions } from './suggestions/option-groups/grouping/sort';
-import filterOptions, { filterOpts, filterGroupings } from './suggestions/option-groups/grouping/filter';
+import filterOptions, { filterGroupings } from './suggestions/option-groups/grouping/filter';
 import { keyEvents } from './utils/keyEvents';
 import Suggestions from './suggestions/';
 import styles from './styles.scss';
@@ -30,7 +30,7 @@ export const SimpleSelectyStateless = ({
   onFocus,
   onKeyDown,
   onFiltered,
-  onSelected,
+  onChosen,
   optionGroups,
   options,
   optLabel,
@@ -48,7 +48,7 @@ export const SimpleSelectyStateless = ({
     onFilter,
     onFiltered,
     onKeyDown,
-    onSelected,
+    onChosen,
   };
 
   const Options = {
@@ -68,7 +68,7 @@ export const SimpleSelectyStateless = ({
   if (Options.filtered.length <= 0) {
     Options.sorted = sortOptions(options, optLabel, sortable);
     Options.grouped = createGrouping(Options.sorted, optionGroups);
-    Options.filtered = filterGroupings(optLabel, optValue, limit, Options.grouped, optionGroups)
+    Options.filtered = filterGroupings(optLabel, optValue, limit, Options.grouped, optionGroups);
   } else {
     Options.sorted = sortOptions(Options.filtered, optLabel, sortable);
     Options.grouped = createGrouping(Options.sorted, optionGroups);
