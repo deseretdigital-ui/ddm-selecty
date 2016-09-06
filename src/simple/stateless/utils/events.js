@@ -4,21 +4,21 @@ export default (key, index, first, last, next, prev, options, optType, typedValu
   switch (key) {
     case 'down': {
       if (index < 0) {
-        update.onSelected(first);
+        update.onChosen(first);
       } else if (index === last) {
         update.onChange(typedValue);
       } else {
-        update.onSelected(next);
+        update.onChosen(next);
       }
       break;
     }
     case 'up': {
       if (index < 0) {
-        update.onSelected(options[optType][last]);
+        update.onChosen(options[optType][last]);
       } else if (index === 0) {
         update.onChange(typedValue);
       } else {
-        update.onSelected(prev);
+        update.onChosen(prev);
       }
       break;
     }
@@ -26,7 +26,7 @@ export default (key, index, first, last, next, prev, options, optType, typedValu
     case 'tab': {
       const text = options[optType][index][options.label];
       update.onChange(text);
-      update.onSelected(options[optType][index]);
+      update.onChosen(options[optType][index]);
       const filtered = filterOptions(options, text, optType, index);
       update.onFiltered(filtered);
       document.activeElement.blur();

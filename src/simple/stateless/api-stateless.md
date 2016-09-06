@@ -229,7 +229,7 @@
     </td>
 	</tr>
   <tr>
-		<td valign="top"><code>onSelected</code></td>
+		<td valign="top"><code>onChosen</code></td>
 		<td valign="top">
 			Callback function triggered when item is selected via a keyboard event. <br/>
 			<code>({ value :: Item }) { }</code>

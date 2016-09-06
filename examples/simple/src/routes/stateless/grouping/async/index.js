@@ -78,7 +78,7 @@ export class StatlessNoGroupAsync extends React.Component {
           onFiltered={filtered => {
             updateFilteredOptions(filtered, 1)
           }}
-          onSelected={
+          onChosen={
             item => {
               updateValue(item.label, 1);
               updateSelected(item, 1);

@@ -49,6 +49,9 @@ class SimpleSelecty extends React.Component {
       if (this.props.onClicked) {
         this.props.onClicked(clickedItem);
       }
+      if (this.props.onSelected) {
+        this.props.onSelected(clickedItem);
+      }
     });
   }
 
@@ -96,7 +99,7 @@ class SimpleSelecty extends React.Component {
     });
   }
 
-  onSelected = selectedItem => {
+  onChosen = selectedItem => {
     const { item } = this.state;
     const label = this.props.optLabel ? this.props.optLabel : 'label';
     const value = this.props.optValue ? this.props.optValue : 'id';
@@ -109,6 +112,9 @@ class SimpleSelecty extends React.Component {
       item: selectedItem,
       value: selectedItem[label],
     }, () => {
+      if (this.props.onChosen) {
+        this.props.onChosen(selectedItem);
+      }
       if (this.props.onSelected) {
         this.props.onSelected(selectedItem);
       }
@@ -165,7 +171,7 @@ class SimpleSelecty extends React.Component {
         onFocus={this.onFocus}
         onKeyDown={this.props.onKeyDown}
         onFiltered={this.onFiltered}
-        onSelected={this.onSelected}
+        onChosen={this.onChosen}
         options={this.state.options}
         placeholder={this.state.placeholder}
         required={this.props.required}
@@ -194,12 +200,13 @@ SimpleSelecty.propTypes = {
   options: PropTypes.array,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
+  onChosen: PropTypes.func,
   onClicked: PropTypes.func,
   onFilter: PropTypes.func,
   onFocus: PropTypes.func,
   onKeyDown: PropTypes.func,
-  onSelected: PropTypes.func,
   onFiltered: PropTypes.func,
+  onSelected: PropTypes.func,
   optionGroups: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -258,11 +265,12 @@ SimpleSelecty.defaultProps = {
   onFocus: null,
   onKeyDown: null,
   onFiltered: null,
+  onSelected: null,
   options: [],
   optionGroups: [],
   optLabel: 'label',
   optValue: 'id',
-  onSelected: null,
+  onChosen: null,
   name: 'selecty',
   noResults: { show: true, label: 'No results found.' },
   placeholder: '',

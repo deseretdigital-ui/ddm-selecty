@@ -29,7 +29,7 @@ export default {
     PropTypes.bool,
   ]),
   onFiltered: PropTypes.func,
-  onSelected: PropTypes.func,
+  onChosen: PropTypes.func,
   optLabel: PropTypes.string,
   optValue: PropTypes.string,
   optionGroups: PropTypes.oneOfType([

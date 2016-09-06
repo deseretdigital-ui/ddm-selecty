@@ -41,7 +41,7 @@ different in their implementation, compared to the stateless version.
 		<td valign="top"><code>delimiters</code></td>
 		<td valign="top">
       An array of character keycodes that will select the currently highlighted
-			item and fire the onSelected method.
+			item and fire the onChosen method.
     </td>
 	</tr>
   <tr>
@@ -193,7 +193,7 @@ different in their implementation, compared to the stateless version.
     </td>
 	</tr>
 	<tr>
-		<td valign="top"><code>onSelected</code></td>
+		<td valign="top"><code>onChosen</code></td>
 		<td valign="top">
 			Callback function triggered when item is selected via a keyboard event. <br/>
 			<code>({ value :: Item }) { }</code>

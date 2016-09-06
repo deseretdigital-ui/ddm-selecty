@@ -18,7 +18,7 @@ export default {
   onFocus: () => {},
   onKeyDown: false,
   onFiltered: () => {},
-  onSelected: () => {},
+  onChosen: () => {},
   optLabel: 'label',
   optValue: 'value',
   options: [],
