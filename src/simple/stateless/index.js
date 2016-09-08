@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import CSSModules from 'react-css-modules';
 import InputElement from '../../input/';
+import defaultProps from './_defaultProps';
+import propTypes from './_propTypes';
 import createGrouping from './suggestions/option-groups/grouping/create';
-import sortOptions from './suggestions/option-groups/grouping/sort';
-import { filterOptions } from './suggestions/option-groups/grouping/filter';
-import keyboardEvents from './utils/keyboadEvents';
-import KEY_MAP from './utils/keyMapping';
+import { sortOptions } from './suggestions/option-groups/grouping/sort';
+import filterOptions, { filterGroupings } from './suggestions/option-groups/grouping/filter';
+import { keyEvents } from './utils/keyEvents';
 import Suggestions from './suggestions/';
 import styles from './styles.scss';
 
@@ -16,7 +17,7 @@ export const SimpleSelectyStateless = ({
   disabled,
   filterable,
   filteredOptions,
-  items,
+  item,
   lazyLoading,
   limit,
   loading,
@@ -28,8 +29,8 @@ export const SimpleSelectyStateless = ({
   onFilter,
   onFocus,
   onKeyDown,
-  onOptionsFiltered,
-  onSelected,
+  onFiltered,
+  onChosen,
   optionGroups,
   options,
   optLabel,
@@ -42,89 +43,66 @@ export const SimpleSelectyStateless = ({
   value,
   visible,
 }) => {
-  const data = filterable && typedValue.length && !lazyLoading ? filteredOptions : options;
-  const results = createGrouping(sortOptions(sortable, data, optLabel), optionGroups);
+  const updateFunctions = {
+    onChange,
+    onFilter,
+    onFiltered,
+    onKeyDown,
+    onChosen,
+  };
+
+  const Options = {
+    filtered: null,
+    grouped: null,
+    groupings: optionGroups.length ? optionGroups : null,
+    label: optLabel,
+    limit,
+    original: options,
+    selected: item,
+    sorted: null,
+    value: optValue,
+  };
+
+  Options.filtered = filterable && typedValue.length && !lazyLoading ? filteredOptions : options;
+
+  if (Options.filtered.length <= 0) {
+    Options.sorted = sortOptions(options, optLabel, sortable);
+    Options.grouped = createGrouping(Options.sorted, optionGroups);
+    Options.filtered = filterGroupings(optLabel, optValue, limit, Options.grouped, optionGroups);
+  } else {
+    Options.sorted = sortOptions(Options.filtered, optLabel, sortable);
+    Options.grouped = createGrouping(Options.sorted, optionGroups);
+  }
   return (
-    <div
-      onBlur={onBlur}
-      onFocus={onFocus}
-      styleName="wrapper"
-      tabIndex={tabIndex}
-    >
+    <div onBlur={onBlur} onFocus={onFocus} tabIndex={tabIndex} styleName="wrapper">
       <InputElement
         autofocus={autofocus}
         disabled={disabled}
         name={name}
-        options={data}
         placeholder={placeholder}
         required={required}
         value={value}
+        onKeyDown={e => keyEvents(e, 'down', filterable, lazyLoading, Options, sortable, typedValue, updateFunctions)}
+        onKeyUp={e => keyEvents(e, 'up', filterable, lazyLoading, Options, sortable, typedValue, updateFunctions)}
         onChange={onChange}
-        onKeyDown={
-          e => {
-            let suggested = options;
-
-            if (filterable) {
-              suggested = options;
-              if ((filteredOptions.length > 0 || typedValue.length > 0) && !lazyLoading) {
-                suggested = filteredOptions;
-              }
-            }
-
-            if (sortable) {
-              suggested = sortOptions(sortable, suggested, optLabel);
-            }
-
-            if (optionGroups.length > 0) {
-              suggested = createGrouping(suggested, optionGroups);
-            }
-
-            onKeyDown instanceof Function
-              ? onKeyDown(e)
-              : keyboardEvents(e, optLabel, suggested, items[0], onSelected,
-                onChange, typedValue, onOptionsFiltered, optionGroups);
-          }
-        }
-        onKeyUp={
-          e => {
-            // Enter for every character except for the tab, enter, and arrow keys
-            const key = KEY_MAP[e.keyCode];
-            if (!key) {
-              if (onFilter instanceof Function) {
-                onFilter(e);
-              } else if (filterable) {
-                let filtered = null;
-
-                if (sortable) {
-                  filtered = sortOptions(sortable, filterOptions(optLabel, e.target.value, options), optLabel);
-                } else {
-                  filtered = filterOptions(optLabel, e.target.value, options);
-                }
-
-                onOptionsFiltered(filtered);
-              }
-            }
-          }
-        }
-        onSelected={onSelected}
       />
       <Suggestions
         autoHighlight={autoHighlight}
         autoSuggest={autoSuggest}
-        selected={items}
+        selected={item}
         limit={limit}
         loading={loading}
+        noResults={noResults}
         optLabel={optLabel}
         optValue={optValue}
-        noResults={noResults}
-        options={results}
+        options={Options.grouped}
         value={value}
         visible={visible}
         onClicked={
-          item => {
-            const filtered = filterOptions(optLabel, item[optLabel], options);
-            onOptionsFiltered(filtered);
-            onClicked(item);
+          clickedItem => {
+            const updatedOptions = filterOptions(Options, clickedItem[optLabel]);
+            onFiltered(updatedOptions);
+            onClicked(clickedItem);
           }
         }
       />
@@ -132,122 +110,7 @@ export const SimpleSelectyStateless = ({
   );
 };
 
-SimpleSelectyStateless.propTypes = {
-  autofocus: PropTypes.bool,
-  autoHighlight: PropTypes.bool,
-  autoSuggest: PropTypes.bool,
-  disabled: PropTypes.bool,
-  filterable: PropTypes.bool,
-  filteredOptions: PropTypes.array,
-  items: PropTypes.array,
-  lazyLoading: PropTypes.bool,
-  limit: PropTypes.number,
-  loading: PropTypes.bool,
-  name: PropTypes.string,
-  noResults: PropTypes.shape({
-    show: PropTypes.bool.isRequired,
-    label: PropTypes.string.isRequired,
-  }),
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func,
-  onClicked: PropTypes.func,
-  onFilter: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.bool,
-  ]),
-  onFocus: PropTypes.func,
-  onKeyDown: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.bool,
-  ]),
-  onOptionsFiltered: PropTypes.func,
-  onSelected: PropTypes.func,
-  optLabel: PropTypes.string,
-  optValue: PropTypes.string,
-  optionGroups: PropTypes.oneOfType([
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        order: PropTypes.number.isRequired,
-        key: PropTypes.string.isRequired,
-        value: PropTypes.oneOfType([
-          PropTypes.number,
-          PropTypes.string,
-        ]).isRequired,
-        label: PropTypes.oneOfType([
-          PropTypes.number,
-          PropTypes.string,
-        ]).isRequired,
-        limit: PropTypes.oneOfType([
-          PropTypes.number,
-          PropTypes.string,
-        ]),
-      })
-    ),
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.oneOfType([
-          PropTypes.number,
-          PropTypes.string,
-        ]).isRequired,
-        label: PropTypes.oneOfType([
-          PropTypes.number,
-          PropTypes.string,
-        ]).isRequired,
-        limit: PropTypes.oneOfType([
-          PropTypes.number,
-          PropTypes.string,
-        ]),
-      })
-    ),
-  ]),
-  options: PropTypes.array,
-  placeholder: PropTypes.string,
-  required: PropTypes.bool,
-  sortable: PropTypes.bool,
-  tabIndex: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
-  typedValue: PropTypes.string,
-  value: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
-  visible: PropTypes.bool,
-};
-
-SimpleSelectyStateless.defaultProps = {
-  autofocus: false,
-  autoHighlight: false,
-  autoSuggest: true,
-  disabled: false,
-  filterable: true,
-  filteredOptions: [],
-  items: [],
-  lazyLoading: false,
-  limit: null,
-  loading: false,
-  name: 'selecty',
-  noResults: { show: true, label: 'No results found.' },
-  onBlur: () => {},
-  onChange: () => {},
-  onClicked: () => {},
-  onFilter: false,
-  onFocus: () => {},
-  onKeyDown: false,
-  onOptionsFiltered: () => {},
-  onSelected: () => {},
-  optLabel: 'label',
-  optValue: 'value',
-  options: [],
-  optionGroups: [],
-  placeholder: '',
-  required: false,
-  sortable: false,
-  tabIndex: 1,
-  typedValue: '',
-  value: '',
-  visible: false,
-};
+SimpleSelectyStateless.propTypes = propTypes;
+SimpleSelectyStateless.defaultProps = defaultProps;
 
 export default CSSModules(SimpleSelectyStateless, styles, { allowMultiple: true });

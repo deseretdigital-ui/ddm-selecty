@@ -55,10 +55,10 @@
     </td>
 	</tr>
   <tr>
-    <td valign="top"><code>items</code></td>
+    <td valign="top"><code>item</code></td>
     <td valign="top" align="center">{}</td>
     <td valign="top" align="center">object</td>
-    <td valign="top">An array of selected values.</td>
+    <td valign="top">An object of selected value.</td>
   </tr>
 	<tr>
 		<td valign="top"><code>label</code></td>
@@ -93,6 +93,7 @@
           order: 0,
           value: 'some string value',
           name: 'string name'
+					fitlerable: (optional) boolean
       }]
       </code>
     </td>
@@ -221,14 +222,14 @@
     </td>
 	</tr>
 	<tr>
-		<td valign="top"><code>onOptionsFiltered</code></td>
+		<td valign="top"><code>onFiltered</code></td>
 		<td valign="top">
       Callback function used to return the filtered list of the options.<br/>
       <code>({ array :: results }) { }</code>
     </td>
 	</tr>
   <tr>
-		<td valign="top"><code>onSelected</code></td>
+		<td valign="top"><code>onChosen</code></td>
 		<td valign="top">
 			Callback function triggered when item is selected via a keyboard event. <br/>
 			<code>({ value :: Item }) { }</code>

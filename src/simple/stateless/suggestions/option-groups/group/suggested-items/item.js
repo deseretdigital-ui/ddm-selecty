@@ -11,11 +11,8 @@ export const SuggestedItem = ({
   optValue,
 }) => {
   let highlight = false;
-  for (let i = 0; i < selected.length; i++) {
-    if (selected[i][optLabel] === item[optLabel] && item[optValue] === selected[i][optValue]) {
-      highlight = true;
-      break;
-    }
+  if (selected[optLabel] === item[optLabel] && item[optValue] === selected[optValue]) {
+    highlight = true;
   }
 
   const applied = classNames({
@@ -32,7 +29,7 @@ export const SuggestedItem = ({
 
 SuggestedItem.propTypes = {
   item: PropTypes.object.isRequired,
-  selected: PropTypes.array.isRequired,
+  selected: PropTypes.object.isRequired,
   optLabel: PropTypes.string.isRequired,
   optValue: PropTypes.string.isRequired,
   onClicked: PropTypes.func.isRequired,

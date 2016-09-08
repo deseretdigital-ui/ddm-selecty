@@ -7,7 +7,7 @@ class SimpleSelecty extends React.Component {
     this.state = {
       loading: (this.props.load !== null),
       filteredOptions: [],
-      items: this.props.items,
+      item: this.props.item,
       options: this.props.options,
       placeholder: this.props.placeholder,
       tabIndex: this.props.tabIndex,
@@ -20,15 +20,6 @@ class SimpleSelecty extends React.Component {
   componentWillMount() {
     if (this.props.load) {
       (this.props.load())({}, this.api);
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.typedValue !== this.state.typedValue) {
-      if (this.props.lazyLoad && this.state.typedValue) {
-        this.setState({ loading: true });
-        (this.props.lazyLoad())(this.state.typedValue, this.api);
-      }
     }
   }
 
@@ -48,57 +39,84 @@ class SimpleSelecty extends React.Component {
     });
   }
 
-  onClicked = item => {
+  onClicked = clickedItem => {
     this.setState({
-      items: [item],
-      typedValue: this.props.optLabel ? item[this.props.optLabel] : item.label,
-      value: item[this.props.optLabel],
+      item: clickedItem,
+      typedValue: this.props.optLabel ? clickedItem[this.props.optLabel] : clickedItem.label,
+      value: clickedItem[this.props.optLabel],
       visible: false,
     }, () => {
       if (this.props.onClicked) {
-        this.props.onClicked(item);
+        this.props.onClicked(clickedItem);
+      }
+      if (this.props.onSelected) {
+        this.props.onSelected(clickedItem);
       }
     });
   }
 
   onChange = text => {
-    const selected = {};
     const value = this.props.optValue ? this.props.optValue : 'id';
     const label = this.props.optLabel ? this.props.optLabel : 'label';
+
+    const cond = {};
+    cond.loading = false;
+
+    // Reset the item selected to null
+    const selected = {};
     selected[value] = null;
     selected[label] = null;
+
+    if (this.props.lazyLoad) {
+      if (text === '') {
+        cond.options = [];
+      } else {
+        cond.loading = true;
+      }
+    }
 
     this.setState({
       typedValue: text,
       value: text,
-      items: [selected],
+      item: selected,
+      ...cond,
     }, () => {
+      if (this.props.lazyLoad && text !== '') {
+        (this.props.lazyLoad())(this.state.typedValue, this.api);
+      }
+
       if (this.props.onChange) {
-        this.props.onClicked(text);
+        this.props.onChange(text);
       }
     });
   }
 
-  onOptionsFiltered = filtered => {
+  onFiltered = filtered => {
     this.setState({ filteredOptions: filtered }, () => {
-      if (this.props.onOptionsFiltered) {
-        this.props.onOptionsFiltered(filtered);
+      if (this.props.onFiltered) {
+        this.props.onFiltered(filtered);
       }
     });
   }
 
-  onSelected = item => {
-    const { items } = this.state;
-    if (items.indexOf(item) > -1) {
+  onChosen = selectedItem => {
+    const { item } = this.state;
+    const label = this.props.optLabel ? this.props.optLabel : 'label';
+    const value = this.props.optValue ? this.props.optValue : 'id';
+
+    if (item[label] === selectedItem[label] && item[value] === selectedItem[value]) {
       return;
     }
 
     this.setState({
-      items: [item],
-      value: this.props.optLabel ? item[this.props.optLabel] : item.label,
+      item: selectedItem,
+      value: selectedItem[label],
     }, () => {
+      if (this.props.onChosen) {
+        this.props.onChosen(selectedItem);
+      }
       if (this.props.onSelected) {
-        this.props.onSelected(item);
+        this.props.onSelected(selectedItem);
       }
     });
   }
@@ -137,7 +155,7 @@ class SimpleSelecty extends React.Component {
         disabled={this.props.disabled}
         filterable={this.props.filterable}
         filteredOptions={this.state.filteredOptions}
-        items={this.state.items}
+        item={this.state.item}
         lazyLoading={this.props.lazyLoad !== null}
         limit={this.props.limit}
         loading={this.state.loading}
@@ -152,8 +170,8 @@ class SimpleSelecty extends React.Component {
         onFilter={this.props.onFilter}
         onFocus={this.onFocus}
         onKeyDown={this.props.onKeyDown}
-        onOptionsFiltered={this.onOptionsFiltered}
-        onSelected={this.onSelected}
+        onFiltered={this.onFiltered}
+        onChosen={this.onChosen}
         options={this.state.options}
         placeholder={this.state.placeholder}
         required={this.props.required}
@@ -173,7 +191,7 @@ SimpleSelecty.propTypes = {
   autoSuggest: PropTypes.bool,
   disabled: PropTypes.bool,
   filterable: PropTypes.bool,
-  items: PropTypes.array,
+  item: PropTypes.object,
   lazyLoad: PropTypes.func,
   limit: PropTypes.number,
   load: PropTypes.func,
@@ -182,12 +200,13 @@ SimpleSelecty.propTypes = {
   options: PropTypes.array,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
+  onChosen: PropTypes.func,
   onClicked: PropTypes.func,
   onFilter: PropTypes.func,
   onFocus: PropTypes.func,
   onKeyDown: PropTypes.func,
+  onFiltered: PropTypes.func,
   onSelected: PropTypes.func,
-  onOptionsFiltered: PropTypes.func,
   optionGroups: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -235,7 +254,7 @@ SimpleSelecty.defaultProps = {
   disabled: false,
   filterable: true,
   filteredOptions: [],
-  items: [{ id: null, label: null }],
+  item: { id: null, label: null },
   lazyLoad: null,
   limit: null,
   load: null,
@@ -245,12 +264,13 @@ SimpleSelecty.defaultProps = {
   onFilter: null,
   onFocus: null,
   onKeyDown: null,
-  onOptionsFiltered: null,
+  onFiltered: null,
+  onSelected: null,
   options: [],
   optionGroups: [],
   optLabel: 'label',
   optValue: 'id',
-  onSelected: null,
+  onChosen: null,
   name: 'selecty',
   noResults: { show: true, label: 'No results found.' },
   placeholder: '',

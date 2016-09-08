@@ -1,41 +1,34 @@
-import { filterOptions } from '../suggestions/option-groups/grouping/filter';
+import filterOptions from '../suggestions/option-groups/grouping/filter';
 
-export default (key, index, first, last, next, prev, label, options,
-   onSelected, onChange, typedValue, onOptionsFiltered) => {
+export default (key, index, first, last, next, prev, options, optType, typedValue, update) => {
   switch (key) {
     case 'down': {
       if (index < 0) {
-        onSelected(first);
+        update.onChosen(first);
       } else if (index === last) {
-        onChange(typedValue);
+        update.onChange(typedValue);
       } else {
-        onSelected(next);
+        update.onChosen(next);
       }
       break;
     }
     case 'up': {
       if (index < 0) {
-        onSelected(options[last]);
+        update.onChosen(options[optType][last]);
       } else if (index === 0) {
-        onChange(typedValue);
+        update.onChange(typedValue);
       } else {
-        onSelected(prev);
+        update.onChosen(prev);
       }
       break;
     }
+    case 'enter':
     case 'tab': {
-      onChange(options[index][label]);
-      onSelected(options[index]);
-      const filtered = filterOptions(label, options[index][label], options);
-      onOptionsFiltered(filtered);
-      document.activeElement.blur();
-      break;
-    }
-    case 'enter': {
-      onChange(options[index][label]);
-      onSelected(options[index]);
-      const filtered = filterOptions(label, options[index][label], options);
-      onOptionsFiltered(filtered);
+      const text = options[optType][index][options.label];
+      update.onChange(text);
+      update.onChosen(options[optType][index]);
+      const filtered = filterOptions(options, text, optType, index);
+      update.onFiltered(filtered);
       document.activeElement.blur();
       break;
     }
