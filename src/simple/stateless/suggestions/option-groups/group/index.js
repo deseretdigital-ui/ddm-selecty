@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import SuggestedItem from './suggested-items/item';
 import styles from './styles.scss';
 
-const SuggestedGroup = ({
+export const SuggestedGroup = ({
   group,
   selected,
   limit,
