@@ -14,6 +14,7 @@ module.exports = {
   isparta: {
     babel: {
       presets: ['es2015', 'react', 'stage-0'],
+      plugins: ['rewire'],
     },
   },
   module: {
@@ -45,7 +46,7 @@ module.exports = {
         query: {
           cacheDirectory: true,
           plugins: ['transform-decorators-legacy'],
-          presets: ['react', 'es2015', 'stage-0']
+          presets: ['react', 'es2015', 'stage-0'],
         },
       },
       { test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i,
