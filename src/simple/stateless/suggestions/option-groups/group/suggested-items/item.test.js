@@ -12,7 +12,7 @@ describe('<SuggestedItem />', () => {
     // Act
     const renderedComponent = shallow(
       <SuggestedItem
-        selected={[]}
+        selected={{}}
         item={item}
         onClicked={() => {}}
         optLabel="label"
@@ -27,12 +27,12 @@ describe('<SuggestedItem />', () => {
 
   it('should render an item highlighted', () => {
     // Arrange
-    const item = { label: 'option_one', value: 1 };
+    const item = { label: 'option_one', value: 1};
 
     // Act
     const renderedComponent = shallow(
       <SuggestedItem
-        selected={[item]}
+        selected={item}
         item={item}
         onClicked={() => {}}
         optLabel="label"
@@ -50,7 +50,7 @@ describe('<SuggestedItem />', () => {
     const onClickSpy = expect.createSpy();
     const renderedComponent = shallow(
       <SuggestedItem
-        selected={[]}
+        selected={{}}
         item={item}
         onClicked={onClickSpy}
         optLabel="label"
