@@ -23,7 +23,7 @@ describe('<SuggestedGroup />', () => {
     const renderedComponent = shallow(
       <SuggestedGroup
         group={group}
-        selected={[]}
+        selected={{}}
         optLabel={'label'}
         optValue={'value'}
         onClicked={() => {}}
@@ -52,7 +52,7 @@ describe('<SuggestedGroup />', () => {
       <SuggestedGroup
         limit={limit}
         group={group}
-        selected={[]}
+        selected={{}}
         optLabel={'label'}
         optValue={'value'}
         onClicked={() => {}}
