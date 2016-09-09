@@ -1,70 +1,81 @@
 import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import CSSModules from 'react-css-modules';
 import styles from './styles.scss';
 import SuggestedGroup from './option-groups/group/';
 
-const Suggestions = ({
-  autoHighlight,
-  autoSuggest,
-  selected,
-  limit,
-  loading,
-  optLabel,
-  optValue,
-  noResults,
-  options,
-  visible,
-  value,
-  onClicked,
-}) => {
-  const baseStyles = {
-    norm: true,
-    visible,
-    suggestion: Object.keys(options).length > 0,
-  };
-
-  if (!autoSuggest && value.length === 0) {
-    baseStyles.visible = false;
+export class Suggestions extends React.Component {
+  scrollIntoView = (element) => {
+    const node = ReactDOM.findDOMNode(element);
+    node.scrollIntoView();
   }
 
-  if (loading) {
-    const applied = classNames(baseStyles);
-    return <div styleName={applied}>Loading...</div>;
-  }
+  render() {
+    const {
+      autoHighlight,
+      autoSuggest,
+      selected,
+      limit,
+      loading,
+      optLabel,
+      optValue,
+      noResults,
+      options,
+      visible,
+      value,
+      onClicked,
+    } = this.props;
 
-  if (Object.keys(options).length === 1 && options[Object.keys(options)[0]].items.length === 0) {
-    if (!noResults.show) {
-      return <noscript />;
+    const baseStyles = {
+      norm: true,
+      visible,
+      suggestion: Object.keys(options).length > 0,
+    };
+
+    if (!autoSuggest && value.length === 0) {
+      baseStyles.visible = false;
     }
-    baseStyles.empty = true;
+
+    if (loading) {
+      const applied = classNames(baseStyles);
+      return <div styleName={applied}>Loading...</div>;
+    }
+
+    if (Object.keys(options).length === 1 && options[Object.keys(options)[0]].items.length === 0) {
+      if (!noResults.show) {
+        return <noscript />;
+      }
+      baseStyles.empty = true;
+      const applied = classNames(baseStyles);
+
+      return <div styleName={applied}>{noResults.label}</div>;
+    }
     const applied = classNames(baseStyles);
 
-    return <div styleName={applied}>{noResults.label}</div>;
-  }
-  const applied = classNames(baseStyles);
-
-  return (
-    <div styleName={applied}>
-      {
-        Object.keys(options).map(
-          (groupName, index) => (
-            <SuggestedGroup
-              autoHighlight={autoHighlight}
-              group={options[groupName]}
-              selected={selected}
-              limit={limit}
-              optLabel={optLabel}
-              optValue={optValue}
-              onClicked={onClicked}
-              key={index}
-            />
+    return (
+      <div styleName={applied} ref="dropdownSuggestions">
+        {
+          Object.keys(options).map(
+            (groupName, index) => (
+              <SuggestedGroup
+                autoHighlight={autoHighlight}
+                group={options[groupName]}
+                limit={limit}
+                optLabel={optLabel}
+                optValue={optValue}
+                onClicked={onClicked}
+                key={index}
+                selected={selected}
+                scrollIntoView={this.scrollIntoView}
+              />
+            )
           )
-        )
-      }
-    </div>
-  );
-};
+        }
+      </div>
+    );
+  }
+}
 
 Suggestions.propTypes = {
   autoHighlight: PropTypes.bool.isRequired,

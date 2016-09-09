@@ -33,10 +33,8 @@ const StatlessNoGroupStatic = ({
     Stateless Static WITHOUT Groups:
     <div style={{'zIndex':'100', 'position':'relative'}}>
       <SimpleSelectyStateless
-        style={{'zIndex':'100'}}
         filteredOptions={filteredOptions_1}
         item={item_1}
-        sortable={true}
         optLabel={'label'}
         optValue={'id'}
         onBlur={() => updateVisible(false, 1)}
@@ -63,6 +61,7 @@ const StatlessNoGroupStatic = ({
         }
         options={defaultOptions}
         placeholder={'Stateless Without Groups'}
+        sortable={true}
         tabIndex={1}
         typedValue={typedValue_1}
         value={value_1}
@@ -80,10 +79,9 @@ const StatlessNoGroupStatic = ({
           filteredOptions={filteredOptions_2}
           item={item_2}
           limit={5}
+          noResults={{show: true, label: 'Nothing!!'}}
           optLabel={'label'}
           optValue={'id'}
-          noResults={{show: true, label: 'Nothing!!'}}
-          sortable={true}
           onBlur={() => updateVisible(false, 2)}
           onFocus={() => updateVisible(true, 2)}
           onClicked={item => {
@@ -108,6 +106,7 @@ const StatlessNoGroupStatic = ({
           }
           options={defaultOptions}
           placeholder={'Stateless Without Groups'}
+          sortable={true}
           tabIndex={2}
           typedValue={typedValue_2}
           value={value_2}
@@ -117,6 +116,7 @@ const StatlessNoGroupStatic = ({
     </div>
   </div>
 );
+
 
 function mapStateToProps (state, ownProps) {
   return {...state.global, ...state.SLNGStatic};
