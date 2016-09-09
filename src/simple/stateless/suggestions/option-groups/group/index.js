@@ -27,7 +27,7 @@ export const SuggestedGroup = ({
         </div>
       );
     } else {
-      <noscript />
+      <noscript />;
     }
   }
 

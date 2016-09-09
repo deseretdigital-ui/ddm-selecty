@@ -53,7 +53,7 @@ export const keyEvents = (e, eventType, filterable, lazyLoading, options, sortab
     if (update.onFilter instanceof Function) {
       update.onFilter(e);
     } else if (filterable) {
-      let updatedOptions = filterOptions(options, e.target.value);
+      const updatedOptions = filterOptions(options, e.target.value);
       update.onFiltered(updatedOptions);
     }
   }
