@@ -4,13 +4,14 @@ import classNames from 'classnames';
 import SuggestedItem from './suggested-items/item';
 import styles from './styles.scss';
 
-const SuggestedGroup = ({
+export const SuggestedGroup = ({
   group,
-  selected,
   limit,
   optLabel,
   optValue,
   onClicked,
+  selected,
+  scrollIntoView,
 }) => {
   const styling = classNames({
     optionGroup: true,
@@ -26,9 +27,9 @@ const SuggestedGroup = ({
           <div styleName={'empty'}>{label}</div>
         </div>
       );
-    } else {
-      <noscript />
     }
+
+    return <noscript />;
   }
 
   const suggestions = [];
@@ -54,12 +55,14 @@ const SuggestedGroup = ({
         suggestions.map(
           (item, index) => (
             <SuggestedItem
+              highlight={selected[optLabel] === item[optLabel] && item[optValue] === selected[optValue]}
               item={item}
               selected={selected}
               optLabel={optLabel}
               optValue={optValue}
               onClicked={onClicked}
               key={index}
+              scrollIntoView={scrollIntoView}
             />
           )
         )
@@ -70,11 +73,12 @@ const SuggestedGroup = ({
 
 SuggestedGroup.propTypes = {
   group: PropTypes.object.isRequired,
-  selected: PropTypes.object.isRequired,
   limit: PropTypes.number,
   optLabel: PropTypes.string.isRequired,
   optValue: PropTypes.string.isRequired,
   onClicked: PropTypes.func.isRequired,
+  selected: PropTypes.object.isRequired,
+  scrollIntoView: PropTypes.func.isRequired,
 };
 
 export default CSSModules(SuggestedGroup, styles, { allowMultiple: true });

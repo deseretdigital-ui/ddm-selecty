@@ -4,10 +4,13 @@ export default (key, index, first, last, next, prev, options, optType, typedValu
   switch (key) {
     case 'down': {
       if (index < 0) {
+        console.log("1");
         update.onChosen(first);
       } else if (index === last) {
+        console.log("2");
         update.onChange(typedValue);
       } else {
+        console.log("3", index, last);
         update.onChosen(next);
       }
       break;

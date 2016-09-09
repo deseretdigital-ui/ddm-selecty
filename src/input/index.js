@@ -12,6 +12,7 @@ const InputElement = ({
   onChange,
   onKeyDown,
   onKeyUp,
+  tabIndex,
 }) => (
   <input
     autoComplete="off"
@@ -26,6 +27,7 @@ const InputElement = ({
     onChange={e => onChange(e.target.value)}
     onKeyDown={e => onKeyDown(e)}
     onKeyUp={e => onKeyUp(e)}
+    tabIndex={tabIndex}
   />
 );
 
@@ -45,6 +47,7 @@ InputElement.propTypes = {
     PropTypes.bool,
   ]).isRequired,
   onKeyUp: PropTypes.func.isRequired,
+  tabIndex: PropTypes.number,
 };
 
 export default CSSModules(InputElement, styles);
