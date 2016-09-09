@@ -32,41 +32,46 @@ const StatlessNoGroupStatic = ({
   <div>
     Stateless Static WITHOUT Groups:
     <div style={{'zIndex':'100', 'position':'relative'}}>
-      <SimpleSelectyStateless
-        filteredOptions={filteredOptions_1}
-        item={item_1}
-        optLabel={'label'}
-        optValue={'id'}
-        onBlur={() => updateVisible(false, 1)}
-        onFocus={() => updateVisible(true, 1)}
-        onClicked={item => {
-          updateValue(item.label, 1);
-          updateTypedValue(item.label, 1);
-          updateSelected(item, 1);
-          updateVisible(false, 1);
-        }}
-        onChange={text => {
-          updateTypedValue(text, 1);
-          updateValue(text, 1);
-          updateSelected(null, 1);
-        }}
-        onFiltered={filtered => {
-          updateFilteredOptions(filtered, 1)
-        }}
-        onChosen={
-          item => {
-            updateValue(item.label, 1);
-            updateSelected(item, 1);
-          }
-        }
-        options={defaultOptions}
-        placeholder={'Stateless Without Groups'}
-        sortable={true}
-        tabIndex={1}
-        typedValue={typedValue_1}
-        value={value_1}
-        visible={visible_1}
-      />
+      <form onSubmit={(e) => {e.preventDefault(); e.stopPropagation(); alert('Form Submitted');}}>
+        <div style={{width: '80%', display: 'inline-block'}}>
+          <SimpleSelectyStateless
+            filteredOptions={filteredOptions_1}
+            item={item_1}
+            optLabel={'label'}
+            optValue={'id'}
+            onBlur={() => updateVisible(false, 1)}
+            onFocus={() => updateVisible(true, 1)}
+            onClicked={item => {
+              updateValue(item.label, 1);
+              updateTypedValue(item.label, 1);
+              updateSelected(item, 1);
+              updateVisible(false, 1);
+            }}
+            onChange={text => {
+              updateTypedValue(text, 1);
+              updateValue(text, 1);
+              updateSelected(null, 1);
+            }}
+            onFiltered={filtered => {
+              updateFilteredOptions(filtered, 1)
+            }}
+            onChosen={
+              item => {
+                updateValue(item.label, 1);
+                updateSelected(item, 1);
+              }
+            }
+            options={defaultOptions}
+            placeholder={'Stateless Without Groups'}
+            sortable={true}
+            tabIndex={1}
+            typedValue={typedValue_1}
+            value={value_1}
+            visible={visible_1}
+          />
+        </div>
+        <button type="submit" style={{marginLeft: '20px'}}>Submit Form</button>
+      </form>
     </div>
 
     <div style={{width: '100%', display: 'inline-block', marginTop: '50px'}}>

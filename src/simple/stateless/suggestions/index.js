@@ -7,8 +7,17 @@ import SuggestedGroup from './option-groups/group/';
 
 export class Suggestions extends React.Component {
   scrollIntoView = (element) => {
+    const container = ReactDOM.findDOMNode(this.refs.dropdownSuggestions);
+    const containerDimension = container.getBoundingClientRect();
     const node = ReactDOM.findDOMNode(element);
-    node.scrollIntoView();
+    const itemDimension = node.getBoundingClientRect();
+    const itemHeight = itemDimension.bottom - itemDimension.top;
+
+    if (itemDimension.bottom > containerDimension.bottom) {
+      container.scrollTop += itemDimension.bottom - containerDimension.bottom;
+    } else if (itemDimension.top < containerDimension.top) {
+      container.scrollTop -= containerDimension.top - itemDimension.top;
+    }
   }
 
   render() {
