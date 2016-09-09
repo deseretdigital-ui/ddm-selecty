@@ -18,8 +18,20 @@ export const SuggestedGroup = ({
     grouping: group.label,
   });
 
+  const showNoResults = false;
+  
   if (!group.items.length) {
-    return <noscript />;
+    if (group.label && showNoResults) {
+      let label = group.noResults ? group.noResults : 'No Results Found';
+      return (
+        <div styleName={styling}>
+          { group.label || <noscript /> }
+          <div styleName={'empty'}>{label}</div>
+        </div>
+      );
+    } else {
+      <noscript />;
+    }
   }
 
   const suggestions = [];

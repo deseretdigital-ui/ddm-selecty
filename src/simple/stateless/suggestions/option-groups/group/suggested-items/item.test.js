@@ -27,7 +27,7 @@ describe('<SuggestedItem />', () => {
 
   it('should render an item highlighted', () => {
     // Arrange
-    const item = { label: 'option_one', value: 1};
+    const item = { label: 'option_one', value: 1 };
 
     // Act
     const renderedComponent = shallow(
