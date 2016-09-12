@@ -23,11 +23,14 @@ export default (key, index, first, last, next, prev, options, optType, typedValu
       break;
     }
     case 'tab': {
-      const text = options[optType][index][options.label];
+      let text = typedValue;
+      if (options[optType][index]) {
+        text = options[optType][index][options.label];
+        update.onChosen(options[optType][index]);
+        const filtered = filterOptions(options, text, optType, index);
+        update.onFiltered(filtered);
+      }
       update.onChange(text);
-      update.onChosen(options[optType][index]);
-      const filtered = filterOptions(options, text, optType, index);
-      update.onFiltered(filtered);
       document.activeElement.blur();
       break;
     }

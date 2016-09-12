@@ -74,7 +74,7 @@ export const SimpleSelectyStateless = ({
     Options.grouped = createGrouping(Options.sorted, optionGroups);
   }
   return (
-    <div onBlur={onBlur} onFocus={onFocus}  styleName="wrapper">
+    <div onBlur={onBlur} onFocus={onFocus} tabIndex={tabIndex} styleName="wrapper">
       <InputElement
         autofocus={autofocus}
         disabled={disabled}
@@ -85,7 +85,6 @@ export const SimpleSelectyStateless = ({
         onKeyDown={e => keyEvents(e, 'down', filterable, lazyLoading, Options, sortable, typedValue, updateFunctions)}
         onKeyUp={e => keyEvents(e, 'up', filterable, lazyLoading, Options, sortable, typedValue, updateFunctions)}
         onChange={onChange}
-        tabIndex={tabIndex}
       />
       <Suggestions
         autoHighlight={autoHighlight}

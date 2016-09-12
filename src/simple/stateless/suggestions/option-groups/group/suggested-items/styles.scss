@@ -14,18 +14,9 @@
     background-color: #5b92f4;
     color: #fff;
   }
-}
 
-.itemNoHover {
-  all: initial;
-  display: block;
-  padding: 5px 0 5px 7px;
-  color: #2354ac;
-  cursor: pointer;
-  &.selected {
-    display: block;
-    padding: 5px 0 5px 7px;
-    background-color: #5b92f4;
-    color: #fff;
+  &:hover ~ &.selected {
+    color: #2354ac;
+    background-color: transparent;
   }
 }
