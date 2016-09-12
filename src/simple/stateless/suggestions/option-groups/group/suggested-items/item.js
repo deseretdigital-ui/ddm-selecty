@@ -19,23 +19,22 @@ export class SuggestedItem extends React.Component {
       item,
       onClicked,
       optLabel,
-      optValue,
       selected,
     } = this.props;
-    const hover = (selected[optLabel] === null && selected[optValue] === null);
-    let ref = 'nonActiveItem';
-    if (highlight) {
-      ref = 'suggestedActiveItem';
-    }
+    const ref = highlight ? 'suggestedActiveItem' : 'nonActiveItem';
+
     const applied = classNames({
-      item: hover,
-      itemNoHover: !hover,
+      item: selected.optLabel === item.optLabel,
       selected: highlight,
     });
 
     return (
-      <div className={applied} styleName={applied} onClick={() => onClicked(item)} ref={ref}>
-          {item[optLabel]}
+      <div
+        styleName={applied}
+        onClick={() => onClicked(item)}
+        ref={ref}
+      >
+        {item[optLabel]}
       </div>
     );
   }

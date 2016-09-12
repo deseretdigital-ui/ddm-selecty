@@ -18,7 +18,7 @@ export class Suggestions extends React.Component {
     } else if (itemDimension.top < containerDimension.top) {
       container.scrollTop -= containerDimension.top - itemDimension.top;
     }
-  }
+  };
 
   render() {
     const {

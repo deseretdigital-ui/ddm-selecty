@@ -16,7 +16,7 @@ export const wordFilter = (phrase, term) => {
   }
 
   return contains;
-}
+};
 
 export const filterOpts = (label, value, limit, opts) => {
   let amount = limit;
@@ -51,7 +51,7 @@ export const filterGroupings = (label, value, limit, options, groups) => {
     const groupHash = {};
 
     for (let marker = 0; marker < groups.length; marker++) {
-        groupHash[groups[marker].value.toLowerCase()] = groups[marker];
+      groupHash[groups[marker].value.toLowerCase()] = groups[marker];
     }
     // Determine the options that would be displayed if they weren't grouped
     let displayedOptions = [];
@@ -61,16 +61,16 @@ export const filterGroupings = (label, value, limit, options, groups) => {
       if (typeof current === 'undefined') { continue; }
       let items = options[objKeys[index]].items;
       if (objKeys[index] === '__default__' || typeof current.filterable === 'undefined' || current.filterable) {
-              items = items.filter((result) => {
-                const lowerResult = result[label].toLowerCase();
-                return wordFilter(lowerResult, term);
-              });
+        items = items.filter((result) => {
+          const lowerResult = result[label].toLowerCase();
+          return wordFilter(lowerResult, term);
+        });
       }
       // Longer if statement in case someone passes back a limit of 0 for a group
       if (current.limit !== null &&
            typeof current.limit !== 'undefined' && current.limit !== 'all' || limit) {
         if (current.limit) {
-          items = items.slice(0, current.limit)
+          items = items.slice(0, current.limit);
         } else {
           items = items.slice(0, limit);
         }
