@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import throttle from 'lodash/throttle';
 import SimpleSelectyStateless from '../stateless/';
 import { debounce } from './debounce';
 
@@ -89,7 +90,7 @@ class SimpleSelecty extends React.Component {
       if (this.props.lazyLoad && text !== '') {
         if (this.props.lazyLoad && this.props.debounce) {
           const time = this.props.debounceTime ? this.props.debounceTime : 200;
-          (debounce(() => {
+          (throttle(() => {
             (this.props.lazyLoad())(this.state.typedValue, this.api);
           }, time))();
         } else {
