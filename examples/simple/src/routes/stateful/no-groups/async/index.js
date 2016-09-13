@@ -46,7 +46,7 @@ const StatfulNoGroupAsync = ({
     <div style={{'zIndex':'100', 'position': 'relative', marginTop: '20px'}}>
       <SimpleSelecty
         debounce={true}
-        debounceTime={200}
+        debounceTime={2000}
         optLabel={'userId'}
         optValue={'id'}
         lazyLoad={() => {

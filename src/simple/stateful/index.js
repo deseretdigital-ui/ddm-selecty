@@ -1,12 +1,11 @@
 import React, { PropTypes } from 'react';
-import throttle from 'lodash/throttle';
 import SimpleSelectyStateless from '../stateless/';
-import { debounce } from './debounce';
 
 class SimpleSelecty extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      blocked: false,
       loading: (this.props.load !== null),
       filteredOptions: [],
       item: this.props.item,
@@ -88,12 +87,15 @@ class SimpleSelecty extends React.Component {
       ...cond,
     }, () => {
       if (this.props.lazyLoad && text !== '') {
-        if (this.props.lazyLoad && this.props.debounce) {
+        if (this.props.lazyLoad && this.props.debounce && !this.state.blocked) {
           const time = this.props.debounceTime ? this.props.debounceTime : 200;
-          (throttle(() => {
-            (this.props.lazyLoad())(this.state.typedValue, this.api);
-          }, time))();
-        } else {
+          this.setState({blocked: true}, () => {
+            setTimeout(() => {
+              this.setState({blocked: false});
+              (this.props.lazyLoad())(this.state.typedValue, this.api);
+            }, time);
+          });
+        } else if (!this.state.blocked){
           (this.props.lazyLoad())(this.state.typedValue, this.api);
         }
       }
