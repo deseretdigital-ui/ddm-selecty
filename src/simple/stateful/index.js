@@ -21,6 +21,10 @@ class SimpleSelecty extends React.Component {
     if (this.props.load) {
       (this.props.load())({}, this.api);
     }
+    if (this.props.lazyLoad && this.props.value !== '') {
+      this.setState({loading: true});
+      (this.props.lazyLoad())(this.props.value, this.api);
+    }
   }
 
   onBlur = () => {
