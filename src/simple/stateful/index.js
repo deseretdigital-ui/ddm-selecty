@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import SimpleSelectyStateless from '../stateless/';
+import { debounce } from './debounce';
 
 class SimpleSelecty extends React.Component {
   constructor(props, context) {
@@ -86,7 +87,14 @@ class SimpleSelecty extends React.Component {
       ...cond,
     }, () => {
       if (this.props.lazyLoad && text !== '') {
-        (this.props.lazyLoad())(this.state.typedValue, this.api);
+        if (this.props.lazyLoad && this.props.debounce) {
+          const time = this.props.debounceTime ? this.props.debounceTime : 200;
+          (debounce(() => {
+            (this.props.lazyLoad())(this.state.typedValue, this.api);
+          }, time))();
+        } else {
+          (this.props.lazyLoad())(this.state.typedValue, this.api);
+        }
       }
 
       if (this.props.onChange) {

@@ -45,6 +45,8 @@ const StatfulNoGroupAsync = ({
     Stateful Async WITHOUT Groups:
     <div style={{'zIndex':'100', 'position': 'relative', marginTop: '20px'}}>
       <SimpleSelecty
+        debounce={true}
+        debounceTime={200}
         optLabel={'userId'}
         optValue={'id'}
         lazyLoad={() => {
