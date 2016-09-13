@@ -71,6 +71,7 @@ const StatfulNoGroupAsync = ({
               });
           }
         }}
+        value={"1"}
       />
     </div>
   </div>
