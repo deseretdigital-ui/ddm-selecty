@@ -11,6 +11,7 @@ class SimpleSelecty extends React.Component {
       item: this.props.item,
       options: this.props.options,
       placeholder: this.props.placeholder,
+      reload: false,
       tabIndex: this.props.tabIndex,
       typedValue: '',
       value: this.props.value,
@@ -37,7 +38,7 @@ class SimpleSelecty extends React.Component {
   }
 
   onFocus = () => {
-    this.setState({ visible: true }, () => {
+    this.setState({ visible: true, reload: true }, () => {
       if (this.props.onFocus) {
         this.props.onFocus();
       }
@@ -95,8 +96,15 @@ class SimpleSelecty extends React.Component {
               (this.props.lazyLoad())(this.state.typedValue, this.api);
             }, time);
           });
-        } else if (!this.state.blocked){
-          (this.props.lazyLoad())(this.state.typedValue, this.api);
+        } else if (!this.state.blocked || this.state.reload){
+          if (this.state.reload) {
+            this.setState({reload: false}, () => {
+              (this.props.lazyLoad())(this.state.typedValue, this.api);
+            })
+          } else {
+            (this.props.lazyLoad())(this.state.typedValue, this.api);
+          }
+
         }
       }
 
