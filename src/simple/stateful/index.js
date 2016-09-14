@@ -23,7 +23,7 @@ class SimpleSelecty extends React.Component {
       (this.props.load())({}, this.api);
     }
     if (this.props.lazyLoad && this.props.value !== '') {
-      this.setState({loading: true});
+      this.setState({ loading: true });
       (this.props.lazyLoad())(this.props.value, this.api);
     }
   }
@@ -93,13 +93,13 @@ class SimpleSelecty extends React.Component {
       if (this.props.lazyLoad && text !== '') {
         if (this.props.lazyLoad && this.props.debounce && !this.state.blocked) {
           const time = this.props.debounceTime ? this.props.debounceTime : 200;
-          this.setState({blocked: true}, () => {
+          this.setState({ blocked: true }, () => {
             setTimeout(() => {
-              this.setState({blocked: false});
+              this.setState({ blocked: false });
               (this.props.lazyLoad())(this.state.typedValue, this.api);
             }, time);
           });
-        } else if (!this.state.blocked){
+        } else if (!this.state.blocked) {
           (this.props.lazyLoad())(this.state.typedValue, this.api);
         }
       }
@@ -197,7 +197,7 @@ class SimpleSelecty extends React.Component {
         sortable={this.props.sortable}
         tabIndex={this.state.tabIndex}
         typedValue={this.state.typedValue}
-        value={this.state.value}
+        value={this.props.value}
         visible={this.state.visible}
       />
     );
