@@ -46,12 +46,12 @@ const StatfulNoGroupAsync = ({
     <div style={{'zIndex':'100', 'position': 'relative', marginTop: '20px'}}>
       <SimpleSelecty
         debounce={true}
-        debounceTime={2000}
-        optLabel={'userId'}
-        optValue={'id'}
+        debounceTime={400}
+        optLabel={'name'}
+        optValue={'name'}
         lazyLoad={() => {
           return (params, callback) => {
-            return fetch(`http://jsonplaceholder.typicode.com/posts/${params}`)
+            return fetch(`http://services.groupkt.com/country/search?text=${encodeURI(params)}`)
               .then((response) => {
                 if (response.status >= 200 && response.status < 300) {
                   return response;
@@ -65,7 +65,7 @@ const StatfulNoGroupAsync = ({
               })
               .then((response) => {
                 setTimeout(() => {
-                  callback(response);
+                  callback(response.RestResponse.result);
                 }, 2000);
               }).catch((error) => {
                 console.error(`Unsuccessful api call ${error}`);
@@ -73,7 +73,7 @@ const StatfulNoGroupAsync = ({
               });
           }
         }}
-        value={"1"}
+        value={"U"}
       />
     </div>
   </div>
