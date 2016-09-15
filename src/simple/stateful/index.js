@@ -197,7 +197,7 @@ class SimpleSelecty extends React.Component {
         sortable={this.props.sortable}
         tabIndex={this.state.tabIndex}
         typedValue={this.state.typedValue}
-        value={this.props.value}
+        value={this.state.value}
         visible={this.state.visible}
       />
     );
