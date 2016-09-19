@@ -26,7 +26,7 @@ export default {
   placeholder: '',
   required: false,
   sortable: false,
-  tabIndex: 1,
+  tab: 0,
   typedValue: '',
   value: '',
   visible: false,
