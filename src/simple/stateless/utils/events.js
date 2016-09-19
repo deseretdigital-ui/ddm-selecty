@@ -31,7 +31,7 @@ export default (key, index, first, last, next, prev, options, optType, typedValu
         update.onFiltered(filtered);
       }
       update.onChange(text);
-      document.activeElement.blur();
+      // document.activeElement.blur();
       break;
     }
     case 'esc': {
