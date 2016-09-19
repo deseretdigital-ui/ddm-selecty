@@ -64,13 +64,15 @@ const StatlessNoGroupStatic = ({
             options={defaultOptions}
             placeholder={'Stateless Without Groups'}
             sortable={true}
-            tabIndex={1}
+            tab={1}
             typedValue={typedValue_1}
             value={value_1}
             visible={visible_1}
           />
         </div>
-        <button type="submit" style={{marginLeft: '20px'}}>Submit Form</button>
+        <input tabIndex={2}></input>
+        <input tabIndex={3}></input>
+        <button type="submit" tabIndex={4} style={{marginLeft: '20px'}}>Submit Form</button>
       </form>
     </div>
 
@@ -80,43 +82,46 @@ const StatlessNoGroupStatic = ({
       in a smaller div to display SimpleSelecty responsive nature. The div has
       a width of 500px and SimpleSelecty will fill up 100% of its containers width.
       <div style={{width: '500px', marginTop: '20px'}}>
-        <SimpleSelectyStateless
-          filteredOptions={filteredOptions_2}
-          item={item_2}
-          limit={5}
-          noResults={{show: true, label: 'Nothing!!'}}
-          optLabel={'label'}
-          optValue={'id'}
-          onBlur={() => updateVisible(false, 2)}
-          onFocus={() => updateVisible(true, 2)}
-          onClicked={item => {
-            updateValue(item.label, 2);
-            updateTypedValue(item.label, 2);
-            updateSelected(item, 2);
-            updateVisible(false, 2);
-          }}
-          onChange={text => {
-            updateTypedValue(text, 2);
-            updateValue(text, 2);
-            updateSelected(null, 2);
-          }}
-          onFiltered={filtered => {
-            updateFilteredOptions(filtered, 2)
-          }}
-          onChosen={
-            item => {
+        <form>
+          <SimpleSelectyStateless
+            filteredOptions={filteredOptions_2}
+            item={item_2}
+            limit={5}
+            noResults={{show: true, label: 'Nothing!!'}}
+            optLabel={'label'}
+            optValue={'id'}
+            onBlur={() => updateVisible(false, 2)}
+            onFocus={() => updateVisible(true, 2)}
+            onClicked={item => {
               updateValue(item.label, 2);
+              updateTypedValue(item.label, 2);
               updateSelected(item, 2);
+              updateVisible(false, 2);
+            }}
+            onChange={text => {
+              updateTypedValue(text, 2);
+              updateValue(text, 2);
+              updateSelected(null, 2);
+            }}
+            onFiltered={filtered => {
+              updateFilteredOptions(filtered, 2)
+            }}
+            onChosen={
+              item => {
+                updateValue(item.label, 2);
+                updateSelected(item, 2);
+              }
             }
-          }
-          options={defaultOptions}
-          placeholder={'Stateless Without Groups'}
-          sortable={true}
-          tabIndex={2}
-          typedValue={typedValue_2}
-          value={value_2}
-          visible={visible_2}
-        />
+            options={defaultOptions}
+            placeholder={'Stateless Without Groups'}
+            sortable={true}
+            tab={5}
+            typedValue={typedValue_2}
+            value={value_2}
+            visible={visible_2}
+          />
+          <input tabIndex={6}></input>
+        </form>
       </div>
     </div>
   </div>

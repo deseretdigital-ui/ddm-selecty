@@ -130,7 +130,7 @@
     </td>
 	</tr>
 	<tr>
-		<td valign="top"><code>tabIndex</code></td>
+		<td valign="top"><code>tab</code></td>
     <td valign="top" width="100px" align="center">1</td>
     <td valign="top" width="100px" align="center">number, string</td>
 		<td valign="top">

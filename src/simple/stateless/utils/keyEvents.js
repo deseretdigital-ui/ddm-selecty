@@ -54,10 +54,9 @@ export const keyBindings = (key, filterable, lazyLoading, options, sortable, typ
 export const keyEvents = (e, eventType, filterable, lazyLoading, options, sortable, typedText, update) => {
   const key = KEY_MAP[e.keyCode];
   if (eventType === 'down' && key) {
-    if (key !== 'tab' && key !== 'enter') {
+    if (key !== 'tab') {
       e.preventDefault();
     }
-
     update.onKeyDown instanceof Function
       ? update.onKeyDown(e)
       : keyBindings(key, filterable, lazyLoading, options, sortable, typedText, update);

@@ -72,7 +72,7 @@ export default {
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   sortable: PropTypes.bool,
-  tabIndex: PropTypes.oneOfType([
+  tab: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),

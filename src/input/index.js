@@ -9,10 +9,12 @@ const InputElement = ({
   placeholder,
   required,
   value,
+  onBlur,
   onChange,
+  onFocus,
   onKeyDown,
   onKeyUp,
-  tabIndex,
+  tabPost,
 }) => (
   <input
     autoComplete="off"
@@ -24,10 +26,11 @@ const InputElement = ({
     value={value}
     type="text"
     styleName="input"
+    onBlur={onBlur} onFocus={onFocus}
     onChange={e => onChange(e.target.value)}
     onKeyDown={e => onKeyDown(e)}
     onKeyUp={e => onKeyUp(e)}
-    tabIndex={tabIndex}
+    tabIndex={tabPost}
   />
 );
 
@@ -41,13 +44,15 @@ InputElement.propTypes = {
     PropTypes.number,
     PropTypes.string,
   ]).isRequired,
+  onBlur: PropTypes.func.isRequired,
+  onFocus: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   onKeyDown: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.bool,
   ]).isRequired,
   onKeyUp: PropTypes.func.isRequired,
-  tabIndex: PropTypes.number,
+  tabPost: PropTypes.number,
 };
 
 export default CSSModules(InputElement, styles);
