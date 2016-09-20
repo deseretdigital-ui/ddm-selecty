@@ -73,8 +73,24 @@ export const SimpleSelectyStateless = ({
     Options.sorted = sortOptions(Options.filtered, optLabel, sortable);
     Options.grouped = createGrouping(Options.sorted, optionGroups);
   }
+
+  var inputRef = null;
+
+  const setInputRef = (input) => {
+    inputRef = input;
+  };
+
+  const focusWrapper = () => {
+    if (inputRef) {
+      inputRef.select();
+    }
+    if (onFocus) {
+      onFocus();
+    }
+  };
+
   return (
-    <div onBlur={onBlur} onFocus={onFocus} tabIndex={tabIndex} styleName="wrapper">
+    <div onBlur={onBlur} onFocus={focusWrapper} tabIndex={tabIndex} styleName="wrapper">
       <InputElement
         autofocus={autofocus}
         disabled={disabled}
@@ -85,6 +101,7 @@ export const SimpleSelectyStateless = ({
         onKeyDown={e => keyEvents(e, 'down', filterable, lazyLoading, Options, sortable, typedValue, updateFunctions)}
         onKeyUp={e => keyEvents(e, 'up', filterable, lazyLoading, Options, sortable, typedValue, updateFunctions)}
         onChange={onChange}
+        inputRef={input => setInputRef(input)}
         tabIndex={tabIndex}
       />
       <Suggestions
