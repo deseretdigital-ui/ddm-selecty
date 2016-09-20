@@ -79,6 +79,7 @@ const StatlessGroupingStatic = ({
         value={value_1}
         visible={visible_1}
       />
+      <input type="text" />
     </div>
     <div style={{zIndex:'80', marginTop: '20px', position:'relative'}}>
       Unlike the option above, this example displays how to using Groupings
