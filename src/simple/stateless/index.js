@@ -85,6 +85,7 @@ export const SimpleSelectyStateless = ({
         onKeyDown={e => keyEvents(e, 'down', filterable, lazyLoading, Options, sortable, typedValue, updateFunctions)}
         onKeyUp={e => keyEvents(e, 'up', filterable, lazyLoading, Options, sortable, typedValue, updateFunctions)}
         onChange={onChange}
+        tabIndex={tabIndex}
       />
       <Suggestions
         autoHighlight={autoHighlight}

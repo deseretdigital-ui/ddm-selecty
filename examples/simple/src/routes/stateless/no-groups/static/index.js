@@ -69,8 +69,10 @@ const StatlessNoGroupStatic = ({
             value={value_1}
             visible={visible_1}
           />
+          <input type="text" tabIndex={2} />
+          <input type="text" tabIndex={3} />
         </div>
-        <button type="submit" style={{marginLeft: '20px'}}>Submit Form</button>
+        <button type="submit" tabIndex={4} style={{marginLeft: '20px'}}>Submit Form</button>
       </form>
     </div>
 
@@ -112,7 +114,7 @@ const StatlessNoGroupStatic = ({
           options={defaultOptions}
           placeholder={'Stateless Without Groups'}
           sortable={true}
-          tabIndex={2}
+          tabIndex={5}
           typedValue={typedValue_2}
           value={value_2}
           visible={visible_2}
