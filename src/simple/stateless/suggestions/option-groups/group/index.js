@@ -19,10 +19,10 @@ export const SuggestedGroup = ({
   });
 
   const showNoResults = false;
-  
+
   if (!group.items.length) {
     if (group.label && showNoResults) {
-      let label = group.noResults ? group.noResults : 'No Results Found';
+      const label = group.noResults ? group.noResults : 'No Results Found';
       return (
         <div styleName={styling}>
           { group.label || <noscript /> }
