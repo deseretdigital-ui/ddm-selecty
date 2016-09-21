@@ -11,30 +11,12 @@
   font-size: 14px;
   color: #303030;
 }
-::-webkit-input-placeholder {
+::placeholder {
   color: #464646;
   font-size: 18px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  overflow: visible;
+  vertical-align: middle;
 }
 
-:-moz-placeholder { /* Firefox 18- */
-  color: #464646;
-  font-size: 20px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-  color: #464646;
-  font-size: 20px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-:-ms-input-placeholder {
-  color: #464646;
-  font-size: 20px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
