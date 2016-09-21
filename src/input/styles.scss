@@ -8,5 +8,15 @@
   height: 34px;
   width: 100%;
   font-family: Raleway, sans-serif;
-  font-size: 14px;  
+  font-size: 14px;
+  color: #303030;
 }
+::placeholder {
+  color: #464646;
+  font-size: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: visible;
+  vertical-align: middle;
+}
+
