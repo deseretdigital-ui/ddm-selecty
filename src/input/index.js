@@ -13,7 +13,6 @@ const InputElement = ({
   onKeyDown,
   onKeyUp,
   tabIndex,
-  inputRef,
 }) => (
   <input
     autoComplete="off"
@@ -30,7 +29,6 @@ const InputElement = ({
     onKeyUp={e => onKeyUp(e)}
     tabIndex={tabIndex}
     onFocus={e => e.target.select()}
-    ref={inputRef}
   />
 );
 
@@ -51,7 +49,6 @@ InputElement.propTypes = {
   ]).isRequired,
   onKeyUp: PropTypes.func.isRequired,
   tabIndex: PropTypes.number,
-  inputRef: PropTypes.any,
 };
 
 export default CSSModules(InputElement, styles);

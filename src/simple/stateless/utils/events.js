@@ -31,6 +31,7 @@ export default (key, index, first, last, next, prev, options, optType, typedValu
         update.onFiltered(filtered);
       }
       update.onChange(text);
+      update.onBlur();
       break;
     }
     case 'esc': {
