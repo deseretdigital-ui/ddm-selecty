@@ -88,9 +88,9 @@ export default (options, text) => {
   let filtered = [];
 
   if (options.groupings) {
-    filtered = filterGroupings(opts.label, text, opts.limit, opts['grouped'], opts.groupings);
+    filtered = filterGroupings(opts.label, text, opts.limit, opts.grouped, opts.groupings);
   } else {
-    filtered = filterOpts(opts.label, text, opts.limit, opts['original']);
+    filtered = filterOpts(opts.label, text, opts.limit, opts.original);
   }
   return filtered;
 };

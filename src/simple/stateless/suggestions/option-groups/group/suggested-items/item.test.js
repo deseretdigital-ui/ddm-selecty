@@ -1,9 +1,7 @@
 import expect from 'expect';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
-import classNames from 'classnames';
 import { SuggestedItem } from './item';
-
 
 describe('<SuggestedItem />', () => {
   it('should render an item unhighlighted', () => {
@@ -14,7 +12,7 @@ describe('<SuggestedItem />', () => {
     // Act
     const renderedComponent = shallow(
       <SuggestedItem
-        items={[]}
+        selected={{}}
         item={item}
         onClicked={() => {}}
         optLabel="label"
@@ -34,7 +32,7 @@ describe('<SuggestedItem />', () => {
     // Act
     const renderedComponent = shallow(
       <SuggestedItem
-        items={[item]}
+        selected={item}
         item={item}
         onClicked={() => {}}
         optLabel="label"
@@ -52,7 +50,7 @@ describe('<SuggestedItem />', () => {
     const onClickSpy = expect.createSpy();
     const renderedComponent = shallow(
       <SuggestedItem
-        items={[]}
+        selected={{}}
         item={item}
         onClicked={onClickSpy}
         optLabel="label"
