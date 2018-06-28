@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import CSSModules from 'react-css-modules';
 import styles from './styles.scss';
-import SuggestedGroup from './option-groups/group/';
+import SuggestedGroup from './option-groups/group';
 
 export class Suggestions extends React.Component {
   scrollIntoView = (element) => {
@@ -11,7 +12,6 @@ export class Suggestions extends React.Component {
     const containerDimension = container.getBoundingClientRect();
     const node = ReactDOM.findDOMNode(element);
     const itemDimension = node.getBoundingClientRect();
-    const itemHeight = itemDimension.bottom - itemDimension.top;
 
     if (itemDimension.bottom > containerDimension.bottom) {
       container.scrollTop += itemDimension.bottom - containerDimension.bottom;
@@ -78,7 +78,7 @@ export class Suggestions extends React.Component {
                 selected={selected}
                 scrollIntoView={this.scrollIntoView}
               />
-            )
+            ),
           )
         }
       </div>

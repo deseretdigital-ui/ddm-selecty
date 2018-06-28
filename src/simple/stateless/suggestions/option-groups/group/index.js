@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
 import classNames from 'classnames';
 import SuggestedItem from './suggested-items/item';
@@ -54,7 +55,7 @@ export const SuggestedGroup = ({
               key={index}
               scrollIntoView={scrollIntoView}
             />
-          )
+          ),
         )
       }
     </div>

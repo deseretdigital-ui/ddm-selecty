@@ -1,14 +1,17 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import CSSModules from 'react-css-modules';
 import classNames from 'classnames';
 import styles from './styles.scss';
 
 export class SuggestedItem extends React.Component {
   componentDidUpdate(prevProps) {
-    const { highlight, optLabel, optValue, selected } = this.props;
+    const {
+      highlight, optLabel, optValue, selected,
+    } = this.props;
     // only scroll into view if the active item changed last render
-    if (highlight && (selected[optLabel] !== prevProps.selected[optLabel] ||
-          selected[optValue] !== prevProps.selected[optValue])) {
+    if (highlight && (selected[optLabel] !== prevProps.selected[optLabel]
+          || selected[optValue] !== prevProps.selected[optValue])) {
       this.props.scrollIntoView(this.refs.suggestedActiveItem);
     }
   }

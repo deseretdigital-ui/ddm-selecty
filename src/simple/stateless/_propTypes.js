@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import PropTypes from 'prop-types';
 
 export default {
   autofocus: PropTypes.bool,
@@ -49,7 +49,7 @@ export default {
           PropTypes.number,
           PropTypes.string,
         ]),
-      })
+      }),
     ),
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -65,7 +65,7 @@ export default {
           PropTypes.number,
           PropTypes.string,
         ]),
-      })
+      }),
     ),
   ]),
   options: PropTypes.array,

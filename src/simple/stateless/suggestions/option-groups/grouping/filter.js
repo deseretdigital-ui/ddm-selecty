@@ -2,7 +2,7 @@ export const wordFilter = (phrase, term) => {
   // If nothing is passed back to search for, always return true
   if (term === null || term === '' || term.length === 0) {
     return true;
-  } else if (phrase === null || phrase === '') {
+  } if (phrase === null || phrase === '') {
     return false;
   }
   const words = phrase.split(' ');
@@ -36,10 +36,10 @@ export const filterOpts = (label, value, limit, opts) => {
         filtered.push(options[i]);
       }
     }
-    amount = amount ? amount : filtered.length;
+    amount = amount || filtered.length;
     return filtered.slice(0, amount);
   }
-  amount = amount ? amount : options.length;
+  amount = amount || options.length;
   return options.slice(0, amount);
 };
 
@@ -67,8 +67,8 @@ export const filterGroupings = (label, value, limit, options, groups) => {
         });
       }
       // Longer if statement in case someone passes back a limit of 0 for a group
-      if (current.limit !== null &&
-           typeof current.limit !== 'undefined' && current.limit !== 'all' || limit) {
+      if (current.limit !== null
+           && typeof current.limit !== 'undefined' && current.limit !== 'all' || limit) {
         if (current.limit) {
           items = items.slice(0, current.limit);
         } else {
@@ -88,9 +88,9 @@ export default (options, text) => {
   let filtered = [];
 
   if (options.groupings) {
-    filtered = filterGroupings(opts.label, text, opts.limit, opts['grouped'], opts.groupings);
+    filtered = filterGroupings(opts.label, text, opts.limit, opts.grouped, opts.groupings);
   } else {
-    filtered = filterOpts(opts.label, text, opts.limit, opts['original']);
+    filtered = filterOpts(opts.label, text, opts.limit, opts.original);
   }
   return filtered;
 };
