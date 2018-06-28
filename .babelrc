@@ -1,16 +1,6 @@
 {
   "presets": [
-    [
-      "env", {
-        "targets": {
-          "browsers": [
-            "> 2% in US",
-            "ie 11"
-          ]
-        },
-        "useBuiltIns": true
-      }
-    ],
+    "env",
     "react",
     "stage-0"
   ],

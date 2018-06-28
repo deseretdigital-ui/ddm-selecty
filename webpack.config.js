@@ -7,11 +7,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
+  target: 'node',
   entry: path.resolve(__dirname, './src/index.js'),
   output: {
     path:  path.resolve(__dirname, './dist/'),
     filename: 'ddm.selecty.js',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    globalObject: 'this',
+    umdNamedDefine: true,
   },
   resolve: {
     modules: [
