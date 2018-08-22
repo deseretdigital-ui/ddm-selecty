@@ -1,45 +1,64 @@
 {
-  "extends": "eslint-config-airbnb",
+  "extends": "airbnb",
+  "parser": "babel-eslint",
   "env": {
-    "mocha": true,
-    "node": true,
     "browser": true,
-    "jquery": true,
+    "node": true,
     "es6": true
   },
-  "parser": "babel-eslint",
   "rules": {
-    "valid-jsdoc": 2,
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/react-in-jsx-scope": 2,
+    "one-var": 0,
+    "react/jsx-boolean-value": 0,
+    "radix": 0,
+    "indent": [2, 2, {"SwitchCase": 1}],
+    "react/no-multi-comp": 0,
+    "no-console": 0,
+    "no-shadow": 0,
+    "react/prop-types": 0,
+    "import/extensions": 0,
+    "import/no-unresolved": 0,
+    "import/no-dynamic-require": 0,
+    "import/no-extraneous-dependencies": 0,
+    "max-len": 0,
+    "global-require": 0,
+    "react/require-default-props": 0,
+    "react/forbid-prop-types": 0,
+    "import/first": 0,
+    "import/prefer-default-export": 0,
+    "no-restricted-syntax": 0,
+    "import/no-named-as-default": 0,
+    "no-plusplus": 0,
+    "react/no-array-index-key": 0,
     "react/jsx-filename-extension": 0,
-
-    // Disable until Flow supports let and const
-    "no-var": 0,
-    "new-cap": 0,
-    "vars-on-top": 0,
-    "max-len": ["error", {
-      "code": 120,
-      "ignoreComments": true,
-      "ignoreTrailingComments": true,
-      "ignoreUrls": true
-    }],
-
-    //Temporarirly disabled due to a possible bug in babel-eslint (todomvc example)
-    "block-scoped-var": 0,
-    // Temporarily disabled for test/* until babel/babel-eslint#33 is resolved
-    "padded-blocks": 0,
-    "react/sort-prop-types": [1, {
-      "callbacksLast": true,
-      "ignoreCase": true,
-      "requiredFirst": false
-    }],
-    "no-unused-expressions": [2, {
-      "allowTernary": true
-    }]
-  },
-  "plugins": [
-    "react"
-  ]
+    "no-case-declarations": 0,
+    "consistent-return": 0,
+    "array-callback-return": 0,
+    "jsx-a11y/label-has-for": 0,
+    "no-continue": 0,
+    "jsx-a11y/tabindex-no-positive": 0,
+    "no-underscore-dangle": 0,
+    "react/no-string-refs": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "react/no-danger": 0,
+    "react/jsx-no-target-blank": 0,
+    "jsx-a11y/anchor-has-content": 0,
+    "jsx-a11y/href-no-hash": 0,
+    "no-return-assign": 0,
+    "react/prefer-stateless-function": 0,
+    "no-mixed-operators": 0,
+    "react/no-unescaped-entities": 0,
+    "jsx-a11y/img-has-alt": 0,
+    "react/no-find-dom-node": 0,
+    "new-cap": ["error", { "newIsCapExceptions": ["graylog"], "capIsNew": false }],
+    "prefer-destructuring": 0,
+    "function-paren-newline": 0,
+    "semi-style": 0,
+    "jsx-a11y/media-has-caption": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "import/order": 0,
+    "react/destructuring-assignment": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "jsx-a11y/no-autofocus": 0
+  }
 }

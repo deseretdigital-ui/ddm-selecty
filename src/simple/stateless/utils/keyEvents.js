@@ -58,9 +58,11 @@ export const keyEvents = (e, eventType, filterable, lazyLoading, options, sortab
       e.preventDefault();
     }
 
-    update.onKeyDown instanceof Function
-      ? update.onKeyDown(e)
-      : keyBindings(key, filterable, lazyLoading, options, sortable, typedText, update);
+    if (update.onKeyDown instanceof Function) {
+      update.onKeyDown(e);
+    } else {
+      keyBindings(key, filterable, lazyLoading, options, sortable, typedText, update);
+    }
   } else if (eventType === 'up' && !key) {
     if (update.onFilter instanceof Function) {
       update.onFilter(e);

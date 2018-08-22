@@ -1,13 +1,13 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
-import InputElement from '../../input/';
+import InputElement from '../../input';
 import defaultProps from './_defaultProps';
 import propTypes from './_propTypes';
 import createGrouping from './suggestions/option-groups/grouping/create';
 import { sortOptions } from './suggestions/option-groups/grouping/sort';
 import filterOptions, { filterGroupings } from './suggestions/option-groups/grouping/filter';
 import { keyEvents } from './utils/keyEvents';
-import Suggestions from './suggestions/';
+import Suggestions from './suggestions';
 import styles from './styles.scss';
 
 export const SimpleSelectyStateless = ({
@@ -77,7 +77,7 @@ export const SimpleSelectyStateless = ({
 
 
   return (
-    <div onFocus={onFocus} onBlur={() => setTimeout(() => onBlur(), 300)} styleName="wrapper">
+    <div onFocus={onFocus} onBlur={() => setTimeout(onBlur, 300)} styleName="wrapper">
       <InputElement
         autofocus={autofocus}
         disabled={disabled}
@@ -103,7 +103,7 @@ export const SimpleSelectyStateless = ({
         value={value}
         visible={visible}
         onClicked={
-          clickedItem => {
+          (clickedItem) => {
             const updatedOptions = filterOptions(Options, clickedItem[optLabel]);
             onFiltered(updatedOptions);
             onClicked(clickedItem);

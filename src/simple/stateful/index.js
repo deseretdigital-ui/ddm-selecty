@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react';
-import SimpleSelectyStateless from '../stateless/';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import SimpleSelectyStateless from '../stateless';
 
-class SimpleSelecty extends React.Component {
+class SimpleSelecty extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -34,7 +35,7 @@ class SimpleSelecty extends React.Component {
         this.props.onBlur();
       }
     });
-  }
+  };
 
   onFocus = () => {
     this.setState({ visible: true }, () => {
@@ -42,9 +43,9 @@ class SimpleSelecty extends React.Component {
         this.props.onFocus();
       }
     });
-  }
+  };
 
-  onClicked = clickedItem => {
+  onClicked = (clickedItem) => {
     this.setState({
       item: clickedItem,
       typedValue: this.props.optLabel ? clickedItem[this.props.optLabel] : clickedItem.label,
@@ -62,9 +63,9 @@ class SimpleSelecty extends React.Component {
         this.props.onSelected(clickedItem);
       }
     });
-  }
+  };
 
-  onChange = text => {
+  onChange = (text) => {
     const value = this.props.optValue ? this.props.optValue : 'id';
     const label = this.props.optLabel ? this.props.optLabel : 'label';
 
@@ -108,17 +109,17 @@ class SimpleSelecty extends React.Component {
         this.props.onChange(text);
       }
     });
-  }
+  };
 
-  onFiltered = filtered => {
+  onFiltered = (filtered) => {
     this.setState({ filteredOptions: filtered }, () => {
       if (this.props.onFiltered) {
         this.props.onFiltered(filtered);
       }
     });
-  }
+  };
 
-  onChosen = selectedItem => {
+  onChosen = (selectedItem) => {
     const { item } = this.state;
     const label = this.props.optLabel ? this.props.optLabel : 'label';
     const value = this.props.optValue ? this.props.optValue : 'id';
@@ -138,14 +139,14 @@ class SimpleSelecty extends React.Component {
         this.props.onSelected(selectedItem);
       }
     });
-  }
+  };
 
   api = (res = null) => {
     let opts = (this.props.options ? this.props.options : []);
     let proceed = true;
     if (res) {
       if (Array.isArray(res)) {
-        for (var i = 0; i < res.length; i++) {
+        for (let i = 0; i < res.length; i++) {
           if (typeof res[i] !== 'object') {
             proceed = false;
             break;
@@ -163,7 +164,7 @@ class SimpleSelecty extends React.Component {
       console.warn('Warning: UI-Elements SimpleSelecty API request did not return correctly');
     }
     this.setState({ loading: false, options: opts });
-  }
+  };
 
   render() {
     return (
@@ -237,7 +238,7 @@ SimpleSelecty.propTypes = {
           PropTypes.number,
           PropTypes.string,
         ]),
-      })
+      }),
     ),
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -247,7 +248,7 @@ SimpleSelecty.propTypes = {
           PropTypes.number,
           PropTypes.string,
         ]),
-      })
+      }),
     ),
   ]),
   name: PropTypes.string,
@@ -272,7 +273,6 @@ SimpleSelecty.defaultProps = {
   autoSuggest: true,
   disabled: false,
   filterable: true,
-  filteredOptions: [],
   item: { id: null, label: null },
   lazyLoad: null,
   limit: null,
@@ -296,7 +296,6 @@ SimpleSelecty.defaultProps = {
   required: false,
   sortable: false,
   tabIndex: 1,
-  typedValue: '',
   value: '',
   visible: false,
 };

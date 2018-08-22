@@ -12,7 +12,7 @@ export default (options, groups = null, optGroupHashed = null) => {
     groupsHashed = optGroupHashed;
 
     // Clear out any previous items
-    Object.keys(optGroupHashed).map(groupName => {
+    Object.keys(optGroupHashed).map((groupName) => {
       optGroupHashed[groupName].items = [];
       return null;
     });
